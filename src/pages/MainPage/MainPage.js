@@ -1,6 +1,6 @@
 import React from 'react'
 import shortid from 'shortid'
-import MovieGroup from '../MovieGroup/MovieGroup'
+import MovieGroup from '../../components/MovieGroup/MovieGroup'
 import classes from './MainPage.module.css'
 
 const MainPage = () => {

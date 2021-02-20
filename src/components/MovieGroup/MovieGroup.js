@@ -9,17 +9,20 @@ import classes from './MovieGroup.module.css'
 const MovieGroup = ({ name, searchBy, param = null }) => {
 
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(false)
+  const [noData, setnoData] = useState(false)
   const [list, setList] = useState([])
 
 
   useEffect(() => {
-    setLoading(true)
     setError(false)
+    setLoading(true)
+    setnoData(false)
     getData(searchBy, param) // Invoking the request depending on filters after 
       .then(response => {
-        setLoading(false) 
-        setList(response.data.results)
+        const results = response.data.results
+        setLoading(false)
+        results.length > 0 ? setList(results) : setnoData(true)
       })
       .catch(e => {
         setLoading(false)
@@ -27,20 +30,19 @@ const MovieGroup = ({ name, searchBy, param = null }) => {
       })
   }, [param, searchBy])
 
-  const errorMessage = error ? <Error error={error}/>: null
+
+  const errorMessage = error ? <Error error={error}/> : null 
   const spinner = loading ? <Loader/> : null
-  const content = !(spinner || errorMessage) ? <Carousel movies={list}/> : null
+  const noResults = noData ? <h3>It seems like there is no movies you are looking for :(</h3> : null
+  const content = !(spinner || errorMessage || noResults) ? <Carousel movies={list}/> : null
 
   return (
     <div className={classes.Container}>
       <h1>{name}</h1>
       {spinner}
       {errorMessage}
-      { 
-        list.length > 0 
-        ? content 
-        : <h3>Error status 422. It seems like there is no movies you are looking for :(</h3>
-      }
+      {noResults}
+      {content}
     </div>
   )
 }

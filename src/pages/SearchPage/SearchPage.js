@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MovieGroup from '../MovieGroup/MovieGroup'
+import MovieGroup from '../../components/MovieGroup/MovieGroup'
 import classes from "./SearchPage.module.css"
 
 

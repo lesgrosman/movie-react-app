@@ -76,7 +76,7 @@ const Carousel = ({ movies }) => {
 
   return (
     <Slider {...settings} className={classes.Slider}>
-      {
+      { 
         movies.map(({ id, poster_path, title, first_air_date, name }) => {
           const type = first_air_date ? 'tv' : 'movie' // Checking is item a movie or tv show
           const movie_name = title ? title : name // Movie has prop title, and tv show - name(by default). Setting the general name of item

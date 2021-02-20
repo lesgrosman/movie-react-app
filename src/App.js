@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
-import MainPage from './components/MainPage/MainPage'
-import MovieDetailPage from './components/MovieDetailPage/MovieDetailPage'
-import PlayerPage from './components/PlayerPage/PlayerPage'
-import SearchPage from './components/SearchPage/SearchPage'
+import MainPage from './pages/MainPage/MainPage'
+import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage'
+import PlayerPage from './pages/PlayerPage/PlayerPage'
+import SearchPage from './pages/SearchPage/SearchPage'
 import Wrapper from './components/Wrapper/Wrapper'
 
 function App() { // Main component with routes
