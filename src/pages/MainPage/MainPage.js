@@ -26,6 +26,7 @@ const MainPage = () => {
     })
   }
 
+
   return (
     <div className={classes.MainPage}>
       {renderLists(groups)}

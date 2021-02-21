@@ -1,9 +1,7 @@
 import axios from 'axios'
-import imageNotFound from './imageNotFound.jpeg'
 
 const api = '1f28dfddc7456645d53d767c58b4324c'
 const base = 'https://api.themoviedb.org/3'
-const baseImg = 'https://image.tmdb.org/t/p/w185/'
 
 export const getData = (searchBy, param='') => { // Getting the list of content by genre or type(movie/tv) and parametr for each type
 
@@ -18,31 +16,22 @@ export const getData = (searchBy, param='') => { // Getting the list of content 
   }
 }
 
-export const getDataById = (type, id) => { // Getting content by Id by type(movie/tv) and id
+const getResource = async (url) => {
+  const res = await fetch(`${base}${url}`)
+  if (!res.ok) {
+      throw new Error(`Could not fetch ${url}` +
+        `, received ${res.status}`);
+    }
+  return await res.json()
+} 
 
-  if (type === 'movie') {
-    return axios.get(`${base}/movie/${id}?api_key=${api}&language=en-US`)
-  }
-
-  return axios.get(`${base}/tv/${id}?api_key=${api}&language=en-US&page=1`)
+export const getDataById = async (type, id) => { // Getting content by Id by type(movie/tv) and id
+  console.log('getting data')
+  const movie =  await getResource(`/${type}/${id}?api_key=${api}&language=en-US`)
+  const credits = await getResource(`/${type}/${id}/credits?api_key=${api}&language=en-US`)
+  const trailer = await getResource(`/${type}/${id}/videos?api_key=${api}&language=en-US`)
+  const trailerList = trailer.results
+  console.log(movie)
+  return {...movie, ...credits, trailerList}
 }
 
-export const getTrailerById = (type, id) => { // Get movie or tv show trailer
-
-  if (type === 'movie') {
-    return axios.get(`${base}/movie/${id}/videos?api_key=${api}&language=en-US`)
-  }
-
-  return axios.get(`${base}/tv/${id}/videos?api_key=${api}&language=en-US`)
-}
-
-/////////////////////////////////////
-
-export function checkImage(image) { // if poster doesnt exist show default image
-    
-  if (image === null) {   
-    return imageNotFound
-  }
-
-  return `${baseImg}${image}`
-}

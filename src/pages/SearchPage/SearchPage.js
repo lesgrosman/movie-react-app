@@ -1,32 +1,57 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import MovieGroup from '../../components/MovieGroup/MovieGroup'
-import classes from "./SearchPage.module.css"
+import { makeStyles } from '@material-ui/core/styles'
+import { Grid, TextField, Typography, Input } from '@material-ui/core'
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: '20px',
+    display: "flex",
+    flexDirection: 'column',
+    justifyContent: "center",
+    alignItems: 'center'
+  },
+  form: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '50ch',
+    },
+    marginTop: '40px'
+  },
+}));
 
 const SearchPage = () => {
+  const classes = useStyles()
 
-  const [input, setInput] = useState('') // Variable for setting an empty string after submit
-  const [query, setQuery] = useState('') // Parametr for request
+  const [query, setQuery] = useState(null) // Parametr for request
   const [visible, setVisible] = useState(false) // Visibility of content after after submit
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault()
+  const {register, handleSubmit} = useForm()
+
+  const onSubmit = (data, e) => {
+    e.target.reset()
     setVisible(true)
-    setQuery(input)
-    setInput('')
+    setQuery(data.query)
+    console.log(data.query)
   }
 
   return (
-    <div className={classes.SearchPage}>
-      <h1>Search Page</h1>
-      <form onSubmit={onSubmitHandler}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a movie title..."
-        />
-      </form>
+    <div>
+    <Grid container className={classes.container}>
+      <Grid item>
+        <Typography variant="h3">Search Page</Typography>
+      </Grid>
+      <Grid item>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+          <TextField
+            name="query" 
+            inputRef={register}
+            label="Type a movie title" 
+          />
+        </form>
+      </Grid>
+    </Grid>   
       { 
         visible 
         ? <MovieGroup 
@@ -34,8 +59,9 @@ const SearchPage = () => {
             param={query}
           />
         : null
-      }     
+      } 
     </div>
+
   )
 }
 
