@@ -1,7 +1,6 @@
 import React from 'react'
 import shortid from 'shortid'
 import MovieGroup from '../../components/MovieGroup/MovieGroup'
-import classes from './MainPage.module.css'
 
 const MainPage = () => {
   
@@ -28,7 +27,7 @@ const MainPage = () => {
 
 
   return (
-    <div className={classes.MainPage}>
+    <div>
       {renderLists(groups)}
     </div>
   )

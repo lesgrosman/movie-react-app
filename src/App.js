@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import MainPage from './pages/MainPage/MainPage'
 import DetailPage from './pages/DetailPage/DetailPage'
-import PlayerPage from './pages/PlayerPage/PlayerPage'
 import SearchPage from './pages/SearchPage/SearchPage'
 import Wrapper from './components/Wrapper/Wrapper'
 
@@ -33,7 +32,6 @@ function App() { // Main component with routes
             return <DetailPage personId={id}/>
           }
         }/>
-        <Route path="/player/" component={PlayerPage}/>
       </Wrapper>
     </Router>
 
