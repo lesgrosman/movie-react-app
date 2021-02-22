@@ -40,7 +40,7 @@ const SearchPage = () => {
     <div>
     <Grid container className={classes.container}>
       <Grid item>
-        <Typography variant="h3">Search Page</Typography>
+        {/* <Typography variant="h3">Search Page</Typography> */}
       </Grid>
       <Grid item>
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>

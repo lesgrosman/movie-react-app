@@ -10,12 +10,8 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles({
   table: {
-    // minWidth: 400,
     width: '100%',
     marginTop: '30px'
-  },
-  row: {
-    padding: '20px'
   },
   name: {
     color: 'rgba(31,31,31,.5)',
@@ -23,7 +19,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function AboutTable({movie, type}) {
+export default function AboutTable({ movie }) {
   const classes = useStyles();
 
   function createData(name, info) {
@@ -44,13 +40,13 @@ export default function AboutTable({movie, type}) {
     <TableContainer >
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          About {type}
+        <Typography style={{marginLeft: '15px'}} variant="h6" id="tableTitle" component="div">
+          Info
         </Typography>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow className={classes.row} key={row.name}>
+            <TableRow key={row.name}>
               <TableCell className={classes.name} component="th" >
                 {row.name}
               </TableCell>

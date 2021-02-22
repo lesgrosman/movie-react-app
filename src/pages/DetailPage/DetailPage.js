@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
+import { Grid } from '@material-ui/core'
 import Error from '../../components/UI/Error/Error'
 import { getDataById } from '../../services/services'
 import Loader from '../../components/UI/Loader/Loader'
 import MovieContent from './MovieContent/MovieContent'
 import { transform } from '../../frameworks/transformFramework'
 
-const MovieDetailPage = ({ movieId, type }) => {
+const DetailPage = ({ movieId, type }) => {
 
   const [movie, setMovie] = useState({})
   const [loading, setLoading] = useState(true)
@@ -22,22 +23,26 @@ const MovieDetailPage = ({ movieId, type }) => {
         setError(e)
         setLoading(false)
       })
+    window.scrollTo(0, 0)
   }, [])
-
-
-// Checking which content to shows
 
   const errorMessage = error ? <Error error={error}/>: null
   const spinner = loading ? <Loader/> : null
   const content = !(spinner || errorMessage) ? <MovieContent movie={movie} type={type} /> : null
 
   return (
-    <div>
-      {spinner}
-      {errorMessage}
-      {content}
-    </div>
+    <Grid container>
+      <Grid item md={1}/>
+      <Grid item md={10}>
+        <div>
+          {spinner}
+          {errorMessage}
+          {content}
+        </div>
+      </Grid>
+      <Grid item md={1}/>
+    </Grid>
   )
 }
 
-export default MovieDetailPage
+export default DetailPage
