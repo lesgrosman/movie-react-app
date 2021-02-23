@@ -7,13 +7,10 @@ import StarRatings from 'react-star-ratings'
 
 const useStyles = makeStyles({
   container: {
-    marginTop: '10px',
-    display: 'flex',
-    backgroundColor: '#f9f9f9'
+    display: 'flex'
   },
   rootTop: {
-    paddingTop: '100px',
-    backgroundColor: '#f9f9f9'
+    paddingTop: '100px'
   },
   left: {
     display: 'flex',
@@ -41,7 +38,7 @@ const useStyles = makeStyles({
   },
   rank: {
     display: 'inline-block',
-    color: rank_average =>rank_average >= 7 ? 'green' : rank_average < 5 ? 'red' : 'grey',
+    color: rank_average =>rank_average >= 7 ? '#00e676' : rank_average < 5 ? '#c50e29' : '#b0bec5',
     fontWeight: 500,
     marginRight: '10px'
   },
@@ -90,7 +87,7 @@ const MovieContent = ({ movie }) => {
             </Grid>
             <Grid className={classes.right} item md={3}>
                 <Typography className={classes.rank} variant="h4">{rank_average}</Typography>
-                <Typography style={{display: 'inline-block', color: 'rgba(31,31,31,.5)'}} variant="h5">{rank_count}</Typography>
+                <Typography style={{display: 'inline-block', color: 'rgba(255,255,255, .5)'}} variant="h5">{rank_count}</Typography>
               <Typography className={classes.cast} variant="h6">Cast:</Typography>
               {
                 cast.map(person => {
@@ -111,14 +108,14 @@ const MovieContent = ({ movie }) => {
                 <div className={classes.rankStars}>
                   <StarRatings
                     rating={rank_average}
-                    starRatedColor="#f3d250"
+                    starRatedColor="#ffb300"
                     numberOfStars={10}
                     name="rating"
                     starDimension="40px"
                     starSpacing="5px"
                   />
                   <Typography style={{marginLeft: '20px'}} className={classes.rank} variant="h3">{rank_average}</Typography> 
-                  <Typography style={{display: 'inline-block', color: 'rgba(31,31,31,.5)', align: 'bottom'}} variant="h5">{rank_count}</Typography>        
+                  <Typography style={{display: 'inline-block', color: 'rgba(255,255,255, .5)', align: 'bottom'}} variant="h5">{rank_count}</Typography>        
                 </div>
               </Grid>
               <Grid className={classes.bottomBlock} item>
@@ -132,7 +129,7 @@ const MovieContent = ({ movie }) => {
                       width="740px"
                       origin={window.location.origin}
                     />
-                  : <h1>Trailer does not exist :(</h1>
+                  : <Typography variant="h5">Trailer does not exist :(</Typography>
                 }
               </Grid>
             </Grid>

@@ -11,11 +11,17 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles({
   table: {
     width: '100%',
-    marginTop: '30px'
+    marginTop: '30px',
+    color: '#fff' 
   },
   name: {
-    color: 'rgba(31,31,31,.5)',
-    margin: '10px'
+    color: 'rgba(255,255,255, 0.5)',
+    margin: '10px',
+    borderBottomColor: 'rgba(255,255,255, 0.2)'
+  },
+  info: {
+    color: '#fff',
+    borderBottomColor: 'rgba(255,255,255, 0.2)'
   }
 });
 
@@ -47,14 +53,14 @@ export default function AboutTable({ movie }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell className={classes.name} component="th" >
+              <TableCell className={classes.name} component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="left">
+              <TableCell className={classes.info} align="left">
                 {
                   Array.isArray(row.info) && row.info.length !== 0 
                   ? row.info.join(', ') 
-                  : row.info.length == 0 
+                  : row.info.length === 0 
                   ? '-' 
                   : row.info
                 }

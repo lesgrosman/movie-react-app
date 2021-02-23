@@ -1,13 +1,24 @@
 body {
-  background-color: #f9f9f9;
+  margin: 0;
+  color: #fff;
+  background-color: #000018;
   font-family: "Gt america", sans-serif;
 }
 
 .slick-prev:before,
 .slick-next:before {
-  color: #384259!important;
+  /* color: #384259!important; */
+  color: #fff!important;
 }
 
 .slick-slide div {
   outline: none;
+}
+
+.slick-dots li button:before {
+  color: white !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color:red !important;
 }

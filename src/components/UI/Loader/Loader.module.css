@@ -24,10 +24,10 @@
     height: 50%;
     background: #384259;
     border-radius: 100% 0 0 0;
-    position: absolute;
+    /* position: absolute;
     top: 0;
     left: 0;
-    content: '';
+    content: ''; */
   }
   .loader:after {
     background: #fff;
@@ -35,12 +35,12 @@
     height: 75%;
     border-radius: 50%;
     content: '';
-    margin: auto;
-    position: absolute;
+    /* margin: auto; */
+    /* position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    right: 0;
+    right: 0; */
   }
   @-webkit-keyframes load3 {
     0% {
