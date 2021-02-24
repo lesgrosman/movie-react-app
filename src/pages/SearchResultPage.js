@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import MovieGroup from '../../components/MovieGroup/MovieGroup'
+import React from 'react'
+import MovieGroup from '../components/MovieGroup/MovieGroup'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
@@ -20,7 +20,6 @@ const SearchResultPage = ({query}) => {
         name="Search results"
         param={query}/>
     </div>
-
   )
 }
 

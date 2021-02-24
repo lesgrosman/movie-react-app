@@ -26,12 +26,19 @@ const getResource = async (url) => {
 } 
 
 export const getDataById = async (type, id) => { // Getting content by Id by type(movie/tv) and id
-  console.log('getting data')
+  if (type === 'person') {
+    const person = await getResource(`/${type}/${id}?api_key=${api}&language=en-US`)
+    const movieCredits = await getResource(`/${type}/${id}/movie_credits?api_key=${api}&language=en-US`)
+    const tvCredits = await getResource(`/${type}/${id}/tv_credits?api_key=${api}&language=en-US`)
+  
+    return {...person, movieCredits, tvCredits}
+  }
   const movie =  await getResource(`/${type}/${id}?api_key=${api}&language=en-US`)
   const credits = await getResource(`/${type}/${id}/credits?api_key=${api}&language=en-US`)
   const trailer = await getResource(`/${type}/${id}/videos?api_key=${api}&language=en-US`)
   const trailerList = trailer.results
-  console.log(movie)
   return {...movie, ...credits, trailerList}
+
+
 }
 

@@ -3,7 +3,7 @@ import imageNotFound from '../services/imageNotFound.jpeg'
 const baseImg = 'https://image.tmdb.org/t/p/w185/'
 const baseYT = 'https://www.youtube.com/watch?v='
 
-export const transform = (itemObj, type) => {
+export const movieTransform = (itemObj, type) => {
   return {
     id: itemObj.id,
     title: itemObj.title ? itemObj.title : itemObj.name,
@@ -60,7 +60,12 @@ function getTeam(crewList, job, type) {
 }
 
 function getCast(castList) {
-  return castList.map(person => person.name).slice(0, 10)
+  return castList.map(person => {
+    return {
+      id: person.id,
+      name: person.name
+    }
+  }).slice(0, 10)
 }
 
 

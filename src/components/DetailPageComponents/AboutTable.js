@@ -25,22 +25,33 @@ const useStyles = makeStyles({
   }
 });
 
-export default function AboutTable({ movie }) {
+export default function AboutTable({ data, type }) {
   const classes = useStyles();
 
   function createData(name, info) {
     return { name, info};
   }
   
-  const rows = [
-    createData('Year', movie.year),
-    createData('Countries', movie.countries),
-    createData('Genres', movie.genres),
-    createData('Slogan', movie.tagline),
-    createData('Director', movie.directors),
-    createData('Writer', movie.writers),
-    createData('Producer', movie.producers),
+  const rowsMovie = [
+    createData('Year', data.year),
+    createData('Countries', data.countries),
+    createData('Genres', data.genres),
+    createData('Slogan', data.tagline),
+    createData('Director', data.directors),
+    createData('Writer', data.writers),
+    createData('Producer', data.producers),
   ];
+
+  const rowsPerson = [
+    createData('Name', data.name),
+    createData('Gender', data.gender),
+    createData('Birthday', data.birthday),
+    createData('Place of Birth', data.place_of_birth),
+    // data.deathday ? createData('Deathday', data.deathday) : createData('Deathday', '-')
+  ];
+
+  const rows = type === 'person' ? rowsPerson : rowsMovie
+  console.log(rows)
 
   return (
     <TableContainer >
@@ -60,9 +71,9 @@ export default function AboutTable({ movie }) {
                 {
                   Array.isArray(row.info) && row.info.length !== 0 
                   ? row.info.join(', ') 
-                  : row.info.length === 0 
-                  ? '-' 
-                  : row.info
+                  : !row.info
+                  ? '-'
+                  : row.info                              
                 }
               </TableCell>
             </TableRow>
