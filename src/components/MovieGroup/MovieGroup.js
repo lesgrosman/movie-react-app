@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { getData } from '../../services/services'
+import { getItems } from '../../frameworks/personTransformFramework'
 import Carousel from '../Carousel/Carousel'
 import Error from '../UI/Error/Error'
 import Loader from '../UI/Loader/Loader'
 import classes from './MovieGroup.module.css'
 
 // MovieGroup is a container for Carousel. Requests are called here 
-const MovieGroup = ({ name, searchBy, param = null }) => {
+const MovieGroup = ({ name, searchBy, param = null, type }) => {
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -21,7 +22,7 @@ const MovieGroup = ({ name, searchBy, param = null }) => {
       .then(response => {
         const results = response.data.results
         setLoading(false)
-        results.length > 0 ? setMovies(results) : setNoData(true)
+        results.length > 0 ? setMovies(getItems(results, type)) : setNoData(true)
       })
       .catch(e => {
         setLoading(false)
@@ -32,7 +33,7 @@ const MovieGroup = ({ name, searchBy, param = null }) => {
   const errorMessage = error ? <Error error={error}/> : null 
   const spinner = loading ? <Loader/> : null
   const noResults = noData ? <h3>It seems like there is no movies you are looking for :(</h3> : null
-  const content = !(spinner || errorMessage || noResults) ? <Carousel list={movies}/> : null
+  const content = !(spinner || errorMessage || noResults) ? <Carousel list={movies} similar={false}/> : null
   return (
     <div className={classes.Container}>
       <h1>{name}</h1>

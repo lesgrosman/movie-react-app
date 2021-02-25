@@ -6,20 +6,21 @@ const MainPage = () => {
   
   // Array of 4 content groups. SearchBy and param are arguments for filtering requests(folder services)
   const groups = [ 
-    {name: 'Popular Movies', searchBy: 'type', param: 'movie'}, 
-    {name: 'Popular Series', searchBy: 'type', param: 'tv'},
-    {name: 'Family', searchBy: 'genre', param: '10751'},
-    {name: 'Documentary', searchBy: 'genre', param: '99'},
+    {name: 'Popular Movies', searchBy: 'type', param: 'movie', type: 'movie'}, 
+    {name: 'Popular Series', searchBy: 'type', param: 'tv', type: 'tv'},
+    {name: 'Family', searchBy: 'genre', param: '10751', type: 'movie'},
+    {name: 'Documentary', searchBy: 'genre', param: '99', type: 'movie'},
   ]
 
   const renderLists = (groups) => {
-    return groups.map(({ name, searchBy, param }, i) => {
+    return groups.map(({ name, searchBy, param, type }) => {
       return (
         <MovieGroup 
           key={shortid.generate()} 
           searchBy={searchBy} 
           name={name} 
-          param={param} 
+          param={param}
+          type={type}
         />
       )
     })

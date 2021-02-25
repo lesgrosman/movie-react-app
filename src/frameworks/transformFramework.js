@@ -1,3 +1,4 @@
+import sortByParam from './sortFramework'
 import imageNotFound from '../services/imageNotFound.jpeg'
 
 const baseImg = 'https://image.tmdb.org/t/p/w185/'
@@ -19,7 +20,8 @@ export const movieTransform = (itemObj, type) => {
     rank_average: itemObj.vote_average,
     rank_count: itemObj.vote_count,
     poster: checkImage(itemObj.poster_path),
-    trailerURL: checkTrailer(itemObj.trailerList)
+    trailerURL: checkTrailer(itemObj.trailerList),
+    similar: getSimilarItems(sortByParam(itemObj.similarItems, 'vote_count'), type),
   }
 }
 
@@ -67,5 +69,18 @@ function getCast(castList) {
     }
   }).slice(0, 10)
 }
+
+function getSimilarItems(arr, type) {
+  return arr.map(item => {
+    return {
+      id: item.id,
+      title: type === 'movie' ? item.title : item.name,
+      poster: checkImage(item.poster_path),
+      rank_average: item.vote_average,
+      itemType: type
+    }
+  })
+}
+
 
 

@@ -1,14 +1,13 @@
 import React from 'react'
 import Slider from 'react-slick'
 import { useHistory } from 'react-router-dom'
-import { checkImage } from '../../frameworks/transformFramework'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'font-awesome/css/font-awesome.min.css'
 import classes from './Carousel.module.css'
 
 // Setting the Carousel(slick) depending on list in props
-const Carousel = ({ list }) => {
+const Carousel = ({ list, similar }) => {
 
   const history = useHistory()
 
@@ -18,7 +17,7 @@ const Carousel = ({ list }) => {
     slidesToShow: 6,
     slidesToScroll: 6,
     initialSlide: 0,
-    dots: true,
+    dots: !similar,
     responsive: [
       {
         breakpoint: 1223,
@@ -78,13 +77,15 @@ const Carousel = ({ list }) => {
     <Slider {...settings} className={classes.Slider}>
       { 
         list 
-          ? list.map(({ id, poster_path, title, first_air_date, name }) => {
-            const type = first_air_date ? 'tv' : 'movie' // Checking is item a movie or tv show
-            const movie_name = title ? title : name // Movie has prop title, and tv show - name(by default). Setting the general name of item
+          ? list.map(({ id, poster, title, rank_average, itemType }) => {
             return (
-              <div key={id} onClick={() => history.push(`/${type}/${id}`)}> {/* Adding the id to the path by choosing the movie */ }
-                <img width="185" height="278" src={checkImage(poster_path)} alt="img"/> {/* Check if image exists */ }
-                <h3>{movie_name}</h3>
+              <div key={id} onClick={() => history.push(`/${itemType}/${id}`)}>
+                {
+                  similar 
+                  ? <img width="93" height="140" src={poster} alt="img"/>
+                  : <img width="185" height="278" src={poster} alt="img"/>
+                } 
+                { !similar ? <h3>{title}</h3> : null }
               </div>
             )
           })

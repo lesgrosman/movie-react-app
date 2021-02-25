@@ -51,7 +51,6 @@ export default function AboutTable({ data, type }) {
   ];
 
   const rows = type === 'person' ? rowsPerson : rowsMovie
-  console.log(rows)
 
   return (
     <TableContainer >

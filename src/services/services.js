@@ -36,8 +36,10 @@ export const getDataById = async (type, id) => { // Getting content by Id by typ
   const movie =  await getResource(`/${type}/${id}?api_key=${api}&language=en-US`)
   const credits = await getResource(`/${type}/${id}/credits?api_key=${api}&language=en-US`)
   const trailer = await getResource(`/${type}/${id}/videos?api_key=${api}&language=en-US`)
+  const similar = await getResource(`/${type}/${id}/similar?api_key=${api}&language=en-US$page=1`)
+  const similarItems = similar.results
   const trailerList = trailer.results
-  return {...movie, ...credits, trailerList}
+  return {...movie, ...credits, trailerList, similarItems}
 
 
 }

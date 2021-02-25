@@ -29,7 +29,7 @@ const DetailPage = ({ id, type }) => {
         setLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [])
+  }, [id])
 
   const errorMessage = error ? <Error error={error}/>: null
   const spinner = loading ? <Loader/> : null

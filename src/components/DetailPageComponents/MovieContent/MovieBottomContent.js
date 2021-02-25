@@ -3,6 +3,7 @@ import { Grid, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ReactPlayer from 'react-player'
 import StarRatings from 'react-star-ratings'
+import Carousel from '../../Carousel/Carousel'
 
 const useStyles = makeStyles({
   rootBottom:{
@@ -13,6 +14,10 @@ const useStyles = makeStyles({
   leftBottomSide: {
     display: 'flex',
     flexDirection: 'column'
+  },
+  similarMovies: {
+    width: '100%',
+    marginBottom: '20px'
   },
   bottomBlock: {
     marginBottom: '20px'
@@ -29,11 +34,14 @@ const useStyles = makeStyles({
 
 const MovieBottomContent = ({ movie }) => {
   const classes = useStyles()
-  const { overview, rank_average, rank_count, trailerURL } = movie
-
+  const { overview, rank_average, rank_count, trailerURL, similar } = movie
   return (
     <Grid className={classes.rootBottom} item container>
       <Grid className={classes.leftBottomSide} item container md={8}>
+        <Grid className={classes.similarMovies} item>
+          <Typography className={classes.bottomTitle} variant="h5">Similar movies</Typography>
+          <Carousel list={similar} similar/>
+        </Grid>
         <Grid className={classes.bottomBlock} item>
           <Typography className={classes.bottomTitle} variant="h5">Annotation</Typography>
           <Typography variant="body1">{overview}</Typography>
