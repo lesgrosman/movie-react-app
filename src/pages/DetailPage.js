@@ -26,7 +26,6 @@ const DetailPage = ({ type }) => {
         setLoading(false)
       })
       .catch(e => {
-        console.log(e)
         setError(e)
         setLoading(false)
       })

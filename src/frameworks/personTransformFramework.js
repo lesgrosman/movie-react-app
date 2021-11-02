@@ -3,7 +3,6 @@ import sortByParam from './sortFramework'
 
 export const personTransrofm = (itemObj) => {
   const { id, name, place_of_birth, birthday, deathday, gender, movieCredits, tvCredits, profile_path } = itemObj
-  console.log(movieCredits)
   return {
     id,
     name,
@@ -18,7 +17,6 @@ export const personTransrofm = (itemObj) => {
 }
 
 export function getItems(array, type) {
-  console.log(array)
   return array.map(item => {
     return {
       id: item.id,
