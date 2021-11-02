@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react"
-import { Grid } from '@material-ui/core'
-import Error from '../components/UI/Error/Error'
-import { getDataById } from '../services/services'
-import Loader from '../components/UI/Loader/Loader'
-import Content from '../components/DetailPageComponents/Content'
-import { movieTransform } from '../frameworks/transformFramework'
-import { personTransrofm } from '../frameworks/personTransformFramework'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
+import Error from '../components/UI/Error/Error';
+import { getDataById } from '../services/services';
+import Loader from '../components/UI/Loader/Loader';
+import Content from '../components/DetailPageComponents/Content';
+import { movieTransform } from '../frameworks/transformFramework';
+import { personTransrofm } from '../frameworks/personTransformFramework';
 
-const DetailPage = ({ id, type }) => {
+const DetailPage = ({ type }) => {
+  const { id } = useParams();
 
   const [itemObject, setItemObject] = useState({})
   const [loading, setLoading] = useState(true)
@@ -29,7 +31,7 @@ const DetailPage = ({ id, type }) => {
         setLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [id])
+  }, [id, type])
 
   const errorMessage = error ? <Error error={error}/>: null
   const spinner = loading ? <Loader/> : null

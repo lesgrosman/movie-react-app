@@ -1,15 +1,41 @@
 import React from 'react'
 import Slider from 'react-slick'
+import { makeStyles } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'font-awesome/css/font-awesome.min.css'
-import classes from './Carousel.module.css'
+
+const useStyles = makeStyles((theme) => ({
+  slider: {
+    outline: 'none',
+  },
+  box: {
+    '& img': {
+      margin: 'auto',
+      boxShadow: '0 8px 6px -6px black',
+      cursor: 'pointer',
+      transition: '0.3s',
+    },
+    '& img:hover': {
+      opacity: 0.8,
+    },
+    '& .MuiTypography-root': {
+      textAlign: 'center',
+    },
+  }
+}));
 
 // Setting the Carousel(slick) depending on list in props
 const Carousel = ({ list, similar }) => {
-
+  const classes = useStyles();
   const history = useHistory()
+
+  const redirectToDetail = (item) => {
+    history.push(`/${item.itemType}/${item.id}`);
+  };
 
   const settings = {
     infinite: false,
@@ -17,7 +43,7 @@ const Carousel = ({ list, similar }) => {
     slidesToShow: 6,
     slidesToScroll: 6,
     initialSlide: 0,
-    dots: !similar,
+    // dots: !similar,
     responsive: [
       {
         breakpoint: 1223,
@@ -26,7 +52,6 @@ const Carousel = ({ list, similar }) => {
             slidesToScroll: 5,
             initialSlide: 0,
             infinite: false,
-            dots: true
           }
       },
       {
@@ -36,7 +61,6 @@ const Carousel = ({ list, similar }) => {
             slidesToScroll: 4,
             initialSlide: 0,
             infinite: false,
-            dots: true
           }
       },
       {
@@ -46,7 +70,6 @@ const Carousel = ({ list, similar }) => {
             slidesToScroll: 3,
             initialSlide: 0,
             infinite: false,
-            dots: true
           }
       },
       {
@@ -56,7 +79,6 @@ const Carousel = ({ list, similar }) => {
             slidesToScroll: 2,
             initialSlide: 0,
             infinite: false,
-            dots: true
           }
       },
       {
@@ -66,7 +88,6 @@ const Carousel = ({ list, similar }) => {
             slidesToScroll: 1,
             initialSlide: 0,
             infinite: false,
-            dots: false
           }
       }
 
@@ -74,22 +95,20 @@ const Carousel = ({ list, similar }) => {
   }
 
   return (
-    <Slider {...settings} className={classes.Slider}>
-      { 
-        list 
-          ? list.map(({ id, poster, title, rank_average, itemType }) => {
-            return (
-              <div key={id} onClick={() => history.push(`/${itemType}/${id}`)}>
-                {
-                  similar 
-                  ? <img width="93" height="140" src={poster} alt="img"/>
-                  : <img width="185" height="278" src={poster} alt="img"/>
-                } 
-                { !similar ? <h3>{title}</h3> : null }
-              </div>
-            )
-          })
-          : null
+    <Slider {...settings}>
+      { list && list.map((item) => (
+        <Box 
+          className={classes.box}
+          key={item.id} 
+          onClick={() => redirectToDetail(item)}
+        >
+          { similar ? 
+            <img width="93" height="140" src={item.poster} alt="img"/>
+            : <img width="185" height="278" src={item.poster} alt="img"/>
+          } 
+          {!similar && <Typography variant="h5">{item.title}</Typography>}
+        </Box>
+        ))
       }
     </Slider>
   )

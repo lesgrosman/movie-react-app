@@ -1,25 +1,18 @@
-import React from 'react'
-import MovieGroup from '../components/MovieGroup/MovieGroup'
-import { makeStyles } from '@material-ui/core/styles'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import Box from '@material-ui/core/Box'
+import MovieGroup from '../components/MovieGroup';
 
-const useStyles = makeStyles(() => ({
-  container: {
-    height: '700px',
-    display: "flex",
-    flexDirection: 'column',
-    justifyContent: 'center',
-  }
-}));
-
-const SearchResultPage = ({query}) => {
-  const classes = useStyles()
+const SearchResultPage = () => {
+  const { query } = useParams();
 
   return (
-    <div className={classes.container}>
-        <MovieGroup
+    <Box>
+      <MovieGroup
         name="Search results"
-        param={query}/>
-    </div>
+        param={query}
+      />
+    </Box>
   )
 }
 

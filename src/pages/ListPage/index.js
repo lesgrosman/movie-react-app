@@ -1,6 +1,7 @@
-import React from 'react'
-import shortid from 'shortid'
-import MovieGroup from '../components/MovieGroup/MovieGroup'
+import React from 'react';
+import Box from '@material-ui/core/Box';
+import shortid from 'shortid';
+import MovieGroup from '../../components/MovieGroup';
 
 const MainPage = () => {
   
@@ -10,28 +11,21 @@ const MainPage = () => {
     {name: 'Popular Series', searchBy: 'type', param: 'tv', type: 'tv'},
     {name: 'Family', searchBy: 'genre', param: '10751', type: 'movie'},
     {name: 'Documentary', searchBy: 'genre', param: '99', type: 'movie'},
-  ]
-
-  const renderLists = (groups) => {
-    return groups.map(({ name, searchBy, param, type }) => {
-      return (
-        <MovieGroup 
-          key={shortid.generate()} 
-          searchBy={searchBy} 
-          name={name} 
-          param={param}
-          type={type}
-        />
-      )
-    })
-  }
-
+  ];
 
   return (
-    <div>
-      {renderLists(groups)}
-    </div>
-  )
-}
+    <Box>
+      {groups.map((item) => (
+        <MovieGroup 
+          key={shortid.generate()} 
+          searchBy={item.searchBy} 
+          name={item.name} 
+          param={item.param}
+          type={item.type}
+        />
+      ))}
+    </Box>
+  );
+};
 
-export default MainPage
+export default MainPage;
