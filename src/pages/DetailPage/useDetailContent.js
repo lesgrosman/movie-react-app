@@ -14,7 +14,9 @@ export const useDetailContent = (props) => {
   const [error, setError] = useState(false);
 
 
-  useEffect(() => { 
+  useEffect(() => {
+    setError(false)
+    setLoading(true)  
     getDataById(type, id) 
       .then(response => {
         // if (type === 'person') {
