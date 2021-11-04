@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDataById } from '../../services/services';
-import { movieTransform } from '../../utils/transformFramework';
-import { personTransrofm } from '../../utils/personTransformFramework';
+import { mapMovieObject } from '../../utils/transformFramework';
 
 
 export const useDetailContent = (props) => {
@@ -21,7 +20,7 @@ export const useDetailContent = (props) => {
         // if (type === 'person') {
         //   setItemObject(personTransrofm(response, type))
         // } else {
-        setMovie(movieTransform(response, type))
+        setMovie(mapMovieObject(response, type))
         // }
         setLoading(false)
       })
@@ -33,4 +32,4 @@ export const useDetailContent = (props) => {
   }, [id, type])
 
   return { movieObj, error, loading };
-}
+};

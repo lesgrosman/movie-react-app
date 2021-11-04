@@ -10,4 +10,4 @@ export default function sortByParam(array, param) {
     }
   }
   return array
-}
+};

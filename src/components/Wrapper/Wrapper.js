@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     background: 'rgba(8, 27, 64, 1)',
     offset: theme.mixins.toolbar,
     paddingTop: theme.typography.pxToRem(55),
+    minHeight: '100vh',
   },
 }))
 

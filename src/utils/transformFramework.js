@@ -1,10 +1,22 @@
-import sortByParam from './sortFramework'
-import imageNotFound from '../services/imageNotFound.jpeg'
+import sortByParam from './sortFramework';
+import imageNotFound from '../services/imageNotFound.jpeg';
 
-const baseImg = 'https://image.tmdb.org/t/p/w185/'
-const baseYT = 'https://www.youtube.com/watch?v='
+const BASE_IMG = 'https://image.tmdb.org/t/p/w185/';
+const BASE_YT = 'https://www.youtube.com/watch?v=';
 
-export const movieTransform = (itemObj, type) => {
+export function getItems(array, type) {
+  return array.map(item => {
+    return {
+      id: item.id,
+      title: type === 'movie' ? item.title : item.name,
+      rank_average: item.vote_average,
+      poster: checkImage(item.poster_path),
+      itemType: type
+    }
+  })
+};
+
+export const mapMovieObject = (itemObj, type) => {
   return {
     id: itemObj.id,
     title: itemObj.title ? itemObj.title : itemObj.name,
@@ -23,43 +35,44 @@ export const movieTransform = (itemObj, type) => {
     trailerURL: checkTrailer(itemObj.trailerList),
     similar: getSimilarItems(sortByParam(itemObj.similarItems, 'vote_count'), type),
   }
-}
+};
 
 function getGenres(genresList) {
-  return genresList.map(obj => obj.name)
-}
+  return genresList.map(obj => obj.name);
+};
 
 function getYear(date) {
-  return date.slice(0, 4)
-}
+  return date.slice(0, 4);
+};
 
 function getCountries(countriesList) {
-  return countriesList.map(country => country.name)
-}
+  return countriesList.map(country => country.name);
+};
 
 export function checkImage(image) {
   if (image === null) {   
-    return imageNotFound
+    return imageNotFound;
   }
 
-  return `${baseImg}${image}`
-}
+  return `${BASE_IMG}${image}`;
+};
 
 function checkTrailer(list) {
   if (list.length === 0) {
     return null
   }
-  return `${baseYT}${list[0].key}`
-}
+  return `${BASE_YT}${list[0].key}`;
+};
 
 function getTeam(crewList, job, type) {
   if (type === 'movie') {
     const team = crewList.filter(item => item.job === job)
-    return team.map(item => item.name).slice(0, 3)
+    return team.map(item => item.name).slice(0, 3);
   }
   const tv_team = crewList.filter(item => item.known_for_department === job)
-  return tv_team.map(item => item.name).slice(0, 3)
-}
+
+  return tv_team.map(item => item.name).slice(0, 3);
+};
 
 function getCast(castList) {
   return castList.map(person => {
@@ -68,7 +81,7 @@ function getCast(castList) {
       name: person.name
     }
   }).slice(0, 10)
-}
+};
 
 function getSimilarItems(arr, type) {
   return arr.map(item => {
@@ -79,8 +92,8 @@ function getSimilarItems(arr, type) {
       rank_average: item.vote_average,
       itemType: type
     }
-  })
-}
+  });
+};
 
 
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getData } from '../../services/services'
-import { getItems } from '../../utils/personTransformFramework'
+import { getData } from '../../services/services';
+import { getItems } from '../../utils/transformFramework';
 
 
 export const useMovieGroup = (props) => {
@@ -27,4 +27,4 @@ export const useMovieGroup = (props) => {
   }, [ param, searchBy, type ]);
 
   return { movies, error, loading };
-}
+};
