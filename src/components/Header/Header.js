@@ -7,19 +7,16 @@ import Slide from '@material-ui/core/Slide';
 import SearchInput from '../SearchInput/SearchInput';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
     overFlow: 'hidden',
-    backgroundColor: '#1a237e' 
-    // backgroundColor: '#3151b5',
-    // backgroundColor: '#040068'
-
+    background: 'rgba(8, 27, 64, 1)',
   },
   title: {
     fontWeight: 'bold',
-    fontSize: '20px',
+    fontSize: theme.typography.pxToRem(20),
     color: 'inherit'
   }
 }));

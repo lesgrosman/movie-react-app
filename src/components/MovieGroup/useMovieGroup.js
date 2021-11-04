@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getData } from '../../services/services'
-import { getItems } from '../../frameworks/personTransformFramework'
+import { getItems } from '../../utils/personTransformFramework'
 
 
 export const useMovieGroup = (props) => {

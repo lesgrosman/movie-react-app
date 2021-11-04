@@ -1,7 +1,9 @@
 body {
   margin: 0;
   color: #fff;
-  background-color: #000018;
+  /* background-color: #000018; */
+  /* background: rgba(82, 101, 164, 1); */
+  background: linear-gradient(67.49deg, #237BB8 -8.15%, #081B40 89.39%);
   font-family: "Gt america", sans-serif;
 }
 
@@ -22,3 +24,4 @@ body {
 .slick-dots li.slick-active button:before {
   color:red !important;
 }
+

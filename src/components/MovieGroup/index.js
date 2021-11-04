@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Carousel from '../Carousel/Carousel';
 import Error from '../UI/Error/Error';
-import Loader from '../UI/Loader/Loader';
+import MovieGroupSkeleton from './MovieGroupSkeleton';
 
 import { useMovieGroup } from './useMovieGroup'
 
@@ -29,7 +29,7 @@ const MovieGroup = ({ name, searchBy, param = null, type }) => {
     loading,
   } = useMovieGroup({searchBy, param, type})
 
-  if (loading) return <Loader />;
+  if (loading) return <MovieGroupSkeleton />;
 
   if (error) return <Error error={error} />;
 

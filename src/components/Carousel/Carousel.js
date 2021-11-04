@@ -96,7 +96,7 @@ const Carousel = ({ list, similar }) => {
 
   return (
     <Slider {...settings}>
-      { list && list.map((item) => (
+      {list && list.map((item) => (
         <Box 
           className={classes.box}
           key={item.id} 
@@ -108,8 +108,7 @@ const Carousel = ({ list, similar }) => {
           } 
           {!similar && <Typography variant="h5">{item.title}</Typography>}
         </Box>
-        ))
-      }
+      ))}
     </Slider>
   )
 }

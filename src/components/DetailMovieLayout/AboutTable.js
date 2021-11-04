@@ -8,22 +8,27 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     width: '100%',
-    marginTop: '30px',
-    color: '#fff' 
+    marginTop: theme.typography.pxToRem(30),
+    color: theme.palette.common.white,
   },
   name: {
     color: 'rgba(255,255,255, 0.5)',
-    margin: '10px',
+    margin: theme.typography.pxToRem(10),
     borderBottomColor: 'rgba(255,255,255, 0.2)'
   },
   info: {
-    color: '#fff',
+    color: theme.palette.common.white,
     borderBottomColor: 'rgba(255,255,255, 0.2)'
-  }
-});
+  },
+  head: {
+    '& .MuiTypography-root': {
+      marginLeft: theme.typography.pxToRem(15),
+    },
+  },
+}));
 
 export default function AboutTable({ data, type }) {
   const classes = useStyles();
@@ -55,10 +60,10 @@ export default function AboutTable({ data, type }) {
   return (
     <TableContainer >
       <Table className={classes.table} size="small" aria-label="a dense table">
-        <TableHead>
-        <Typography style={{marginLeft: '15px'}} variant="h6" id="tableTitle" component="div">
-          Info
-        </Typography>
+        <TableHead className={classes.head}>
+          <Typography variant="h6" id="tableTitle" component="div">
+            Info
+          </Typography>
         </TableHead>
         <TableBody>
           {rows.map((row) => (

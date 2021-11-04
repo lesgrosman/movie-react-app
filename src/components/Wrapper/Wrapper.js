@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: '#00142d',
+    background: 'rgba(8, 27, 64, 1)',
     offset: theme.mixins.toolbar,
     paddingTop: theme.typography.pxToRem(55),
   },
