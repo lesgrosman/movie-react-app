@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { InputBase } from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
         width: '20ch',
       },
     },
-  }
-}));
+  },
+}))
 
 const SearchInput = () => {
   const classes = useStyles()
   const history = useHistory()
 
-  const {register, handleSubmit} = useForm()
+  const { register, handleSubmit } = useForm()
 
   const onSubmit = (data, e) => {
     e.target.reset()
@@ -66,8 +66,8 @@ const SearchInput = () => {
         </div>
         <InputBase
           inputRef={register}
-          name="query"
-          placeholder="Search movie"
+          name='query'
+          placeholder='Search movie'
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,

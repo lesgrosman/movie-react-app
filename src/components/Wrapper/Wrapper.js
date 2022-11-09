@@ -1,7 +1,7 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core'
+import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,17 +13,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Wrapper = ({ children }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Container className={classes.root}>
-      <Box>
-        {children}
-      </Box>
+      <Box>{children}</Box>
     </Container>
   )
 }
-
-
 
 export default Wrapper

@@ -3,41 +3,36 @@ import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
-  rootBottom:{
+  rootBottom: {
     display: 'flex',
     paddingTop: '30px',
-    paddingLeft: '25px'
+    paddingLeft: '25px',
   },
   leftBottomSide: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   similarMovies: {
     width: '100%',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   bottomBlock: {
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   bottomTitle: {
     marginBottom: '15px',
-    fontWeight: 500
+    fontWeight: 500,
   },
   rankStars: {
     display: 'flex',
-    alignItems: 'flex-end'
-  }
+    alignItems: 'flex-end',
+  },
 })
 
 const MovieBottomContent = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const {
-    similarNode,
-    annotationNode,
-    ratingNode,
-    trailerNode,
-  } = props;
+  const { similarNode, annotationNode, ratingNode, trailerNode } = props
 
   return (
     <Grid className={classes.rootBottom} item container>

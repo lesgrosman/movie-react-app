@@ -17,26 +17,26 @@ const useStyles = makeStyles((theme) => ({
   name: {
     color: 'rgba(255,255,255, 0.5)',
     margin: theme.typography.pxToRem(10),
-    borderBottomColor: 'rgba(255,255,255, 0.2)'
+    borderBottomColor: 'rgba(255,255,255, 0.2)',
   },
   info: {
     color: theme.palette.common.white,
-    borderBottomColor: 'rgba(255,255,255, 0.2)'
+    borderBottomColor: 'rgba(255,255,255, 0.2)',
   },
   head: {
     '& .MuiTypography-root': {
       marginLeft: theme.typography.pxToRem(15),
     },
   },
-}));
+}))
 
 export default function AboutTable({ data, type }) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   function createData(name, info) {
-    return { name, info};
+    return { name, info }
   }
-  
+
   const rowsMovie = [
     createData('Year', data.year),
     createData('Countries', data.countries),
@@ -45,7 +45,7 @@ export default function AboutTable({ data, type }) {
     createData('Director', data.directors),
     createData('Writer', data.writers),
     createData('Producer', data.producers),
-  ];
+  ]
 
   const rowsPerson = [
     createData('Name', data.name),
@@ -53,37 +53,35 @@ export default function AboutTable({ data, type }) {
     createData('Birthday', data.birthday),
     createData('Place of Birth', data.place_of_birth),
     // data.deathday ? createData('Deathday', data.deathday) : createData('Deathday', '-')
-  ];
+  ]
 
   const rows = type === 'person' ? rowsPerson : rowsMovie
 
   return (
-    <TableContainer >
-      <Table className={classes.table} size="small" aria-label="a dense table">
+    <TableContainer>
+      <Table className={classes.table} size='small' aria-label='a dense table'>
         <TableHead className={classes.head}>
-          <Typography variant="h6" id="tableTitle" component="div">
+          <Typography variant='h6' id='tableTitle' component='div'>
             Info
           </Typography>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell className={classes.name} component="th" scope="row">
+              <TableCell className={classes.name} component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell className={classes.info} align="left">
-                {
-                  Array.isArray(row.info) && row.info.length !== 0 
-                  ? row.info.join(', ') 
+              <TableCell className={classes.info} align='left'>
+                {Array.isArray(row.info) && row.info.length !== 0
+                  ? row.info.join(', ')
                   : !row.info
                   ? '-'
-                  : row.info                              
-                }
+                  : row.info}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
