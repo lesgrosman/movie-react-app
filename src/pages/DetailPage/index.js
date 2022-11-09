@@ -57,8 +57,6 @@ const DetailPage = ({ type }) => {
 
   if (error || !movieObj) return <Error error={error}/>;
 
-  console.log(loading, movieObj);
-
   const {
     poster,
     title,
