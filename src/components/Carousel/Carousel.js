@@ -1,12 +1,12 @@
+import 'font-awesome/css/font-awesome.min.css'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
+import { makeStyles } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import Box from '@material-ui/core/Box'
 import React from 'react'
 import Slider from 'react-slick'
-import { makeStyles } from '@material-ui/core'
-import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
-import { useHistory } from 'react-router-dom'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import 'font-awesome/css/font-awesome.min.css'
 
 const useStyles = makeStyles(() => ({
   slider: {
@@ -97,13 +97,31 @@ const Carousel = ({ list, similar }) => {
     <Slider {...settings}>
       {list &&
         list.map((item) => (
-          <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
+          <Box
+            className={classes.box}
+            key={item.id}
+            onClick={() => redirectToDetail(item)}
+          >
             {similar ? (
-              <img width='93' height='140' src={item.poster} alt='img' />
+              <img
+                width='93'
+                height='140'
+                src={item.poster}
+                alt='img'
+              />
             ) : (
-              <img width='185' height='278' src={item.poster} alt='img' />
+              <img
+                width='185'
+                height='278'
+                src={item.poster}
+                alt='img'
+              />
             )}
-            {!similar && <Typography variant='h5'>{item.title}</Typography>}
+            {!similar && (
+              <Typography variant='h5'>
+                {item.title}
+              </Typography>
+            )}
           </Box>
         ))}
     </Slider>

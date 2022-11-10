@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { getDataById } from '../../services/services'
 import { mapMovieObject } from '../../utils/transformFramework'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 export const useDetailContent = (props) => {
   const { id } = useParams()

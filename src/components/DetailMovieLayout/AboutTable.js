@@ -1,5 +1,5 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -59,20 +59,36 @@ export default function AboutTable({ data, type }) {
 
   return (
     <TableContainer>
-      <Table className={classes.table} size='small' aria-label='a dense table'>
+      <Table
+        className={classes.table}
+        size='small'
+        aria-label='a dense table'
+      >
         <TableHead className={classes.head}>
-          <Typography variant='h6' id='tableTitle' component='div'>
+          <Typography
+            variant='h6'
+            id='tableTitle'
+            component='div'
+          >
             Info
           </Typography>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell className={classes.name} component='th' scope='row'>
+              <TableCell
+                className={classes.name}
+                component='th'
+                scope='row'
+              >
                 {row.name}
               </TableCell>
-              <TableCell className={classes.info} align='left'>
-                {Array.isArray(row.info) && row.info.length !== 0
+              <TableCell
+                className={classes.info}
+                align='left'
+              >
+                {Array.isArray(row.info) &&
+                row.info.length !== 0
                   ? row.info.join(', ')
                   : !row.info
                   ? '-'

@@ -1,7 +1,7 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core'
-import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
+import Container from '@material-ui/core/Container'
+import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   root: {

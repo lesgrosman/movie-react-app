@@ -1,5 +1,5 @@
-import sortByParam from './sortFramework'
 import imageNotFound from '../services/imageNotFound.jpeg'
+import sortByParam from './sortFramework'
 
 const BASE_IMG = 'https://image.tmdb.org/t/p/w185/'
 const BASE_YT = 'https://www.youtube.com/watch?v='
@@ -21,7 +21,9 @@ export const mapMovieObject = (itemObj, type) => {
     id: itemObj.id,
     title: itemObj.title ? itemObj.title : itemObj.name,
     genres: getGenres(itemObj.genres),
-    year: itemObj.release_date ? getYear(itemObj.release_date) : getYear(itemObj.first_air_date),
+    year: itemObj.release_date
+      ? getYear(itemObj.release_date)
+      : getYear(itemObj.first_air_date),
     countries: getCountries(itemObj.production_countries),
     directors:
       type === 'movie'
@@ -39,7 +41,10 @@ export const mapMovieObject = (itemObj, type) => {
     rankCount: itemObj.vote_count,
     poster: checkImage(itemObj.poster_path),
     trailerURL: checkTrailer(itemObj.trailerList),
-    similar: getSimilarItems(sortByParam(itemObj.similarItems, 'vote_count'), type),
+    similar: getSimilarItems(
+      sortByParam(itemObj.similarItems, 'vote_count'),
+      type,
+    ),
   }
 }
 
@@ -75,7 +80,9 @@ function getTeam(crewList, job, type) {
     const team = crewList.filter((item) => item.job === job)
     return team.map((item) => item.name).slice(0, 3)
   }
-  const tvTeam = crewList.filter((item) => item.known_for_department === job)
+  const tvTeam = crewList.filter(
+    (item) => item.known_for_department === job,
+  )
 
   return tvTeam.map((item) => item.name).slice(0, 3)
 }

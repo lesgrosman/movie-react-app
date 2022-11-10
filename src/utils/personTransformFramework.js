@@ -21,8 +21,14 @@ export const personTransrofm = (itemObj) => {
     deathday,
     gender: gender === 1 ? 'female' : 'male',
     poster: checkImage(profilePath),
-    movies: getItems(sortByParam(movieCredits.cast, 'popularity'), 'movie'),
-    tvs: getItems(sortByParam(tvCredits.cast, 'popularity'), 'tv'),
+    movies: getItems(
+      sortByParam(movieCredits.cast, 'popularity'),
+      'movie',
+    ),
+    tvs: getItems(
+      sortByParam(tvCredits.cast, 'popularity'),
+      'tv',
+    ),
   }
 }
 

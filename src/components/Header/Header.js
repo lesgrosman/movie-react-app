@@ -1,10 +1,10 @@
-import React from 'react'
+import { AppBar, Button, Toolbar } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-import Slide from '@material-ui/core/Slide'
+import React from 'react'
 import SearchInput from '../SearchInput/SearchInput'
+import Slide from '@material-ui/core/Slide'
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 const HideOnScroll = (props) => {
   const { children, window } = props
-  const trigger = useScrollTrigger({ target: window ? window() : undefined })
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  })
 
   return (
     <Slide appear={false} direction='down' in={!trigger}>
@@ -39,7 +41,11 @@ const Header = () => {
       <HideOnScroll>
         <AppBar position='fixed'>
           <Toolbar className={classes.root}>
-            <Button component={Link} to='/' className={classes.title}>
+            <Button
+              component={Link}
+              to='/'
+              className={classes.title}
+            >
               Main Page
             </Button>
             <SearchInput />

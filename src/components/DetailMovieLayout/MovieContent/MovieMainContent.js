@@ -1,6 +1,6 @@
-import React from 'react'
 import { Divider, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
 
 const useStyles = makeStyles({
   rootTop: {
@@ -34,7 +34,12 @@ const MovieMainContent = (props) => {
     <Grid className={classes.rootTop} item container>
       <Grid className={classes.left} item md={3}>
         {imageNode}
-        <Divider className={classes.divider} orientation='vertical' light flexItem />
+        <Divider
+          className={classes.divider}
+          orientation='vertical'
+          light
+          flexItem
+        />
       </Grid>
       <Grid item md={6}>
         <div className={classes.about}>{centralNode}</div>

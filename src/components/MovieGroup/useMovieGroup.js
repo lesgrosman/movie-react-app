@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { getData } from '../../services/services'
 import { getItems } from '../../utils/transformFramework'
+import { useEffect, useState } from 'react'
 
 export const useMovieGroup = (props) => {
   const [loading, setLoading] = useState(true)

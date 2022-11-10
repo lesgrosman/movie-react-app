@@ -1,8 +1,12 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { Divider, Grid, Typography } from '@material-ui/core'
+import {
+  Divider,
+  Grid,
+  Typography,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from 'react-router-dom'
 import AboutTable from '../AboutTable'
+import React from 'react'
 
 const useStyles = makeStyles({
   rootTop: {
@@ -52,8 +56,17 @@ const PersonMainContent = ({ person, type }) => {
   return (
     <Grid className={classes.rootTop} item container>
       <Grid className={classes.left} item md={3}>
-        <img className={classes.image} src={poster} alt='img' />
-        <Divider className={classes.divider} orientation='vertical' light flexItem />
+        <img
+          className={classes.image}
+          src={poster}
+          alt='img'
+        />
+        <Divider
+          className={classes.divider}
+          orientation='vertical'
+          light
+          flexItem
+        />
       </Grid>
       <Grid item md={6}>
         <div className={classes.about}>
@@ -70,7 +83,9 @@ const PersonMainContent = ({ person, type }) => {
             <Typography
               key={index}
               className={classes.choice}
-              onClick={() => history.push(`/${item.itemType}/${item.id}`)}
+              onClick={() =>
+                history.push(`/${item.itemType}/${item.id}`)
+              }
             >
               {item.title}
             </Typography>
