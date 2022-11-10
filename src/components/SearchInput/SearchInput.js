@@ -1,8 +1,7 @@
 import { InputBase } from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { useForm } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
-import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles(theme => ({
@@ -49,13 +48,13 @@ const useStyles = makeStyles(theme => ({
 
 const SearchInput = () => {
   const classes = useStyles()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (data, e) => {
     e.target.reset()
-    history.push(`/results${data.query}`)
+    navigate(`/results${data.query}`)
   }
 
   return (
