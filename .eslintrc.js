@@ -47,7 +47,7 @@ module.exports = {
     'no-irregular-whitespace': 'warn',
     'react/react-in-jsx-scope': 'off',
     'no-constant-binary-expression': 'error',
-    'react/prop-types': 'off',
+    'react/prop-types': 'off', // DELETE when typescript
   },
   plugins: ['sort-imports-es6-autofix'],
   settings: {

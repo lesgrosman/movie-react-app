@@ -2,7 +2,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { makeStyles } from '@material-ui/core'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
 import Slider from 'react-slick'
 import Typography from '@material-ui/core/Typography'
@@ -29,11 +29,12 @@ const useStyles = makeStyles(() => ({
 
 // Setting the Carousel(slick) depending on list in props
 const Carousel = ({ list, similar }) => {
+  const navigate = useNavigate()
   const classes = useStyles()
-  const history = useHistory()
+  // const history = useHistory()
 
   const redirectToDetail = item => {
-    history.push(`/${item.itemType}/${item.id}`)
+    navigate(`/${item.itemType}/${item.id}`)
   }
 
   const settings = {
