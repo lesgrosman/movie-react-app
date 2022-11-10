@@ -17,11 +17,7 @@ export const useDetailContent = props => {
     setLoading(true)
     getDataById(type, id)
       .then(response => {
-        // if (type === 'person') {
-        //   setItemObject(personTransrofm(response, type))
-        // } else {
         setMovie(mapMovieObject(response, type))
-        // }
         setLoading(false)
       })
       .catch(e => {

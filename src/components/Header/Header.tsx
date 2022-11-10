@@ -36,18 +36,16 @@ const Header = () => {
   const classes = useStyles()
 
   return (
-    <>
-      <HideOnScroll>
-        <AppBar position='fixed'>
-          <Toolbar className={classes.root}>
-            <Button component={Link} to='/' className={classes.title}>
-              Main Page
-            </Button>
-            <SearchInput />
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-    </>
+    <HideOnScroll>
+      <AppBar position='fixed'>
+        <Toolbar className={classes.root}>
+          <Button component={Link} to='/' className={classes.title}>
+            Main Page
+          </Button>
+          <SearchInput />
+        </Toolbar>
+      </AppBar>
+    </HideOnScroll>
   )
 }
 

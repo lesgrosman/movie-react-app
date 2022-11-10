@@ -1,6 +1,7 @@
 import 'font-awesome/css/font-awesome.min.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
+import { MovieItem, Nullable } from 'utils/types'
 import { makeStyles } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
@@ -27,16 +28,8 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-interface MovieItem {
-  id: number
-  itemType: string
-  poster: string
-  rankAverage: number
-  title: string
-}
-
 interface Props {
-  list: MovieItem[]
+  list: Nullable<MovieItem[]>
   similar: boolean
 }
 
@@ -44,7 +37,6 @@ interface Props {
 const Carousel = ({ list, similar }: Props) => {
   const navigate = useNavigate()
   const classes = useStyles()
-  console.log(list)
 
   const redirectToDetail = (item: MovieItem) => {
     navigate(`/${item.itemType}/${item.id}`)

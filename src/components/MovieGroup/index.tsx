@@ -21,9 +21,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface Props {
-  searchBy: string
+  searchBy?: string
   name: string
-  param: string
+  param?: string
   type: string
 }
 

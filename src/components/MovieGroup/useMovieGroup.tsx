@@ -1,9 +1,10 @@
+import { MovieItem, Nullable } from 'utils/types'
 import { getData } from '../../services/services'
 import { getItems } from '../../utils/transformFramework'
 import { useEffect, useState } from 'react'
 
 interface Props {
-  searchBy: string
+  searchBy?: string
   param: string
   type: string
 }
@@ -11,7 +12,7 @@ interface Props {
 interface UseMovieGroup {
   loading: boolean
   error: boolean
-  movies: any
+  movies: Nullable<MovieItem[]>
 }
 
 export const useMovieGroup = ({ searchBy, param = '', type }: Props): UseMovieGroup => {

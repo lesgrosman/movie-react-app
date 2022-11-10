@@ -1,7 +1,6 @@
-import React from 'react'
 import classes from './Error.module.css'
 
-const Error = ({ error }) => {
+const Error = ({ error }: { error: any }) => {
   // Error handlers
 
   const errorStatus = error.response.status.toString()

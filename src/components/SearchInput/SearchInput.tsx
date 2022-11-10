@@ -50,10 +50,10 @@ const SearchInput = () => {
   const classes = useStyles()
   const navigate = useNavigate()
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
-  const onSubmit = (data, e) => {
-    e.target.reset()
+  const onSubmit = (data: any) => {
+    reset()
     navigate(`/results${data.query}`)
   }
 

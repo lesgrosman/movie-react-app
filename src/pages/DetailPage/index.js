@@ -47,6 +47,8 @@ const DetailPage = ({ type }) => {
     type,
   })
 
+  console.log(movieObj)
+
   const classes = useStyles(movieObj?.rank_average)
 
   if (loading) return <MovieDetailSkeleton />
