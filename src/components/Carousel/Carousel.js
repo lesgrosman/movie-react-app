@@ -4,7 +4,6 @@ import 'slick-carousel/slick/slick.css'
 import { makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
-import React from 'react'
 import Slider from 'react-slick'
 import Typography from '@material-ui/core/Typography'
 
