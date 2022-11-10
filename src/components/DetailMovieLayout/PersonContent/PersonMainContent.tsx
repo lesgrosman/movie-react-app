@@ -3,7 +3,6 @@ import { MovieItem } from 'utils/types'
 import { makeStyles } from '@material-ui/core/styles'
 import { useNavigate } from 'react-router-dom'
 import AboutTable from '../AboutTable'
-import React from 'react'
 
 const useStyles = makeStyles({
   rootTop: {

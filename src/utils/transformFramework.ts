@@ -2,6 +2,7 @@ import {
   CastMember,
   CrewMember,
   Genre,
+  MovieItem,
   MovieItemResponse,
   MovieResponse,
   Nullable,
@@ -129,7 +130,10 @@ function getCast(castList: CastMember[]) {
     .slice(0, 10)
 }
 
-function getSimilarItems(arr: MovieItemResponse[] | TVSeriesItemResponse[], type: string) {
+function getSimilarItems(
+  arr: MovieItemResponse[] | TVSeriesItemResponse[],
+  type: string
+): MovieItem[] {
   return arr.map(item => {
     return {
       id: item.id,

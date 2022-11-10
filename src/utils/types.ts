@@ -184,7 +184,7 @@ export type MovieResponse = {
     crew: CrewMember[]
   }
   trailers: Trailer[]
-  similar: MovieItemResponse
+  similar: MovieItemResponse[]
 }
 
 export type TVSeriesResponse = {

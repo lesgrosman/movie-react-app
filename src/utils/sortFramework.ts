@@ -1,4 +1,4 @@
-export default function sortByParam(array, param) {
+export default function sortByParam(array: any[], param: string) {
   let temp = 0
   for (let i = 0; i < array.length; i++) {
     for (let j = i; j < array.length; j++) {
