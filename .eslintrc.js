@@ -1,6 +1,13 @@
 // https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
 module.exports = {
-  extends: ['plugin:react/recommended', 'plugin:prettier/recommended', 'prettier'],
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+  ],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -9,6 +16,19 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/semi': ['error', 'never'],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { functions: false, classes: false, variables: false, typedefs: true },
+    ],
+    '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/prefer-interface': 0,
+    '@typescript-eslint/interface-name-prefix': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/ban-ts-ignore': 0,
+    '@typescript-eslint/explicit-member-accessibility': 0,
     'prettier/prettier': 'error',
     semi: 'off',
     eqeqeq: 'error',
