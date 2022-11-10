@@ -48,8 +48,8 @@ export const getDataById = async (type, id) => {
 
   return {
     ...movie,
-    ...credits,
-    trailerList,
-    similarItems,
+    credits: credits,
+    trailers: trailerList,
+    similar: similarItems,
   }
 }

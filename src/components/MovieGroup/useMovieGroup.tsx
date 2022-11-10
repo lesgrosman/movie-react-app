@@ -1,6 +1,6 @@
 import { MovieItem, Nullable } from 'utils/types'
 import { getData } from '../../services/services'
-import { getItems } from '../../utils/transformFramework'
+import { getMovies, getTVSeries } from '../../utils/transformFramework'
 import { useEffect, useState } from 'react'
 
 interface Props {
@@ -16,9 +16,9 @@ interface UseMovieGroup {
 }
 
 export const useMovieGroup = ({ searchBy, param = '', type }: Props): UseMovieGroup => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-  const [movies, setMovies] = useState(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<boolean>(false)
+  const [movies, setMovies] = useState<Nullable<MovieItem[]>>(null)
 
   useEffect(() => {
     setError(false)
@@ -27,7 +27,7 @@ export const useMovieGroup = ({ searchBy, param = '', type }: Props): UseMovieGr
       .then(response => {
         const results = response.data.results
         setLoading(false)
-        setMovies(getItems(results, type))
+        setMovies(type === 'movie' ? () => getMovies(results) : getTVSeries(results))
       })
       .catch(e => {
         setLoading(false)

@@ -9,14 +9,14 @@ import ReactPlayer from 'react-player'
 import StarRatings from 'react-star-ratings'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   image: {
-    borderRadius: theme.typography.pxToRem(10),
-    width: theme.typography.pxToRem(185),
-    height: theme.typography.pxToRem(278),
+    borderRadius: '10px',
+    width: '185px',
+    height: '278px',
   },
   bottomTitle: {
-    marginBottom: theme.typography.pxToRem(15),
+    marginBottom: '15px',
     fontWeight: 500,
   },
   rankStars: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: '30px',
   },
   rank: {
-    marginLeft: theme.typography.pxToRem(20),
+    marginLeft: '20px',
   },
   rankSecondary: {
     display: 'inline-block',
@@ -42,14 +42,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const DetailPage = ({ type }) => {
+interface Props {
+  type: string
+}
+
+const DetailPage = ({ type }: Props) => {
   const { movieObj, error, loading } = useDetailContent({
     type,
   })
 
-  console.log(movieObj)
-
-  const classes = useStyles(movieObj?.rank_average)
+  const classes = useStyles(movieObj?.rankAverage)
 
   if (loading) return <MovieDetailSkeleton />
 
