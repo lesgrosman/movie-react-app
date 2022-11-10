@@ -3,14 +3,14 @@ body {
   color: #fff;
   /* background-color: #000018; */
   /* background: rgba(82, 101, 164, 1); */
-  background: linear-gradient(67.49deg, #237BB8 -8.15%, #081B40 89.39%);
-  font-family: "Gt america", sans-serif;
+  background: linear-gradient(67.49deg, #237bb8 -8.15%, #081b40 89.39%);
+  font-family: 'Gt america', sans-serif;
 }
 
 .slick-prev:before,
 .slick-next:before {
   /* color: #384259!important; */
-  color: #fff!important;
+  color: #fff !important;
 }
 
 .slick-slide div {
@@ -22,6 +22,5 @@ body {
 }
 
 .slick-dots li.slick-active button:before {
-  color:red !important;
+  color: red !important;
 }
-

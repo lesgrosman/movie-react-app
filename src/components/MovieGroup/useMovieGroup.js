@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
-import { getData } from '../../services/services';
-import { getItems } from '../../utils/transformFramework';
+import { getData } from '../../services/services'
+import { getItems } from '../../utils/transformFramework'
+import { useEffect, useState } from 'react'
 
+export const useMovieGroup = props => {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [movies, setMovies] = useState(null)
 
-export const useMovieGroup = (props) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [movies, setMovies] = useState(null);
-
-  const { searchBy, type, param } = props;
-
+  const { searchBy, type, param } = props
 
   useEffect(() => {
     setError(false)
-    setLoading(true)   
-    getData(searchBy, param) // Invoking the request depending on filters after 
+    setLoading(true)
+    getData(searchBy, param) // Invoking the request depending on filters after
       .then(response => {
         const results = response.data.results
         setLoading(false)
@@ -24,7 +22,7 @@ export const useMovieGroup = (props) => {
         setLoading(false)
         setError(e)
       })
-  }, [ param, searchBy, type ]);
+  }, [param, searchBy, type])
 
-  return { movies, error, loading };
-};
+  return { movies, error, loading }
+}

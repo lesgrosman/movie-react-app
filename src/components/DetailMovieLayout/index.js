@@ -1,9 +1,9 @@
-import React from 'react'
-import { Grid, Fade } from '@material-ui/core'
+import { Fade, Grid } from '@material-ui/core'
 import MovieBottomContent from './MovieContent/MovieBottomContent'
 import MovieMainContent from './MovieContent/MovieMainContent'
+import React from 'react'
 
-const Content = (props) => {
+const Content = props => {
   const {
     imageNode,
     centralNode,
@@ -12,15 +12,11 @@ const Content = (props) => {
     annotationNode,
     ratingNode,
     trailerNode,
-  } = props;
+  } = props
 
   const MovieContent = (
     <>
-      <MovieMainContent
-        imageNode={imageNode}
-        centralNode={centralNode}
-        rightNode={rightNode}
-      />
+      <MovieMainContent imageNode={imageNode} centralNode={centralNode} rightNode={rightNode} />
       <MovieBottomContent
         similarNode={similarNode}
         annotationNode={annotationNode}
@@ -32,9 +28,7 @@ const Content = (props) => {
 
   return (
     <Fade in={true} timeout={1000}>
-      <Grid container>         
-        {MovieContent}
-      </Grid>
+      <Grid container>{MovieContent}</Grid>
     </Fade>
   )
 }
