@@ -1,17 +1,17 @@
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+import AppNavigator from './navigation/AppNavigator'
 import GlobalStyles from './utils/GlobalStyles'
 import Header from './components/Header/Header'
-import MainAppPage from './pages/MainAppPage'
 import Wrapper from './components/Wrapper/Wrapper'
 
 const App = () => (
-  <Router>
+  <BrowserRouter>
     <GlobalStyles />
     <Header />
     <Wrapper>
-      <MainAppPage />
+      <AppNavigator />
     </Wrapper>
-  </Router>
+  </BrowserRouter>
 )
 
 export default App
