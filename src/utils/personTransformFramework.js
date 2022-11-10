@@ -1,7 +1,7 @@
 import { checkImage } from './transformFramework'
 import sortByParam from './sortFramework'
 
-export const personTransrofm = (itemObj) => {
+export const personTransrofm = itemObj => {
   const {
     id,
     name,
@@ -21,19 +21,13 @@ export const personTransrofm = (itemObj) => {
     deathday,
     gender: gender === 1 ? 'female' : 'male',
     poster: checkImage(profilePath),
-    movies: getItems(
-      sortByParam(movieCredits.cast, 'popularity'),
-      'movie',
-    ),
-    tvs: getItems(
-      sortByParam(tvCredits.cast, 'popularity'),
-      'tv',
-    ),
+    movies: getItems(sortByParam(movieCredits.cast, 'popularity'), 'movie'),
+    tvs: getItems(sortByParam(tvCredits.cast, 'popularity'), 'tv'),
   }
 }
 
 export function getItems(array, type) {
-  return array.map((item) => {
+  return array.map(item => {
     return {
       id: item.id,
       title: type === 'movie' ? item.title : item.name,

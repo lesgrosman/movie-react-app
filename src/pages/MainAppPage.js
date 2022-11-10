@@ -8,23 +8,11 @@ const MainAppPage = () => {
   return (
     <>
       <Route path='/' exact component={ListPage} />
-      <Route
-        path='/movie/:id'
-        render={() => <DetailPage type='movie' />}
-      />
-      <Route
-        path='/tv/:id'
-        render={() => <DetailPage type='tv' />}
-      />
+      <Route path='/movie/:id' render={() => <DetailPage type='movie' />} />
+      <Route path='/tv/:id' render={() => <DetailPage type='tv' />} />
 
-      <Route
-        path='/person/:id'
-        render={() => <DetailPage type='person' />}
-      />
-      <Route
-        path='/results:query'
-        component={SearchResultPage}
-      />
+      <Route path='/person/:id' render={() => <DetailPage type='person' />} />
+      <Route path='/results:query' component={SearchResultPage} />
     </>
   )
 }

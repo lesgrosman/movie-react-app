@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   table: {
     width: '100%',
     marginTop: theme.typography.pxToRem(30),
@@ -59,36 +59,20 @@ export default function AboutTable({ data, type }) {
 
   return (
     <TableContainer>
-      <Table
-        className={classes.table}
-        size='small'
-        aria-label='a dense table'
-      >
+      <Table className={classes.table} size='small' aria-label='a dense table'>
         <TableHead className={classes.head}>
-          <Typography
-            variant='h6'
-            id='tableTitle'
-            component='div'
-          >
+          <Typography variant='h6' id='tableTitle' component='div'>
             Info
           </Typography>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map(row => (
             <TableRow key={row.name}>
-              <TableCell
-                className={classes.name}
-                component='th'
-                scope='row'
-              >
+              <TableCell className={classes.name} component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell
-                className={classes.info}
-                align='left'
-              >
-                {Array.isArray(row.info) &&
-                row.info.length !== 0
+              <TableCell className={classes.info} align='left'>
+                {Array.isArray(row.info) && row.info.length !== 0
                   ? row.info.join(', ')
                   : !row.info
                   ? '-'

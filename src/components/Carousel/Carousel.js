@@ -33,7 +33,7 @@ const Carousel = ({ list, similar }) => {
   const classes = useStyles()
   const history = useHistory()
 
-  const redirectToDetail = (item) => {
+  const redirectToDetail = item => {
     history.push(`/${item.itemType}/${item.id}`)
   }
 
@@ -96,32 +96,14 @@ const Carousel = ({ list, similar }) => {
   return (
     <Slider {...settings}>
       {list &&
-        list.map((item) => (
-          <Box
-            className={classes.box}
-            key={item.id}
-            onClick={() => redirectToDetail(item)}
-          >
+        list.map(item => (
+          <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
             {similar ? (
-              <img
-                width='93'
-                height='140'
-                src={item.poster}
-                alt='img'
-              />
+              <img width='93' height='140' src={item.poster} alt='img' />
             ) : (
-              <img
-                width='185'
-                height='278'
-                src={item.poster}
-                alt='img'
-              />
+              <img width='185' height='278' src={item.poster} alt='img' />
             )}
-            {!similar && (
-              <Typography variant='h5'>
-                {item.title}
-              </Typography>
-            )}
+            {!similar && <Typography variant='h5'>{item.title}</Typography>}
           </Box>
         ))}
     </Slider>

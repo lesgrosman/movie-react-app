@@ -3,7 +3,7 @@ import MovieBottomContent from './MovieContent/MovieBottomContent'
 import MovieMainContent from './MovieContent/MovieMainContent'
 import React from 'react'
 
-const Content = (props) => {
+const Content = props => {
   const {
     imageNode,
     centralNode,
@@ -16,11 +16,7 @@ const Content = (props) => {
 
   const MovieContent = (
     <>
-      <MovieMainContent
-        imageNode={imageNode}
-        centralNode={centralNode}
-        rightNode={rightNode}
-      />
+      <MovieMainContent imageNode={imageNode} centralNode={centralNode} rightNode={rightNode} />
       <MovieBottomContent
         similarNode={similarNode}
         annotationNode={annotationNode}

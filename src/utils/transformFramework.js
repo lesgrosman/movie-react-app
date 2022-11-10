@@ -5,7 +5,7 @@ const BASE_IMG = 'https://image.tmdb.org/t/p/w185/'
 const BASE_YT = 'https://www.youtube.com/watch?v='
 
 export function getItems(array, type) {
-  return array.map((item) => {
+  return array.map(item => {
     return {
       id: item.id,
       title: type === 'movie' ? item.title : item.name,
@@ -21,9 +21,7 @@ export const mapMovieObject = (itemObj, type) => {
     id: itemObj.id,
     title: itemObj.title ? itemObj.title : itemObj.name,
     genres: getGenres(itemObj.genres),
-    year: itemObj.release_date
-      ? getYear(itemObj.release_date)
-      : getYear(itemObj.first_air_date),
+    year: itemObj.release_date ? getYear(itemObj.release_date) : getYear(itemObj.first_air_date),
     countries: getCountries(itemObj.production_countries),
     directors:
       type === 'movie'
@@ -41,15 +39,12 @@ export const mapMovieObject = (itemObj, type) => {
     rankCount: itemObj.vote_count,
     poster: checkImage(itemObj.poster_path),
     trailerURL: checkTrailer(itemObj.trailerList),
-    similar: getSimilarItems(
-      sortByParam(itemObj.similarItems, 'vote_count'),
-      type,
-    ),
+    similar: getSimilarItems(sortByParam(itemObj.similarItems, 'vote_count'), type),
   }
 }
 
 function getGenres(genresList) {
-  return genresList.map((obj) => obj.name)
+  return genresList.map(obj => obj.name)
 }
 
 function getYear(date) {
@@ -57,7 +52,7 @@ function getYear(date) {
 }
 
 function getCountries(countriesList) {
-  return countriesList.map((country) => country.name)
+  return countriesList.map(country => country.name)
 }
 
 export function checkImage(image) {
@@ -77,19 +72,17 @@ function checkTrailer(list) {
 
 function getTeam(crewList, job, type) {
   if (type === 'movie') {
-    const team = crewList.filter((item) => item.job === job)
-    return team.map((item) => item.name).slice(0, 3)
+    const team = crewList.filter(item => item.job === job)
+    return team.map(item => item.name).slice(0, 3)
   }
-  const tvTeam = crewList.filter(
-    (item) => item.known_for_department === job,
-  )
+  const tvTeam = crewList.filter(item => item.known_for_department === job)
 
-  return tvTeam.map((item) => item.name).slice(0, 3)
+  return tvTeam.map(item => item.name).slice(0, 3)
 }
 
 function getCast(castList) {
   return castList
-    .map((person) => {
+    .map(person => {
       return {
         id: person.id,
         name: person.name,
@@ -99,7 +92,7 @@ function getCast(castList) {
 }
 
 function getSimilarItems(arr, type) {
-  return arr.map((item) => {
+  return arr.map(item => {
     return {
       id: item.id,
       title: type === 'movie' ? item.title : item.name,

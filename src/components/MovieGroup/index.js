@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { useMovieGroup } from './useMovieGroup'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTypography-root': {
       textAlign: 'center',
@@ -20,12 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const MovieGroup = ({
-  name,
-  searchBy,
-  param = null,
-  type,
-}) => {
+const MovieGroup = ({ name, searchBy, param = null, type }) => {
   const classes = useStyles()
 
   const { movies, error, loading } = useMovieGroup({
@@ -39,12 +34,7 @@ const MovieGroup = ({
   if (error) return <Error error={error} />
 
   if (movies && movies.length < 1) {
-    return (
-      <h3>
-        It seems like there is no movies you are looking
-        for...
-      </h3>
-    )
+    return <h3>It seems like there is no movies you are looking for...</h3>
   }
 
   return (

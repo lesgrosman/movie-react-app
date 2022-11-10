@@ -6,7 +6,7 @@ import SearchInput from '../SearchInput/SearchInput'
 import Slide from '@material-ui/core/Slide'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const HideOnScroll = (props) => {
+const HideOnScroll = props => {
   const { children, window } = props
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
@@ -41,11 +41,7 @@ const Header = () => {
       <HideOnScroll>
         <AppBar position='fixed'>
           <Toolbar className={classes.root}>
-            <Button
-              component={Link}
-              to='/'
-              className={classes.title}
-            >
+            <Button component={Link} to='/' className={classes.title}>
               Main Page
             </Button>
             <SearchInput />

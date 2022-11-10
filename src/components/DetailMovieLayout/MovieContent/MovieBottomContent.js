@@ -29,24 +29,14 @@ const useStyles = makeStyles({
   },
 })
 
-const MovieBottomContent = (props) => {
+const MovieBottomContent = props => {
   const classes = useStyles()
 
-  const {
-    similarNode,
-    annotationNode,
-    ratingNode,
-    trailerNode,
-  } = props
+  const { similarNode, annotationNode, ratingNode, trailerNode } = props
 
   return (
     <Grid className={classes.rootBottom} item container>
-      <Grid
-        className={classes.leftBottomSide}
-        item
-        container
-        md={8}
-      >
+      <Grid className={classes.leftBottomSide} item container md={8}>
         <Grid className={classes.similarMovies} item>
           {similarNode}
         </Grid>

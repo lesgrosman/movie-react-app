@@ -34,7 +34,7 @@ const MainPage = () => {
 
   return (
     <Box>
-      {groups.map((item) => (
+      {groups.map(item => (
         <MovieGroup
           key={shortid.generate()}
           searchBy={item.searchBy}

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 })
 
-const MovieMainContent = (props) => {
+const MovieMainContent = props => {
   const { imageNode, centralNode, rightNode } = props
 
   const classes = useStyles()
@@ -34,12 +34,7 @@ const MovieMainContent = (props) => {
     <Grid className={classes.rootTop} item container>
       <Grid className={classes.left} item md={3}>
         {imageNode}
-        <Divider
-          className={classes.divider}
-          orientation='vertical'
-          light
-          flexItem
-        />
+        <Divider className={classes.divider} orientation='vertical' light flexItem />
       </Grid>
       <Grid item md={6}>
         <div className={classes.about}>{centralNode}</div>

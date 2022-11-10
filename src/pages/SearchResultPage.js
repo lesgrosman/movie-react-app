@@ -7,11 +7,7 @@ const SearchResultPage = () => {
   const { query } = useParams()
   return (
     <Box>
-      <MovieGroup
-        name='Search results'
-        param={query}
-        type='movie'
-      />
+      <MovieGroup name='Search results' param={query} type='movie' />
     </Box>
   )
 }

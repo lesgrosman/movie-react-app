@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player'
 import StarRatings from 'react-star-ratings'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   image: {
     borderRadius: theme.typography.pxToRem(10),
     width: theme.typography.pxToRem(185),
@@ -26,12 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rankTop: {
     display: 'inline-block',
-    color: (rankAverage) =>
-      rankAverage >= 7
-        ? '#00e676'
-        : rankAverage < 5
-        ? '#c50e29'
-        : '#b0bec5',
+    color: rankAverage => (rankAverage >= 7 ? '#00e676' : rankAverage < 5 ? '#c50e29' : '#b0bec5'),
     fontWeight: 500,
     marginRight: '10px',
   },
@@ -59,20 +54,9 @@ const DetailPage = ({ type }) => {
 
   if (error || !movieObj) return <Error error={error} />
 
-  const {
-    poster,
-    title,
-    rankCount,
-    rankAverage,
-    cast,
-    overview,
-    similar,
-    trailerURL,
-  } = movieObj
+  const { poster, title, rankCount, rankAverage, cast, overview, similar, trailerURL } = movieObj
 
-  const imageNode = (
-    <img className={classes.image} src={poster} alt='img' />
-  )
+  const imageNode = <img className={classes.image} src={poster} alt='img' />
 
   const centralNode = (
     <>
@@ -98,7 +82,7 @@ const DetailPage = ({ type }) => {
       <Typography className={classes.cast} variant='h6'>
         Cast:
       </Typography>
-      {cast.map((person) => (
+      {cast.map(person => (
         <Typography key={person.id} gutterBottom>
           {person.name}
         </Typography>
@@ -108,10 +92,7 @@ const DetailPage = ({ type }) => {
 
   const similarNode = (
     <>
-      <Typography
-        className={classes.bottomTitle}
-        variant='h5'
-      >
+      <Typography className={classes.bottomTitle} variant='h5'>
         Similar movies
       </Typography>
       <Carousel list={similar} similar />
@@ -120,10 +101,7 @@ const DetailPage = ({ type }) => {
 
   const annotationNode = (
     <>
-      <Typography
-        className={classes.bottomTitle}
-        variant='h5'
-      >
+      <Typography className={classes.bottomTitle} variant='h5'>
         Annotation
       </Typography>
       <Typography variant='body1'>{overview}</Typography>
@@ -132,10 +110,7 @@ const DetailPage = ({ type }) => {
 
   const ratingNode = (
     <>
-      <Typography
-        className={classes.bottomTitle}
-        variant='h5'
-      >
+      <Typography className={classes.bottomTitle} variant='h5'>
         Film Rating
       </Typography>
       <div className={classes.rankStars}>
@@ -150,10 +125,7 @@ const DetailPage = ({ type }) => {
         <Typography className={classes.rank} variant='h3'>
           {rankAverage}
         </Typography>
-        <Typography
-          className={classes.rankSecondary}
-          variant='h5'
-        >
+        <Typography className={classes.rankSecondary} variant='h5'>
           {rankCount}
         </Typography>
       </div>
@@ -171,9 +143,7 @@ const DetailPage = ({ type }) => {
           origin={window.location.origin}
         />
       ) : (
-        <Typography variant='h5'>
-          {'Trailer does not exist :('}
-        </Typography>
+        <Typography variant='h5'>{'Trailer does not exist :('}</Typography>
       )}
     </>
   )

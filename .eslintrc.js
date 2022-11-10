@@ -1,9 +1,6 @@
 // https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
 module.exports = {
-  extends: [
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'plugin:prettier/recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -12,7 +9,7 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': 'warn',
+    'prettier/prettier': 'error',
     semi: 'off',
     eqeqeq: 'error',
     'no-use-before-define': [
@@ -35,27 +32,16 @@ module.exports = {
     ],
     'new-parens': 'error',
     'no-bitwise': ['error', { allow: ['~'] }],
-    'no-console': [
-      'warn',
-      { allow: ['warn', 'info', 'error'] },
-    ],
+    'no-console': ['warn', { allow: ['warn', 'info', 'error'] }],
     'no-caller': 'error',
-    'no-multiple-empty-lines': [
-      'error',
-      { max: 2, maxEOF: 1, maxBOF: 0 },
-    ],
+    'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }],
     'quote-props': ['error', 'as-needed'],
     'sort-imports-es6-autofix/sort-imports-es6': [
       2,
       {
         ignoreCase: false,
         ignoreMemberSort: false,
-        memberSyntaxSortOrder: [
-          'none',
-          'all',
-          'multiple',
-          'single',
-        ],
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
     'no-irregular-whitespace': 'warn',
