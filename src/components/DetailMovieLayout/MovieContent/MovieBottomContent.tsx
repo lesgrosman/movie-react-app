@@ -29,10 +29,15 @@ const useStyles = makeStyles({
   },
 })
 
-const MovieBottomContent = props => {
-  const classes = useStyles()
+interface Props {
+  similarNode: React.ReactNode
+  annotationNode: React.ReactNode
+  ratingNode: React.ReactNode
+  trailerNode: React.ReactNode
+}
 
-  const { similarNode, annotationNode, ratingNode, trailerNode } = props
+const MovieBottomContent = ({ similarNode, annotationNode, ratingNode, trailerNode }: Props) => {
+  const classes = useStyles()
 
   return (
     <Grid className={classes.rootBottom} item container>

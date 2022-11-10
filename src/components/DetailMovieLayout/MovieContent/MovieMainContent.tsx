@@ -25,9 +25,13 @@ const useStyles = makeStyles({
   },
 })
 
-const MovieMainContent = props => {
-  const { imageNode, centralNode, rightNode } = props
+interface Props {
+  imageNode: React.ReactNode
+  centralNode: React.ReactNode
+  rightNode: React.ReactNode
+}
 
+const MovieMainContent = ({ imageNode, centralNode, rightNode }: Props) => {
   const classes = useStyles()
 
   return (
