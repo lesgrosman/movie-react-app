@@ -20,7 +20,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const MovieGroup = ({ name, searchBy, param = null, type }) => {
+interface Props {
+  searchBy?: string
+  name: string
+  param?: string
+  type: string
+}
+
+const MovieGroup = ({ name, searchBy, param = '', type }: Props) => {
   const classes = useStyles()
 
   const { movies, error, loading } = useMovieGroup({

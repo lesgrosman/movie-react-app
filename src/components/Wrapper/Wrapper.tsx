@@ -3,16 +3,16 @@ import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import React from 'react'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     background: 'rgba(8, 27, 64, 1)',
-    offset: theme.mixins.toolbar,
-    paddingTop: theme.typography.pxToRem(55),
+    offset: 'auto',
+    paddingTop: '55px',
     minHeight: '100vh',
   },
 }))
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const classes = useStyles()
 
   return (

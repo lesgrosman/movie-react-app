@@ -3,7 +3,7 @@ import axios from 'axios'
 const API = '1f28dfddc7456645d53d767c58b4324c'
 const BASE = 'https://api.themoviedb.org/3'
 
-export const getData = (searchBy, param = '') => {
+export const getData = (searchBy = '', param = '') => {
   // Getting the list of content by genre or type(movie/tv) and parametr for each type
 
   switch (searchBy) {
@@ -20,7 +20,7 @@ export const getData = (searchBy, param = '') => {
   }
 }
 
-const getResource = async url => {
+const getResource = async (url: string) => {
   const res = await fetch(`${BASE}${url}`)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` + `, received ${res.status}`)
@@ -28,7 +28,7 @@ const getResource = async url => {
   return await res.json()
 }
 
-export const getDataById = async (type, id) => {
+export const getDataById = async (type: string, id = '') => {
   // Getting content by Id by type(movie/tv) and id
   if (type === 'person') {
     const person = await getResource(`/${type}/${id}?api_key=${API}&language=en-US`)
@@ -48,8 +48,8 @@ export const getDataById = async (type, id) => {
 
   return {
     ...movie,
-    ...credits,
-    trailerList,
-    similarItems,
+    credits: credits,
+    trailers: trailerList,
+    similar: similarItems,
   }
 }

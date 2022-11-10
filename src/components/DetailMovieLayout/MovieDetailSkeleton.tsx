@@ -10,7 +10,7 @@ const MovieDetailSkeleton = () => {
   const centralNode = (
     <>
       <Skeleton variant='text' animation='wave' width={140} height={50} />
-      {[...Array(9).keys()].map((_, index) => (
+      {Array.from(Array(9).keys()).map((_, index) => (
         <Skeleton key={index} variant='text' width='80%' height={25} />
       ))}
     </>
@@ -19,7 +19,7 @@ const MovieDetailSkeleton = () => {
   const rightNode = (
     <>
       <Skeleton variant='text' width='70%' height={70} />
-      {[...Array(10).keys()].map((_, index) => (
+      {Array.from(Array(10).keys()).map((_, index) => (
         <Skeleton key={index} variant='text' width='60%' height={30} />
       ))}
     </>
@@ -29,7 +29,7 @@ const MovieDetailSkeleton = () => {
     <>
       <Skeleton variant='text' animation='wave' width={240} height={50} />
       <Grid container spacing={2}>
-        {[...Array(6).keys()].map((_, index) => (
+        {Array.from(Array(6).keys()).map((_, index) => (
           <Grid item xs={2} key={index}>
             <Skeleton variant='rect' width={93} height={140} />
           </Grid>
@@ -42,7 +42,7 @@ const MovieDetailSkeleton = () => {
     <>
       <Skeleton variant='text' animation='wave' width={240} height={50} />
       <Box display='flex' flexDirection='column'>
-        {[...Array(6).keys()].map((_, index) => (
+        {Array.from(Array(6).keys()).map((_, index) => (
           <Skeleton key={index} variant='text' animation='wave' width='90%' height={10} />
         ))}
       </Box>
@@ -53,7 +53,7 @@ const MovieDetailSkeleton = () => {
     <>
       <Skeleton variant='text' animation='wave' width={240} height={50} />
       <Grid container spacing={2}>
-        {[...Array(10).keys()].map((_, index) => (
+        {Array.from(Array(10).keys()).map((_, index) => (
           <Grid key={index} item xs={1}>
             <Skeleton variant='circle' animation='wave' width={50} height={50} />
           </Grid>

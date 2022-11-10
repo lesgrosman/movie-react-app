@@ -3,17 +3,25 @@ import MovieBottomContent from './MovieContent/MovieBottomContent'
 import MovieMainContent from './MovieContent/MovieMainContent'
 import React from 'react'
 
-const Content = props => {
-  const {
-    imageNode,
-    centralNode,
-    rightNode,
-    similarNode,
-    annotationNode,
-    ratingNode,
-    trailerNode,
-  } = props
+interface Props {
+  imageNode: React.ReactNode
+  centralNode: React.ReactNode
+  rightNode: React.ReactNode
+  similarNode: React.ReactNode
+  annotationNode: React.ReactNode
+  ratingNode: React.ReactNode
+  trailerNode: React.ReactNode
+}
 
+const Content = ({
+  imageNode,
+  centralNode,
+  rightNode,
+  similarNode,
+  annotationNode,
+  ratingNode,
+  trailerNode,
+}: Props) => {
   const MovieContent = (
     <>
       <MovieMainContent imageNode={imageNode} centralNode={centralNode} rightNode={rightNode} />

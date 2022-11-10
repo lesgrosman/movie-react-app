@@ -8,32 +8,37 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   table: {
     width: '100%',
-    marginTop: theme.typography.pxToRem(30),
-    color: theme.palette.common.white,
+    marginTop: '30px',
+    color: 'white',
   },
   name: {
     color: 'rgba(255,255,255, 0.5)',
-    margin: theme.typography.pxToRem(10),
+    margin: '10px',
     borderBottomColor: 'rgba(255,255,255, 0.2)',
   },
   info: {
-    color: theme.palette.common.white,
+    color: 'white',
     borderBottomColor: 'rgba(255,255,255, 0.2)',
   },
   head: {
     '& .MuiTypography-root': {
-      marginLeft: theme.typography.pxToRem(15),
+      marginLeft: '15px',
     },
   },
 }))
 
-export default function AboutTable({ data, type }) {
+interface Props {
+  data: any
+  type?: string
+}
+
+export default function AboutTable({ data, type }: Props) {
   const classes = useStyles()
 
-  function createData(name, info) {
+  function createData(name: string, info: string) {
     return { name, info }
   }
 

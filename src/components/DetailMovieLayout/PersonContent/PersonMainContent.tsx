@@ -1,8 +1,8 @@
 import { Divider, Grid, Typography } from '@material-ui/core'
+import { MovieItem } from 'utils/types'
 import { makeStyles } from '@material-ui/core/styles'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AboutTable from '../AboutTable'
-import React from 'react'
 
 const useStyles = makeStyles({
   rootTop: {
@@ -44,10 +44,15 @@ const useStyles = makeStyles({
   },
 })
 
-const PersonMainContent = ({ person, type }) => {
+interface Props {
+  person: any
+  type: any
+}
+
+const PersonMainContent = ({ person, type }: Props) => {
   const { name, poster, movies } = person
   const classes = useStyles()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   return (
     <Grid className={classes.rootTop} item container>
@@ -65,12 +70,12 @@ const PersonMainContent = ({ person, type }) => {
         <Typography className={classes.cast} variant='h6'>
           Movies:
         </Typography>
-        {movies.slice(0, 11).map((item, index) => {
+        {movies.slice(0, 11).map((item: MovieItem, i: number) => {
           return (
             <Typography
-              key={index}
+              key={i}
               className={classes.choice}
-              onClick={() => history.push(`/${item.itemType}/${item.id}`)}
+              onClick={() => navigate(`/${item.itemType}/${item.id}`)}
             >
               {item.title}
             </Typography>
