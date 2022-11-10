@@ -2,12 +2,22 @@ import { getData } from '../../services/services'
 import { getItems } from '../../utils/transformFramework'
 import { useEffect, useState } from 'react'
 
-export const useMovieGroup = props => {
+interface Props {
+  searchBy: string
+  param: string
+  type: string
+}
+
+interface UseMovieGroup {
+  loading: boolean
+  error: boolean
+  movies: any
+}
+
+export const useMovieGroup = ({ searchBy, param = '', type }: Props): UseMovieGroup => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [movies, setMovies] = useState(null)
-
-  const { searchBy, type, param } = props
 
   useEffect(() => {
     setError(false)

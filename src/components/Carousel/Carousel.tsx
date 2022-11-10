@@ -27,13 +27,26 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
+interface MovieItem {
+  id: number
+  itemType: string
+  poster: string
+  rankAverage: number
+  title: string
+}
+
+interface Props {
+  list: MovieItem[]
+  similar: boolean
+}
+
 // Setting the Carousel(slick) depending on list in props
-const Carousel = ({ list, similar }) => {
+const Carousel = ({ list, similar }: Props) => {
   const navigate = useNavigate()
   const classes = useStyles()
-  // const history = useHistory()
+  console.log(list)
 
-  const redirectToDetail = item => {
+  const redirectToDetail = (item: MovieItem) => {
     navigate(`/${item.itemType}/${item.id}`)
   }
 
@@ -96,7 +109,7 @@ const Carousel = ({ list, similar }) => {
   return (
     <Slider {...settings}>
       {list &&
-        list.map(item => (
+        list.map((item: MovieItem) => (
           <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
             {similar ? (
               <img width='93' height='140' src={item.poster} alt='img' />
