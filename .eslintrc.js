@@ -12,6 +12,7 @@ module.exports = {
     },
   },
   rules: {
+    'prettier/prettier': 'warn',
     semi: 'off',
     eqeqeq: 'error',
     'no-use-before-define': [
