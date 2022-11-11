@@ -1,15 +1,15 @@
 import { Route, Routes } from 'react-router-dom'
-import DetailPage from '../pages/DetailPage'
 import MainPage from '../pages/MainPage'
+import MovieDetailPage from 'pages/DetailPage/MovieDetailPage'
 import SearchResultPage from '../pages/SearchResultPage'
+import TVSeriesDetailPage from 'pages/DetailPage/TVSeriesDetailPage'
 
 const AppNavigator = () => {
   return (
     <Routes>
       <Route path='/' element={<MainPage />} />
-      <Route path='/movie/:id' element={<DetailPage type='movie' />} />
-      <Route path='/tv/:id' element={<DetailPage type='tv' />} />
-      <Route path='/person/:id' element={<DetailPage type='person' />} />
+      <Route path='/movie/:id' element={<MovieDetailPage />} />
+      <Route path='/tv/:id' element={<TVSeriesDetailPage />} />
       <Route path='/results:query' element={<SearchResultPage />} />
     </Routes>
   )

@@ -27,6 +27,11 @@ export type MovieDetail = {
   year: string
 }
 
+export type SimpleItem = {
+  id: number
+  name: string
+}
+
 export type Genre = {
   id: number
   name: string
@@ -106,6 +111,12 @@ export type CrewMember = Omit<CastMember, 'character' | 'order'> & {
   job: string
 }
 
+export type Credits = {
+  id: number
+  cast: CastMember[]
+  crew: CrewMember[]
+}
+
 export type Trailer = {
   id: string
   iso_639_1: string
@@ -117,6 +128,11 @@ export type Trailer = {
   type: string
   official: boolean
   published_at: string
+}
+
+export type Trailers = {
+  id: number
+  results: Trailer[]
 }
 
 export type MovieItemResponse = {
@@ -152,6 +168,20 @@ export type TVSeriesItemResponse = {
   origin_country: string[]
 }
 
+export type Movies = {
+  page: number
+  results: MovieItemResponse[]
+  total_pages: number
+  totals_results: number
+}
+
+export type TVSeries = {
+  page: number
+  results: TVSeriesItemResponse[]
+  total_pages: number
+  totals_results: number
+}
+
 export type MovieResponse = {
   id: number
   adult: boolean
@@ -178,11 +208,7 @@ export type MovieResponse = {
   video: boolean
   vote_average: number
   vote_count: number
-  credits: {
-    id: number
-    cast: CastMember[]
-    crew: CrewMember[]
-  }
+  credits: Credits
   trailers: Trailer[]
   similar: MovieItemResponse[]
 }
@@ -220,11 +246,70 @@ export type TVSeriesResponse = {
   video: boolean
   vote_average: number
   vote_count: number
-  credits: {
-    id: number
-    cast: CastMember[]
-    crew: CrewMember[]
-  }
+  credits: Credits
   trailers: Trailer[]
   similar: TVSeriesItemResponse[]
+}
+
+export type MovieDetailResponse = {
+  id: number
+  adult: boolean
+  backdrop_path: Nullable<string>
+  belongs_to_collection: any
+  budget: number
+  genres: Genre[]
+  homepage: string
+  imdb_id: string
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: Nullable<string>
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
+  release_date: string
+  revenue: number
+  runtime: Nullable<number>
+  spoken_languages: Language[]
+  status: string
+  tagline: Nullable<string>
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+}
+
+export type TVSeriesDetailResponse = {
+  id: number
+  backdrop_path: Nullable<string>
+  created_by: Creator[]
+  episode_run_time: number[]
+  first_air_date: string
+  genres: Genre[]
+  homepage: string
+  in_production: boolean
+  languages: string[]
+  last_air_date: string
+  last_episode_to_air: EpisodeToAir
+  name: string
+  next_episode_to_air: null
+  networks: Network[]
+  number_of_episodes: number
+  number_of_seasons: number
+  origin_country: string[]
+  original_language: string
+  original_name: string
+  overview: string
+  popularity: number
+  poster_path: Nullable<string>
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
+  seasons: Season[]
+  spoken_languages: Language[]
+  status: string
+  tagline: string
+  type: string
+  video: boolean
+  vote_average: number
+  vote_count: number
 }

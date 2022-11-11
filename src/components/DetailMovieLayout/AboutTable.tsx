@@ -1,3 +1,4 @@
+import { Nullable } from 'utils/types'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 import Table from '@material-ui/core/Table'
@@ -31,36 +32,41 @@ const useStyles = makeStyles(() => ({
 }))
 
 interface Props {
-  data: any
-  type?: string
+  year?: string
+  countries: string
+  genres: string
+  tagline?: Nullable<string>
+  directors: string
+  writers: string
+  producers: string
 }
 
-export default function AboutTable({ data, type }: Props) {
+export default function AboutTable({
+  year = '',
+  countries,
+  genres,
+  tagline = '',
+  directors,
+  writers,
+  producers,
+}: Props) {
   const classes = useStyles()
 
-  function createData(name: string, info: string) {
+  const createData = (name: string, info: string) => {
     return { name, info }
   }
 
   const rowsMovie = [
-    createData('Year', data.year),
-    createData('Countries', data.countries),
-    createData('Genres', data.genres),
-    createData('Slogan', data.tagline),
-    createData('Director', data.directors),
-    createData('Writer', data.writers),
-    createData('Producer', data.producers),
+    createData('Year', year),
+    createData('Countries', countries),
+    createData('Genres', genres),
+    createData('Slogan', tagline || '-'),
+    createData('Director', directors),
+    createData('Writer', writers),
+    createData('Producer', producers),
   ]
 
-  const rowsPerson = [
-    createData('Name', data.name),
-    createData('Gender', data.gender),
-    createData('Birthday', data.birthday),
-    createData('Place of Birth', data.place_of_birth),
-    // data.deathday ? createData('Deathday', data.deathday) : createData('Deathday', '-')
-  ]
-
-  const rows = type === 'person' ? rowsPerson : rowsMovie
+  const rows = rowsMovie
 
   return (
     <TableContainer>
