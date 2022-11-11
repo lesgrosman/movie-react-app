@@ -1,4 +1,4 @@
-import { BASE_IMAGE, BASE_URL } from './constants'
+import { BASE_IMAGE } from './constants'
 import { MovieItem, MovieItemResponse, TVSeriesItemResponse } from './types'
 
 export const fetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
