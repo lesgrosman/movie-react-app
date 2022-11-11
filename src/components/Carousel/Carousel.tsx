@@ -5,6 +5,7 @@ import { MovieItem, Nullable } from 'utils/types'
 import { makeStyles } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
 import Box from '@material-ui/core/Box'
+import Image from 'components/Image'
 import Slider from 'react-slick'
 import Typography from '@material-ui/core/Typography'
 
@@ -30,16 +31,16 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   list: Nullable<MovieItem[]>
-  similar: boolean
+  similar?: boolean
+  type?: 'tv' | 'movie' | 'person'
 }
 
-// Setting the Carousel(slick) depending on list in props
-const Carousel = ({ list, similar }: Props) => {
+const Carousel = ({ list, similar, type = 'movie' }: Props) => {
   const navigate = useNavigate()
   const classes = useStyles()
 
   const redirectToDetail = (item: MovieItem) => {
-    navigate(`/${item.itemType}/${item.id}`)
+    navigate(`/${type}/${item.id}`)
   }
 
   const settings = {
@@ -100,17 +101,18 @@ const Carousel = ({ list, similar }: Props) => {
 
   return (
     <Slider {...settings}>
-      {list &&
-        list.map((item: MovieItem) => (
-          <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
-            {similar ? (
-              <img width='93' height='140' src={item.poster} alt='img' />
-            ) : (
-              <img width='185' height='278' src={item.poster} alt='img' />
-            )}
-            {!similar && <Typography variant='h5'>{item.title}</Typography>}
-          </Box>
-        ))}
+      {list
+        ? list.map((item: MovieItem) => (
+            <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
+              {similar ? (
+                <Image width={93} height={140} imageUrl={item.poster} alt='img' />
+              ) : (
+                <Image imageUrl={item.poster} alt='img' />
+              )}
+              {!similar && <Typography variant='h5'>{item.title}</Typography>}
+            </Box>
+          ))
+        : null}
     </Slider>
   )
 }

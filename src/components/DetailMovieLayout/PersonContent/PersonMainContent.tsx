@@ -63,7 +63,7 @@ const PersonMainContent = ({ person, type }: Props) => {
       <Grid item md={6}>
         <div className={classes.about}>
           <Typography variant='h4'>{name}</Typography>
-          <AboutTable data={person} type={type} />
+          {/* <AboutTable data={person} type={type} /> */}
         </div>
       </Grid>
       <Grid className={classes.right} item md={3}>
