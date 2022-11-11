@@ -5,12 +5,12 @@ import { useStyles } from '../styles'
 type Props = {
   title: string
   list: SimpleItem[]
-  redirectType?: 'movie' | 'person' | 'tv'
+  // redirectType?: 'movie' | 'person' | 'tv'
   rankAverage?: number
   rankCount?: number
 }
 
-const RightSideList = ({ title, list, redirectType = 'movie', rankAverage, rankCount }: Props) => {
+const RightSideList = ({ title, list, rankAverage, rankCount }: Props) => {
   const classes = useStyles()
   return (
     <>
