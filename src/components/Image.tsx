@@ -1,6 +1,5 @@
 import { BASE_IMAGE } from 'utils/constants'
 import { Nullable } from 'utils/types'
-import { Nullable } from 'utils/types'
 
 interface Props {
   imageUrl?: Nullable<string>
