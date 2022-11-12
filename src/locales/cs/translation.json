@@ -1,0 +1,18 @@
+{
+  "common": {
+    "genres": {
+      "thriller": "Thriller",
+      "comedy": "Comedie",
+      "drama": "Drama",
+      "horror": "Horror"
+    },
+    "groups": {
+      "popularMovies": "Popularni filmy",
+      "popularTV": "Popularni serialy"
+    }
+  },
+  "main": {
+    "logo": "Domu",
+    "search": "Hledat filmy"
+  }
+}

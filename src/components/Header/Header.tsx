@@ -1,6 +1,7 @@
 import { AppBar, Button, Toolbar } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
+import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput/SearchInput'
 import Slide from '@material-ui/core/Slide'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
@@ -35,15 +36,27 @@ const HideOnScroll = (props: any) => {
 
 const Header = () => {
   const classes = useStyles()
+  const { t, i18n } = useTranslation()
+
+  const handleChangeLanguage = () => {
+    if (i18n.language === 'en') {
+      i18n.changeLanguage('cs')
+    } else {
+      i18n.changeLanguage('en')
+    }
+  }
 
   return (
     <HideOnScroll>
       <AppBar position='fixed'>
         <Toolbar className={classes.root}>
           <Button component={Link} to='/' className={classes.title}>
-            Main Page
+            {t('main.logo')}
           </Button>
           <SearchInput />
+          <Button className={classes.title} onClick={handleChangeLanguage}>
+            {i18n.language}
+          </Button>
         </Toolbar>
       </AppBar>
     </HideOnScroll>

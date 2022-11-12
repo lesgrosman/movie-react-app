@@ -5,6 +5,7 @@ import { getPopularTVSeries } from './queries'
 import { transformToPreviewItems } from '../../utils/helper'
 import { useQuery } from '@tanstack/react-query'
 import { useStyles } from './styles'
+import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../../components/UI/Error/Error'
@@ -13,6 +14,7 @@ import Typography from '@material-ui/core/Typography'
 
 const PopularTVSeriesGroup = () => {
   const classes = useStyles()
+  const { t } = useTranslation()
 
   const { data, error, isLoading }: QueryType<TVSeriesListResponse> = useQuery(
     [`${QueryKeys.POPULAR_TV_MAIN_GROUP}`],
@@ -31,7 +33,7 @@ const PopularTVSeriesGroup = () => {
 
   return (
     <Box pl='10px' pr='10px' className={classes.root}>
-      <Typography variant='h4'>Popular TV Series</Typography>
+      <Typography variant='h4'>{t('common.groups.popularTV')}</Typography>
       <Carousel list={tranformedMovies} type='tv' />
     </Box>
   )

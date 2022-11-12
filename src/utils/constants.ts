@@ -7,19 +7,19 @@ export const BASE_YOUTUBE = 'https://www.youtube.com/watch?v='
 export const genres: Genre[] = [
   {
     id: 35,
-    name: 'Comedy',
+    name: 'common.genres.comedy',
   },
   {
     id: 53,
-    name: 'Thriller',
+    name: 'common.genres.thriller',
   },
   {
     id: 27,
-    name: 'Horror',
+    name: 'common.genres.horror',
   },
   {
     id: 18,
-    name: 'Drama',
+    name: 'common.genres.drama',
   },
 ]
 
