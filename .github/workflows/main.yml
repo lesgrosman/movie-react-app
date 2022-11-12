@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: 16
           cache: yarn
+      - name: Installing packages
+        run: yarn --frozen-lockfile
 
       - name: Compilation
-        run: yarn lint
+        run: eslint . --ext .js,.jsx,.ts,.tsx
