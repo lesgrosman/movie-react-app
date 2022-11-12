@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const HideOnScroll = (props: any) => {
   const { children, window } = props
   const trigger = useScrollTrigger({

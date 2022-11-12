@@ -1,3 +1,4 @@
+import { BASE_IMAGE } from 'utils/constants'
 import { Nullable } from 'utils/types'
 
 interface Props {
@@ -18,7 +19,15 @@ const Image = ({ imageUrl, className = '', width = 185, height = 278, alt = '' }
         alt={alt}
       />
     )
-  return <img className={className} src={imageUrl} width={width} height={height} alt={alt} />
+  return (
+    <img
+      className={className}
+      src={`${BASE_IMAGE}${imageUrl}`}
+      width={width}
+      height={height}
+      alt={alt}
+    />
+  )
 }
 
 export default Image

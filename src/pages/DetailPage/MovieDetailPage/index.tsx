@@ -45,7 +45,7 @@ const MovieDetailPage = () => {
   if (allDataResponse.some(data => data.isLoading)) return <MovieDetailSkeleton />
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data.data)) {
-    return <Error error={allDataResponse.some(data => data.error)} />
+    return <Error error={404} />
   }
 
   const movie = allDataResponse[0]?.data
