@@ -1,3 +1,8 @@
+import { AxiosError } from 'axios'
+import { UseQueryResult } from '@tanstack/react-query'
+
+export type QueryType<T> = UseQueryResult<T, AxiosError>
+
 export type Nullable<T> = T | null
 
 export type MovieItem = {
@@ -186,7 +191,7 @@ export type MovieResponse = {
   id: number
   adult: boolean
   backdrop_path: Nullable<string>
-  belongs_to_collection: any
+  belongs_to_collection: Record<string, unknown>
   budget: number
   genres: Genre[]
   homepage: string
@@ -255,7 +260,7 @@ export type MovieDetailResponse = {
   id: number
   adult: boolean
   backdrop_path: Nullable<string>
-  belongs_to_collection: any
+  belongs_to_collection: Record<string, unknown>
   budget: number
   genres: Genre[]
   homepage: string

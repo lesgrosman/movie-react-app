@@ -1,4 +1,5 @@
-import { Genre } from 'utils/types'
+import { Genre, QueryType } from 'utils/types'
+import { MovieListResponse } from './types'
 import { getMoviesByGenre } from './queries'
 import { transformToPreviewItems } from '../../utils/helper'
 import { useQuery } from '@tanstack/react-query'
@@ -16,13 +17,14 @@ interface Props {
 const GenreMovieGroup = ({ genre }: Props) => {
   const classes = useStyles()
 
-  const { data, error, isLoading } = useQuery([`${genre.name}-main-group`], () =>
-    getMoviesByGenre(genre.id)
+  const { data, error, isLoading }: QueryType<MovieListResponse> = useQuery(
+    [`${genre.name}-main-group`],
+    () => getMoviesByGenre(genre.id)
   )
 
   if (isLoading && !data) return <MovieGroupSkeleton />
 
-  if (error || !data) return <Error error={error} />
+  if (error || !data) return <Error error={error?.response?.status} />
 
   if (data?.results.length < 1) {
     return <h3>It seems like there are no movies you are looking for...</h3>

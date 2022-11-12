@@ -1,4 +1,6 @@
 import { QueryKeys } from 'utils/constants'
+import { QueryType } from 'utils/types'
+import { TVSeriesListResponse } from './types'
 import { getPopularTVSeries } from './queries'
 import { transformToPreviewItems } from '../../utils/helper'
 import { useQuery } from '@tanstack/react-query'
@@ -12,14 +14,14 @@ import Typography from '@material-ui/core/Typography'
 const PopularTVSeriesGroup = () => {
   const classes = useStyles()
 
-  const { data, error, isLoading } = useQuery(
+  const { data, error, isLoading }: QueryType<TVSeriesListResponse> = useQuery(
     [`${QueryKeys.POPULAR_TV_MAIN_GROUP}`],
     getPopularTVSeries
   )
 
   if (isLoading && !data) return <MovieGroupSkeleton />
 
-  if (error || !data) return <Error error={error} />
+  if (error || !data) return <Error error={error?.response?.status} />
 
   if (data?.results.length < 1) {
     return <h3>It seems like there are no movies you are looking for...</h3>

@@ -29,7 +29,6 @@ module.exports = {
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/no-explicit-any': 'off', // remove
     'prettier/prettier': 'error',
     semi: 'off',
     eqeqeq: 'error',

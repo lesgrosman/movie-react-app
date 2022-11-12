@@ -1,4 +1,4 @@
-import { BASE_IMAGE, QueryKeys } from 'utils/constants'
+import { QueryKeys } from 'utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from 'utils/types'
 import { Typography } from '@material-ui/core'
 import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from '../queries'
@@ -45,7 +45,7 @@ const TVDetailPage = () => {
   if (allDataResponse.some(data => data.isLoading)) return <MovieDetailSkeleton />
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data.data)) {
-    return <Error error={allDataResponse.some(data => data.error)} />
+    return <Error error={404} />
   }
 
   const tv = allDataResponse[0]?.data
@@ -58,12 +58,7 @@ const TVDetailPage = () => {
   const trailerUrl = allDataResponse[3]?.data?.results.find(video => video.key)?.key
 
   const imageNode = (
-    <Image
-      imageUrl={`${BASE_IMAGE}${tv?.poster_path}`}
-      className={classes.image}
-      width={185}
-      height={278}
-    />
+    <Image imageUrl={tv?.poster_path} className={classes.image} width={185} height={278} />
   )
 
   const centralNode = (

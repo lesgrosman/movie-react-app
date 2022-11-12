@@ -1,6 +1,6 @@
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { InputBase } from '@material-ui/core'
-import { fade, makeStyles } from '@material-ui/core/styles'
-import { useForm } from 'react-hook-form'
+import { alpha, makeStyles } from '@material-ui/core/styles'
 import { useNavigate } from 'react-router-dom'
 import SearchIcon from '@material-ui/icons/Search'
 
@@ -8,9 +8,9 @@ const useStyles = makeStyles(theme => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
     width: '100%',
@@ -52,7 +52,7 @@ const SearchInput = () => {
 
   const { register, handleSubmit, reset } = useForm()
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = data => {
     reset()
     navigate(`/results${data.query}`)
   }
