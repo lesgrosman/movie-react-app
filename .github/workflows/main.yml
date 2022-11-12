@@ -21,4 +21,4 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Compilation
-        run: eslint . --ext .js,.jsx,.ts,.tsx
+        run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
