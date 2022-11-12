@@ -22,5 +22,6 @@ jobs:
 
       - name: EsLint
         run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
+
       - name: TS
         run: yarn run tsc --noemit
