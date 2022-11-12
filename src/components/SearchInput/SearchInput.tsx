@@ -2,6 +2,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { InputBase } from '@material-ui/core'
 import { alpha, makeStyles } from '@material-ui/core/styles'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles(theme => ({
@@ -49,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 const SearchInput = () => {
   const classes = useStyles()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const { register, handleSubmit, reset } = useForm()
 
@@ -66,7 +68,7 @@ const SearchInput = () => {
         <InputBase
           inputRef={register}
           name='query'
-          placeholder='Search movie'
+          placeholder={t('main.search')}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,

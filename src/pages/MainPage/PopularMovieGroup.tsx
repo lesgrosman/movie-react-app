@@ -5,6 +5,7 @@ import { getPopularMovies } from './queries'
 import { makeStyles } from '@material-ui/core/styles'
 import { transformToPreviewItems } from '../../utils/helper'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../../components/UI/Error/Error'
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const PopularMovieGroup = () => {
   const classes = useStyles()
+  const { t } = useTranslation()
 
   const { data, isLoading, error }: QueryType<MovieListResponse> = useQuery(
     [`${QueryKeys.POPULAR_MOVIES_MAIN_GROUP}`],
@@ -43,7 +45,7 @@ const PopularMovieGroup = () => {
 
   return (
     <Box pl='10px' pr='10px' className={classes.root}>
-      <Typography variant='h4'>Popular movies</Typography>
+      <Typography variant='h4'>{t('common.groups.popularMovies')}</Typography>
       <Carousel list={tranformedMovies} />
     </Box>
   )

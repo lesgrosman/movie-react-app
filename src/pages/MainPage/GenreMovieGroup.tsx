@@ -4,6 +4,7 @@ import { getMoviesByGenre } from './queries'
 import { transformToPreviewItems } from '../../utils/helper'
 import { useQuery } from '@tanstack/react-query'
 import { useStyles } from './styles'
+import { useTranslation } from 'react-i18next'
 import Box from '@material-ui/core/Box'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../../components/UI/Error/Error'
@@ -16,6 +17,7 @@ interface Props {
 
 const GenreMovieGroup = ({ genre }: Props) => {
   const classes = useStyles()
+  const { t } = useTranslation()
 
   const { data, error, isLoading }: QueryType<MovieListResponse> = useQuery(
     [`${genre.name}-main-group`],
@@ -34,7 +36,7 @@ const GenreMovieGroup = ({ genre }: Props) => {
 
   return (
     <Box pl='10px' pr='10px' className={classes.root}>
-      <Typography variant='h4'>{genre.name}</Typography>
+      <Typography variant='h4'>{t(genre.name)}</Typography>
       <Carousel list={tranformedMovies} />
     </Box>
   )
