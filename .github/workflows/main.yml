@@ -1,4 +1,4 @@
-name: Prepare
+name: lint
 
 on: pull_request
 
@@ -20,5 +20,7 @@ jobs:
       - name: Installing packages
         run: yarn --frozen-lockfile
 
-      - name: Compilation
+      - name: EsLint
         run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
+      - name: TS
+        run: yarn run tsc --noemit
