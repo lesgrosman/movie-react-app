@@ -1,0 +1,18 @@
+{
+  "common": {
+    "genres": {
+      "thriller": "Thrilles",
+      "comedy": "Comedy",
+      "drama": "Drama",
+      "horror": "Horror"
+    },
+    "groups": {
+      "popularMovies": "Popular movies",
+      "popularTV": "Popular TV Series"
+    }
+  },
+  "main": {
+    "logo": "Main Page",
+    "search": "Search movie"
+  }
+}
