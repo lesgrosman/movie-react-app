@@ -52,7 +52,7 @@ module.exports = {
     ],
     'new-parens': 'error',
     'no-bitwise': ['error', { allow: ['~'] }],
-    'no-console': ['warn', { allow: ['warn', 'info', 'error'] }],
+    'no-console': ['error', { allow: ['warn', 'info', 'error'] }],
     'no-caller': 'error',
     'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1, maxBOF: 0 }],
     'quote-props': ['error', 'as-needed'],
