@@ -33,6 +33,8 @@ const HideOnScroll = (props: any) => {
   )
 }
 
+console.log('error')
+
 const Header = () => {
   const classes = useStyles()
   const { t, i18n } = useTranslation()
