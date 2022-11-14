@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 interface Props {
   list: Nullable<MovieItem[]>
   similar?: boolean
-  type?: 'tv' | 'movie' | 'person'
+  type?: 'tv' | 'movie'
 }
 
 const Carousel = ({ list, similar, type = 'movie' }: Props) => {

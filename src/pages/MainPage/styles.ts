@@ -10,7 +10,4 @@ export const useStyles = makeStyles(theme => ({
       marginTop: theme.typography.pxToRem(25),
     },
   },
-  skeletonCard: {
-    marginBottom: theme.typography.pxToRem(25),
-  },
 }))

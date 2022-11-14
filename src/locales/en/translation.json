@@ -14,5 +14,8 @@
   "main": {
     "logo": "Main Page",
     "search": "Search movie"
+  },
+  "search": {
+    "title": "Search results"
   }
 }

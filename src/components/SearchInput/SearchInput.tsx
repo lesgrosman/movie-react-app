@@ -56,7 +56,7 @@ const SearchInput = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = data => {
     reset()
-    navigate(`/results${data.query}`)
+    navigate(`/results/${data.query}`)
   }
 
   return (

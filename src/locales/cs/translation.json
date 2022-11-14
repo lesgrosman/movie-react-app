@@ -14,5 +14,8 @@
   "main": {
     "logo": "Domu",
     "search": "Hledat filmy"
+  },
+  "search": {
+    "title": "Vysledky hledani"
   }
 }

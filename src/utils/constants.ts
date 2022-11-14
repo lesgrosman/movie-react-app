@@ -30,6 +30,7 @@ export enum QueryKeys {
   THRILLER_MAIN_GROUP = 'triller-main-grup',
   HORROR_MAIN_GROUP = 'horror-main-grup',
   DRAMA_MAIN_GROUP = 'drama-main-grup',
+  SEARCH_MOVIES = 'search-movies',
   // detail
   MOVIE_DETAIL = 'movie-detail',
   MOVIE_SIMILAR = 'movie-similar',
