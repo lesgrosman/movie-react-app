@@ -10,7 +10,7 @@ const AppNavigator = () => {
       <Route path='/' element={<MainPage />} />
       <Route path='/movie/:id' element={<MovieDetailPage />} />
       <Route path='/tv/:id' element={<TVSeriesDetailPage />} />
-      <Route path='/results:query' element={<SearchResultPage />} />
+      <Route path='/results/:query' element={<SearchResultPage />} />
     </Routes>
   )
 }
