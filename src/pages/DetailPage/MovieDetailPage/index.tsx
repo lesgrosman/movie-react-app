@@ -21,6 +21,8 @@ const MovieDetailPage = () => {
   const { id } = useParams()
   const classes = useStyles()
 
+  console.log('delete')
+
   const allDataResponse = useQueries({
     queries: [
       {
