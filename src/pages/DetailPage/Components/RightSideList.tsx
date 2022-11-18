@@ -1,6 +1,4 @@
 import { SimpleItem } from 'utils/types'
-import { Typography } from '@material-ui/core'
-import { useStyles } from '../styles'
 
 type Props = {
   title: string
@@ -11,34 +9,33 @@ type Props = {
 }
 
 const RightSideList = ({ title, list, rankAverage, rankCount }: Props) => {
-  const classes = useStyles()
   return (
     <>
-      {rankAverage ? (
-        <Typography className={classes.rankTop} variant='h4'>
-          {rankAverage}
-        </Typography>
-      ) : null}
-      {rankCount ? (
-        <Typography
-          style={{
-            display: 'inline-block',
-            color: 'rgba(255,255,255, .5)',
-          }}
-          variant='h5'
-        >
-          {rankCount}
-        </Typography>
-      ) : null}
+      <div className='flex items-end mb-10'>
+        {rankAverage ? (
+          <h1
+            className={`mb-0 mr-2 ${
+              rankAverage >= 7
+                ? 'text-green-500'
+                : rankAverage >= 5
+                ? 'text-gray-400'
+                : 'text-red-500'
+            }`}
+          >
+            {rankAverage}
+          </h1>
+        ) : (
+          '-'
+        )}
+        {rankCount ? <h4>{rankCount}</h4> : '-'}
+      </div>
 
-      <Typography className={classes.cast} variant='h6'>
-        {title}
-      </Typography>
-      {list?.slice(0, 10).map(item => (
-        <Typography key={item.id} gutterBottom>
-          {item.name}
-        </Typography>
-      ))}
+      <h3>{title}</h3>
+      <div className='flex flex-col gap-1'>
+        {list?.slice(0, 10).map(item => (
+          <span key={item.id}>{item.name}</span>
+        ))}
+      </div>
     </>
   )
 }

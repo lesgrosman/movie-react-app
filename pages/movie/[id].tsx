@@ -1,6 +1,5 @@
 import { BASE_IMAGE, QueryKeys } from '../../src/utils/constants'
 import { MovieDetailResponse, Movies } from '../../src/utils/types'
-import { Typography } from '@material-ui/core'
 import {
   fetchCredits,
   fetchDetail,
@@ -10,13 +9,11 @@ import {
 import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
 import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { useStyles } from '../../src/pages/DetailPage/styles'
 import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
 import Annotation from '../../src/pages/DetailPage/Components/Annotation'
 import DetailMovieLayout from '../../src/components/DetailMovieLayout'
 import Error from '../../src/components/UI/Error/Error'
 import Image from '../../src/components/Image'
-import MovieDetailSkeleton from '../../src/components/DetailMovieLayout/MovieDetailSkeleton'
 import MovieList from '../../src/pages/DetailPage/Components/MovieList'
 import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
@@ -25,7 +22,6 @@ import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
 const MovieDetailPage = () => {
   const router = useRouter()
-  const classes = useStyles()
 
   const { id } = router.query
 
@@ -50,7 +46,7 @@ const MovieDetailPage = () => {
     ],
   })
 
-  if (allDataResponse.some(data => data.isLoading)) return <MovieDetailSkeleton />
+  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data.data)) {
     return <Error error={404} />
@@ -68,7 +64,7 @@ const MovieDetailPage = () => {
   const imageNode = (
     <Image
       imageUrl={`${BASE_IMAGE}${movie?.poster_path}`}
-      className={classes.image}
+      className='rounded-xl'
       width={185}
       height={278}
     />
@@ -76,7 +72,7 @@ const MovieDetailPage = () => {
 
   const centralNode = (
     <>
-      <Typography variant='h4'>{movie?.title}</Typography>
+      <h2>{movie?.title}</h2>
       <AboutTable
         year={movie?.release_date}
         countries={getCountries(movie?.production_countries)}

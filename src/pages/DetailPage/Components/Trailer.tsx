@@ -1,6 +1,5 @@
 import { BASE_YOUTUBE } from 'utils/constants'
 import ReactPlayer from 'react-player'
-import Typography from '@material-ui/core/Typography'
 
 type Props = {
   trailerUrl?: string
@@ -18,7 +17,7 @@ const Trailer = ({ trailerUrl }: Props) => {
           origin={window.location.origin}
         />
       ) : (
-        <Typography variant='h5'>{'Trailer does not exist :('}</Typography>
+        <h4>{'Trailer does not exist :('}</h4>
       )}
     </>
   )

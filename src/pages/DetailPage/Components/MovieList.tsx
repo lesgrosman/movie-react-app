@@ -1,7 +1,5 @@
 import { MovieItemResponse, TVSeriesItemResponse } from 'utils/types'
-import { Typography } from '@material-ui/core'
 import { transformToPreviewItems } from 'utils/helper'
-import { useStyles } from '../styles'
 import Carousel from 'components/Carousel/Carousel'
 import React from 'react'
 
@@ -11,13 +9,10 @@ type Props = {
 }
 
 const MovieList = ({ title, list }: Props) => {
-  const classes = useStyles()
   const transformedList = transformToPreviewItems(list)
   return (
     <>
-      <Typography className={classes.bottomTitle} variant='h5'>
-        {title}
-      </Typography>
+      <h3 className='mb-4'>{title}</h3>
       <Carousel list={transformedList} similar />
     </>
   )

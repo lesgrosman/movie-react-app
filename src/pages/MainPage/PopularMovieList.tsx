@@ -4,7 +4,6 @@ import { QueryType } from 'utils/types'
 import { getPopularMovies } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import MovieGroup from 'components/MovieGroup'
-import Typography from '@material-ui/core/Typography'
 
 const PopularMovieGroup = () => {
   const { data, isLoading, error }: QueryType<MovieListResponse> = useQuery(
@@ -12,18 +11,8 @@ const PopularMovieGroup = () => {
     getPopularMovies
   )
   return (
-    <div
-      style={{
-        paddingLeft: 10,
-        paddingRight: 10,
-      }}
-    >
-      <Typography
-        variant='h4'
-        style={{ textAlign: 'center', marginBottom: '25px', marginTop: '40px' }}
-      >
-        Popular movies
-      </Typography>
+    <div className='px-3 mt-10 text-center'>
+      <h1 className='text-center'>Popular movies</h1>
       <MovieGroup data={data?.results} loading={isLoading} error={error} />
     </div>
   )

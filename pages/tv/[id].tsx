@@ -1,6 +1,5 @@
 import { QueryKeys } from '../../src/utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '../../src/utils/types'
-import { Typography } from '@material-ui/core'
 import {
   fetchCredits,
   fetchDetail,
@@ -10,13 +9,11 @@ import {
 import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
 import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { useStyles } from '../../src/pages/DetailPage/styles'
 import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
 import Annotation from '../../src/pages/DetailPage/Components/Annotation'
 import DetailMovieLayout from '../../src/components/DetailMovieLayout'
 import Error from '../../src/components/UI/Error/Error'
 import Image from '../../src/components/Image'
-import MovieDetailSkeleton from '../../src/components/DetailMovieLayout/MovieDetailSkeleton'
 import MovieList from '../../src/pages/DetailPage/Components/MovieList'
 import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
@@ -25,7 +22,6 @@ import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
 const TVDetailPage = () => {
   const router = useRouter()
-  const classes = useStyles()
 
   const { id } = router.query
 
@@ -50,7 +46,7 @@ const TVDetailPage = () => {
     ],
   })
 
-  if (allDataResponse.some(data => data.isLoading)) return <MovieDetailSkeleton />
+  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data.data)) {
     return <Error error={404} />
@@ -66,12 +62,12 @@ const TVDetailPage = () => {
   const trailerUrl = allDataResponse[3]?.data?.results.find(video => video.key)?.key
 
   const imageNode = (
-    <Image imageUrl={tv?.poster_path} className={classes.image} width={185} height={278} />
+    <Image imageUrl={tv?.poster_path} className='rounded-xl' width={185} height={278} />
   )
 
   const centralNode = (
     <>
-      <Typography variant='h4'>{tv?.name}</Typography>
+      <h2>{tv?.name}</h2>
       <AboutTable
         year={tv?.first_air_date}
         countries={getCountries(tv?.production_countries)}

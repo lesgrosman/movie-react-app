@@ -4,7 +4,6 @@ import { TVSeriesListResponse } from './types'
 import { getPopularTVSeries } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import MovieGroup from 'components/MovieGroup'
-import Typography from '@material-ui/core/Typography'
 
 const PopularTVSeriesGroup = () => {
   const { data, error, isLoading }: QueryType<TVSeriesListResponse> = useQuery(
@@ -13,18 +12,8 @@ const PopularTVSeriesGroup = () => {
   )
 
   return (
-    <div
-      style={{
-        paddingLeft: 10,
-        paddingRight: 10,
-      }}
-    >
-      <Typography
-        variant='h4'
-        style={{ textAlign: 'center', marginBottom: '25px', marginTop: '25px' }}
-      >
-        Popular TV Series
-      </Typography>
+    <div className='px-3 text-center'>
+      <h1>Popular TV Series</h1>
       <MovieGroup data={data?.results} loading={isLoading} error={error} type='tv' />
     </div>
   )

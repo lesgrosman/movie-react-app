@@ -1,8 +1,7 @@
-import '../src/index.css'
+import '../styles/global.css'
 import { IntlProvider } from 'react-intl'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import GlobalStyles from '../src/utils/GlobalStyles'
 import Head from 'next/head'
 import Header from '../src/components/Header/Header'
 import React from 'react'
@@ -37,7 +36,6 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <IntlProvider locale={locale || 'en'} messages={messages[locale || '']} defaultLocale='en'>
-          <GlobalStyles />
           <Header />
           <Wrapper>
             <Component {...pageProps} />

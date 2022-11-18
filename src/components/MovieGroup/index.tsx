@@ -4,7 +4,6 @@ import { transformToPreviewItems } from 'utils/helper'
 import { useMemo } from 'react'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../UI/Error/Error'
-import MovieGroupSkeleton from './MovieGroupSkeleton'
 
 interface Props {
   data?: MovieItemResponse[] | TVSeriesItemResponse[]
@@ -14,12 +13,12 @@ interface Props {
 }
 
 const MovieGroup = ({ data, loading, error, type }: Props) => {
-  if (loading) return <MovieGroupSkeleton />
+  if (loading) return <h1 className='text-center'>Loading...</h1>
 
   if (error || !data) return <Error error={error?.response?.status} />
 
   if (data?.length < 1) {
-    return <h3>It seems like there are no movies you are looking for...</h3>
+    return <h1 className='text-center'>It seems like there are no movies you are looking for...</h1>
   }
 
   const transformedItems = useMemo(() => {
