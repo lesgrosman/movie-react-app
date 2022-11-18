@@ -3,7 +3,6 @@ import { MovieListResponse } from './types'
 import { getMoviesByGenre } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import MovieGroup from '../../components/MovieGroup'
-import Typography from '@material-ui/core/Typography'
 
 interface Props {
   genre: Genre
@@ -16,18 +15,8 @@ const GenreMovieGroup = ({ genre }: Props) => {
   )
 
   return (
-    <div
-      style={{
-        paddingLeft: 10,
-        paddingRight: 10,
-      }}
-    >
-      <Typography
-        variant='h4'
-        style={{ textAlign: 'center', marginBottom: '25px', marginTop: '25px' }}
-      >
-        {genre.name}
-      </Typography>
+    <div className='px-3 mt-10 text-center'>
+      <h1>{genre.name}</h1>
       <MovieGroup data={data?.results} loading={isLoading} error={error} />
     </div>
   )

@@ -1,4 +1,4 @@
-import '../src/index.css'
+import '../styles/global.css'
 import { IntlProvider } from 'react-intl'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'

@@ -2,32 +2,9 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { MovieItem, Nullable } from 'utils/types'
-import { makeStyles } from '@material-ui/core'
 import { useRouter } from 'next/router'
-import Box from '@material-ui/core/Box'
 import Image from 'components/Image'
 import Slider from 'react-slick'
-import Typography from '@material-ui/core/Typography'
-
-const useStyles = makeStyles(() => ({
-  slider: {
-    outline: 'none',
-  },
-  box: {
-    '& img': {
-      margin: 'auto',
-      boxShadow: '0 8px 6px -6px black',
-      cursor: 'pointer',
-      transition: '0.3s',
-    },
-    '& img:hover': {
-      opacity: 0.8,
-    },
-    '& .MuiTypography-root': {
-      textAlign: 'center',
-    },
-  },
-}))
 
 interface Props {
   list: Nullable<MovieItem[]>
@@ -37,7 +14,6 @@ interface Props {
 
 const Carousel = ({ list, similar, type = 'movie' }: Props) => {
   const router = useRouter()
-  const classes = useStyles()
 
   const redirectToDetail = (item: MovieItem) => {
     router.push(`/${type}/${item.id}`)
@@ -103,14 +79,16 @@ const Carousel = ({ list, similar, type = 'movie' }: Props) => {
     <Slider {...settings}>
       {list
         ? list.map((item: MovieItem) => (
-            <Box className={classes.box} key={item.id} onClick={() => redirectToDetail(item)}>
-              {similar ? (
-                <Image width={93} height={140} imageUrl={item.poster} alt='img' />
-              ) : (
-                <Image imageUrl={item.poster} alt='img' />
-              )}
-              {!similar && <Typography variant='h5'>{item.title}</Typography>}
-            </Box>
+            <div key={item.id} onClick={() => redirectToDetail(item)}>
+              <Image
+                width={similar ? 93 : undefined}
+                height={similar ? 140 : undefined}
+                imageUrl={item.poster}
+                alt='img'
+                className='cursor-pointer hover:-translate-y-2 transition ease-in-out hover:scale-110 duration-200'
+              />
+              {!similar && <h3 className='text-center'>{item.title}</h3>}
+            </div>
           ))
         : null}
     </Slider>

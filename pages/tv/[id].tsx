@@ -10,7 +10,6 @@ import {
 import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
 import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import { useStyles } from '../../src/pages/DetailPage/styles'
 import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
 import Annotation from '../../src/pages/DetailPage/Components/Annotation'
 import DetailMovieLayout from '../../src/components/DetailMovieLayout'
@@ -25,7 +24,6 @@ import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
 const TVDetailPage = () => {
   const router = useRouter()
-  const classes = useStyles()
 
   const { id } = router.query
 
@@ -66,7 +64,7 @@ const TVDetailPage = () => {
   const trailerUrl = allDataResponse[3]?.data?.results.find(video => video.key)?.key
 
   const imageNode = (
-    <Image imageUrl={tv?.poster_path} className={classes.image} width={185} height={278} />
+    <Image imageUrl={tv?.poster_path} className='rounded-xl' width={185} height={278} />
   )
 
   const centralNode = (
