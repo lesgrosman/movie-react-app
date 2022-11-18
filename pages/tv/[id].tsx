@@ -1,6 +1,5 @@
 import { QueryKeys } from '../../src/utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '../../src/utils/types'
-import { Typography } from '@material-ui/core'
 import {
   fetchCredits,
   fetchDetail,
@@ -15,7 +14,6 @@ import Annotation from '../../src/pages/DetailPage/Components/Annotation'
 import DetailMovieLayout from '../../src/components/DetailMovieLayout'
 import Error from '../../src/components/UI/Error/Error'
 import Image from '../../src/components/Image'
-import MovieDetailSkeleton from '../../src/components/DetailMovieLayout/MovieDetailSkeleton'
 import MovieList from '../../src/pages/DetailPage/Components/MovieList'
 import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
@@ -48,7 +46,7 @@ const TVDetailPage = () => {
     ],
   })
 
-  if (allDataResponse.some(data => data.isLoading)) return <MovieDetailSkeleton />
+  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data.data)) {
     return <Error error={404} />
@@ -69,7 +67,7 @@ const TVDetailPage = () => {
 
   const centralNode = (
     <>
-      <Typography variant='h4'>{tv?.name}</Typography>
+      <h2>{tv?.name}</h2>
       <AboutTable
         year={tv?.first_air_date}
         countries={getCountries(tv?.production_countries)}
