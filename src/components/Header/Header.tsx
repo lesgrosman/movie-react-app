@@ -1,24 +1,8 @@
 import { AppBar, Button, Toolbar } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 import SearchInput from '../SearchInput/SearchInput'
 import Slide from '@material-ui/core/Slide'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    overFlow: 'hidden',
-    background: 'rgba(8, 27, 64, 1)',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: theme.typography.pxToRem(20),
-    color: 'inherit',
-  },
-}))
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const HideOnScroll = (props: any) => {
@@ -35,28 +19,30 @@ const HideOnScroll = (props: any) => {
 }
 
 const Header = () => {
-  const classes = useStyles()
-  const { t, i18n } = useTranslation()
-
-  const handleChangeLanguage = () => {
-    if (i18n.language === 'en') {
-      i18n.changeLanguage('cs')
-    } else {
-      i18n.changeLanguage('en')
-    }
-  }
-
   return (
     <HideOnScroll>
       <AppBar position='fixed'>
-        <Toolbar className={classes.root}>
-          <Button component={Link} to='/' className={classes.title}>
-            {t('main.logo')}
-          </Button>
+        <Toolbar
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            overflow: 'hidden',
+            background: 'rgba(8, 27, 64, 1)',
+          }}
+        >
+          <Link href='/' style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Button
+              style={{
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: 'inherit',
+              }}
+            >
+              Home page
+            </Button>
+          </Link>
+
           <SearchInput />
-          <Button className={classes.title} onClick={handleChangeLanguage}>
-            {i18n.language}
-          </Button>
         </Toolbar>
       </AppBar>
     </HideOnScroll>
