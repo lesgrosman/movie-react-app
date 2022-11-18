@@ -3,7 +3,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { MovieItem, Nullable } from 'utils/types'
 import { makeStyles } from '@material-ui/core'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import Box from '@material-ui/core/Box'
 import Image from 'components/Image'
 import Slider from 'react-slick'
@@ -36,11 +36,11 @@ interface Props {
 }
 
 const Carousel = ({ list, similar, type = 'movie' }: Props) => {
-  const navigate = useNavigate()
+  const router = useRouter()
   const classes = useStyles()
 
   const redirectToDetail = (item: MovieItem) => {
-    navigate(`/${type}/${item.id}`)
+    router.push(`/${type}/${item.id}`)
   }
 
   const settings = {

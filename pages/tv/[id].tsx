@@ -1,43 +1,51 @@
-import { QueryKeys } from 'utils/constants'
-import { TVSeries, TVSeriesDetailResponse } from 'utils/types'
+import { QueryKeys } from '../../src/utils/constants'
+import { TVSeries, TVSeriesDetailResponse } from '../../src/utils/types'
 import { Typography } from '@material-ui/core'
-import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from '../queries'
-import { getCountries, getCrewByJob, getGenres } from '../utils'
-import { useParams } from 'react-router-dom'
+import {
+  fetchCredits,
+  fetchDetail,
+  fetchSimilar,
+  fetchVideos,
+} from '../../src/pages/DetailPage/queries'
+import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
 import { useQueries } from '@tanstack/react-query'
-import { useStyles } from '../styles'
-import AboutTable from 'components/DetailMovieLayout/AboutTable'
-import Annotation from '../Components/Annotation'
-import DetailMovieLayout from 'components/DetailMovieLayout'
-import Error from 'components/UI/Error/Error'
-import Image from 'components/Image'
-import MovieDetailSkeleton from 'components/DetailMovieLayout/MovieDetailSkeleton'
-import MovieList from '../Components/MovieList'
-import Rating from '../Components/Rating'
-import RightSideList from '../Components/RightSideList'
-import Trailer from '../Components/Trailer'
+import { useRouter } from 'next/router'
+import { useStyles } from '../../src/pages/DetailPage/styles'
+import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
+import Annotation from '../../src/pages/DetailPage/Components/Annotation'
+import DetailMovieLayout from '../../src/components/DetailMovieLayout'
+import Error from '../../src/components/UI/Error/Error'
+import Image from '../../src/components/Image'
+import MovieDetailSkeleton from '../../src/components/DetailMovieLayout/MovieDetailSkeleton'
+import MovieList from '../../src/pages/DetailPage/Components/MovieList'
+import Rating from '../../src/pages/DetailPage/Components/Rating'
+import React from 'react'
+import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
+import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
 const TVDetailPage = () => {
-  const { id } = useParams()
+  const router = useRouter()
   const classes = useStyles()
+
+  const { id } = router.query
 
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<TVSeriesDetailResponse>(id, 'tv'),
+        queryFn: () => fetchDetail<TVSeriesDetailResponse>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<TVSeries>(id, 'tv'),
+        queryFn: () => fetchSimilar<TVSeries>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits(id, 'tv'),
+        queryFn: () => fetchCredits(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos(id, 'tv'),
+        queryFn: () => fetchVideos(id as string, 'tv'),
       },
     ],
   })

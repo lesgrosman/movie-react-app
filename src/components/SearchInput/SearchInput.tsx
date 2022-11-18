@@ -1,25 +1,10 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { InputBase } from '@material-ui/core'
-import { alpha, makeStyles } from '@material-ui/core/styles'
-import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { makeStyles } from '@material-ui/core/styles'
+import { useRouter } from 'next/router'
 import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles(theme => ({
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -34,43 +19,53 @@ const useStyles = makeStyles(theme => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
   },
 }))
 
 const SearchInput = () => {
   const classes = useStyles()
-  const navigate = useNavigate()
-  const { t } = useTranslation()
+  const router = useRouter()
 
   const { register, handleSubmit, reset } = useForm()
 
   const onSubmit: SubmitHandler<FieldValues> = data => {
     reset()
-    navigate(`/results/${data.query}`)
+    router.push(`/search/${data.query}`)
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
+      <div
+        style={{
+          position: 'relative',
+          borderRadius: 6,
+          backgroundColor: 'gray',
+          marginLeft: 0,
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            padding: '0 8px',
+            height: '100%',
+            position: 'absolute',
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <SearchIcon />
         </div>
         <InputBase
           inputRef={register}
           name='query'
-          placeholder={t('main.search')}
+          placeholder='Search'
           classes={{
-            root: classes.inputRoot,
+            root: 'color: inherit',
             input: classes.inputInput,
           }}
           inputProps={{ 'aria-label': 'search' }}
