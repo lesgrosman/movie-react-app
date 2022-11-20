@@ -1,4 +1,6 @@
 import '../styles/global.css'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
