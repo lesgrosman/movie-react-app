@@ -1,5 +1,6 @@
 import { BASE_IMAGE, QueryKeys } from '../../src/utils/constants'
 import { MovieDetailResponse, Movies } from '../../src/utils/types'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
 import {
   fetchCredits,
   fetchDetail,
@@ -19,6 +20,31 @@ import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
 import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
 import Trailer from '../../src/pages/DetailPage/Components/Trailer'
+
+export const getServerSideProps = async context => {
+  const queryClient = new QueryClient()
+
+  await Promise.all([
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_DETAIL}`, context.params?.id], () =>
+      fetchDetail<MovieDetailResponse>(context.params?.id as string, 'movie')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_SIMILAR}`, context.params?.id], () =>
+      fetchSimilar<Movies>(context.params?.id as string, 'movie')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_CREDITS}`, context.params?.id], () =>
+      fetchCredits(context.params?.id as string, 'movie')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_VIDEOS}`, context.params?.id], () =>
+      fetchVideos(context.params?.id as string, 'movie')
+    ),
+  ])
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
 
 const MovieDetailPage = () => {
   const router = useRouter()

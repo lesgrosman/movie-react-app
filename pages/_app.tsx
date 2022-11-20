@@ -1,13 +1,11 @@
 import '../styles/global.css'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { IntlProvider } from 'react-intl'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Header from '../src/components/Header/Header'
 import React from 'react'
 import Wrapper from '../src/components/Wrapper/Wrapper'
-
-const queryClient = new QueryClient()
 
 import cs from '../locales/cs/translation.json'
 import en from '../locales/en/translation.json'
@@ -19,6 +17,7 @@ const messages = {
 
 const App = ({ Component, pageProps }) => {
   const { locale } = useRouter()
+  const [queryClient] = React.useState(() => new QueryClient())
 
   return (
     <div>
@@ -35,12 +34,18 @@ const App = ({ Component, pageProps }) => {
         <title>Movie DB</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <IntlProvider locale={locale || 'en'} messages={messages[locale || '']} defaultLocale='en'>
-          <Header />
-          <Wrapper>
-            <Component {...pageProps} />
-          </Wrapper>
-        </IntlProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <IntlProvider
+            locale={locale || 'en'}
+            messages={messages[locale || '']}
+            defaultLocale='en'
+          >
+            <Header />
+            <Wrapper>
+              <Component {...pageProps} />
+            </Wrapper>
+          </IntlProvider>
+        </Hydrate>
       </QueryClientProvider>
     </div>
   )
