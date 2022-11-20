@@ -1,3 +1,5 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query'
 import { QueryKeys } from '../../src/utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '../../src/utils/types'
 import {
@@ -7,7 +9,6 @@ import {
   fetchVideos,
 } from '../../src/pages/DetailPage/queries'
 import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
-import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
 import Annotation from '../../src/pages/DetailPage/Components/Annotation'
@@ -18,7 +19,40 @@ import MovieList from '../../src/pages/DetailPage/Components/MovieList'
 import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
 import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
+import Seo from '../../src/components/Seo'
 import Trailer from '../../src/pages/DetailPage/Components/Trailer'
+
+export const getStaticProps: GetStaticProps = async context => {
+  const queryClient = new QueryClient()
+
+  await Promise.all([
+    queryClient.prefetchQuery([`${QueryKeys.TV_DETAIL}`, context.params?.id], () =>
+      fetchDetail<TVSeriesDetailResponse>(context.params?.id as string, 'tv')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.TV_SIMILAR}`, context.params?.id], () =>
+      fetchSimilar<TVSeries>(context.params?.id as string, 'tv')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.TV_CREDITS}`, context.params?.id], () =>
+      fetchCredits(context.params?.id as string, 'tv')
+    ),
+    queryClient.prefetchQuery([`${QueryKeys.TV_VIDEOS}`, context.params?.id], () =>
+      fetchVideos(context.params?.id as string, 'tv')
+    ),
+  ])
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
 
 const TVDetailPage = () => {
   const router = useRouter()
@@ -28,19 +62,19 @@ const TVDetailPage = () => {
   const allDataResponse = useQueries({
     queries: [
       {
-        queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
+        queryKey: [`${QueryKeys.TV_DETAIL}`, id],
         queryFn: () => fetchDetail<TVSeriesDetailResponse>(id as string, 'tv'),
       },
       {
-        queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
+        queryKey: [`${QueryKeys.TV_SIMILAR}`, id],
         queryFn: () => fetchSimilar<TVSeries>(id as string, 'tv'),
       },
       {
-        queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
+        queryKey: [`${QueryKeys.TV_CREDITS}`, id],
         queryFn: () => fetchCredits(id as string, 'tv'),
       },
       {
-        queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
+        queryKey: [`${QueryKeys.TV_VIDEOS}`, id],
         queryFn: () => fetchVideos(id as string, 'tv'),
       },
     ],
@@ -62,7 +96,13 @@ const TVDetailPage = () => {
   const trailerUrl = allDataResponse[3]?.data?.results.find(video => video.key)?.key
 
   const imageNode = (
-    <Image imageUrl={tv?.poster_path} className='rounded-xl' width={185} height={278} />
+    <Image
+      src={tv?.poster_path || ''}
+      alt={tv?.name || ''}
+      className='rounded-xl'
+      width={185}
+      height={278}
+    />
   )
 
   const centralNode = (
@@ -100,15 +140,18 @@ const TVDetailPage = () => {
   const trailerNode = <Trailer trailerUrl={trailerUrl} />
 
   return (
-    <DetailMovieLayout
-      imageNode={imageNode}
-      centralNode={centralNode}
-      rightNode={rightNode}
-      similarNode={similarNode}
-      annotationNode={annotationNode}
-      ratingNode={ratingNode}
-      trailerNode={trailerNode}
-    />
+    <>
+      <Seo title={tv?.name} description={tv?.overview} imageUrl={tv?.poster_path} />
+      <DetailMovieLayout
+        imageNode={imageNode}
+        centralNode={centralNode}
+        rightNode={rightNode}
+        similarNode={similarNode}
+        annotationNode={annotationNode}
+        ratingNode={ratingNode}
+        trailerNode={trailerNode}
+      />
+    </>
   )
 }
 

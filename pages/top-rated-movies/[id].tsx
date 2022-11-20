@@ -1,6 +1,6 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths } from 'next'
 import { MovieDetailResponse, Movies } from '../../src/utils/types'
-import { QueryClient, dehydrate } from '@tanstack/react-query'
+import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query'
 import { QueryKeys } from '../../src/utils/constants'
 import {
   fetchCredits,
@@ -9,7 +9,6 @@ import {
   fetchVideos,
 } from '../../src/pages/DetailPage/queries'
 import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
-import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
 import Annotation from '../../src/pages/DetailPage/Components/Annotation'
@@ -23,21 +22,29 @@ import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
 import Seo from '../../src/components/Seo'
 import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
+
+export const getStaticProps = async ({ query }) => {
   const queryClient = new QueryClient()
+  const id = Array.isArray(query?.id) ? query?.id?.[0] : query?.id
 
   await Promise.all([
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_DETAIL}`, context.params?.id], () =>
-      fetchDetail<MovieDetailResponse>(context.params?.id as string, 'movie')
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_DETAIL}`, id], () =>
+      fetchDetail<MovieDetailResponse>(id as string, 'movie')
     ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_SIMILAR}`, context.params?.id], () =>
-      fetchSimilar<Movies>(context.params?.id as string, 'movie')
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_SIMILAR}`, id], () =>
+      fetchSimilar<Movies>(id as string, 'movie')
     ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_CREDITS}`, context.params?.id], () =>
-      fetchCredits(context.params?.id as string, 'movie')
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_CREDITS}`, id], () =>
+      fetchCredits(id as string, 'movie')
     ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_VIDEOS}`, context.params?.id], () =>
-      fetchVideos(context.params?.id as string, 'movie')
+    queryClient.prefetchQuery([`${QueryKeys.MOVIE_VIDEOS}`, id], () =>
+      fetchVideos(id as string, 'movie')
     ),
   ])
 
@@ -48,14 +55,7 @@ export const getStaticProps: GetStaticProps = async context => {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  }
-}
-
-const MovieDetailPage = () => {
+const TopRatedMovieDetail = () => {
   const router = useRouter()
 
   const { id } = router.query
@@ -157,4 +157,4 @@ const MovieDetailPage = () => {
   )
 }
 
-export default MovieDetailPage
+export default TopRatedMovieDetail
