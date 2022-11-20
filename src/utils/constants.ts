@@ -1,7 +1,7 @@
 import { Genre } from './types'
 
 export const BASE_URL = 'https://api.themoviedb.org/3'
-export const BASE_IMAGE = 'https://image.tmdb.org/t/p/w185/'
+export const BASE_IMAGE = 'https://image.tmdb.org/t/p/w185'
 export const BASE_YOUTUBE = 'https://www.youtube.com/watch?v='
 
 export const genres: Genre[] = [
@@ -31,6 +31,7 @@ export enum QueryKeys {
   HORROR_MAIN_GROUP = 'horror-main-grup',
   DRAMA_MAIN_GROUP = 'drama-main-grup',
   SEARCH_MOVIES = 'search-movies',
+  TOP_RATED_MOVIES = 'top-rated-movies',
   // detail
   MOVIE_DETAIL = 'movie-detail',
   MOVIE_SIMILAR = 'movie-similar',

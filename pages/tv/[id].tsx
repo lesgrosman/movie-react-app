@@ -1,3 +1,4 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query'
 import { QueryKeys } from '../../src/utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '../../src/utils/types'
@@ -18,9 +19,10 @@ import MovieList from '../../src/pages/DetailPage/Components/MovieList'
 import Rating from '../../src/pages/DetailPage/Components/Rating'
 import React from 'react'
 import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
+import Seo from '../../src/components/Seo'
 import Trailer from '../../src/pages/DetailPage/Components/Trailer'
 
-export const getServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
   const queryClient = new QueryClient()
 
   await Promise.all([
@@ -42,6 +44,13 @@ export const getServerSideProps = async context => {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -131,15 +140,18 @@ const TVDetailPage = () => {
   const trailerNode = <Trailer trailerUrl={trailerUrl} />
 
   return (
-    <DetailMovieLayout
-      imageNode={imageNode}
-      centralNode={centralNode}
-      rightNode={rightNode}
-      similarNode={similarNode}
-      annotationNode={annotationNode}
-      ratingNode={ratingNode}
-      trailerNode={trailerNode}
-    />
+    <>
+      <Seo title={tv?.name} description={tv?.overview} imageUrl={tv?.poster_path} />
+      <DetailMovieLayout
+        imageNode={imageNode}
+        centralNode={centralNode}
+        rightNode={rightNode}
+        similarNode={similarNode}
+        annotationNode={annotationNode}
+        ratingNode={ratingNode}
+        trailerNode={trailerNode}
+      />
+    </>
   )
 }
 
