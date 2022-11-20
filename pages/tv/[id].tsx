@@ -87,7 +87,13 @@ const TVDetailPage = () => {
   const trailerUrl = allDataResponse[3]?.data?.results.find(video => video.key)?.key
 
   const imageNode = (
-    <Image imageUrl={tv?.poster_path} className='rounded-xl' width={185} height={278} />
+    <Image
+      src={tv?.poster_path || ''}
+      alt={tv?.name || ''}
+      className='rounded-xl'
+      width={185}
+      height={278}
+    />
   )
 
   const centralNode = (

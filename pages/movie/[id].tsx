@@ -1,6 +1,6 @@
-import { BASE_IMAGE, QueryKeys } from '../../src/utils/constants'
 import { MovieDetailResponse, Movies } from '../../src/utils/types'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
+import { QueryKeys } from '../../src/utils/constants'
 import {
   fetchCredits,
   fetchDetail,
@@ -89,10 +89,12 @@ const MovieDetailPage = () => {
 
   const imageNode = (
     <Image
-      imageUrl={`${BASE_IMAGE}${movie?.poster_path}`}
+      src={movie?.poster_path || ''}
+      alt={movie?.title || ''}
       className='rounded-xl'
       width={185}
       height={278}
+      priority
     />
   )
 

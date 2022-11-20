@@ -2,8 +2,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import { MovieItem, Nullable } from 'utils/types'
-import { useRouter } from 'next/router'
 import Image from 'components/Image'
+import Link from 'next/link'
 import Slider from 'react-slick'
 
 interface Props {
@@ -13,12 +13,6 @@ interface Props {
 }
 
 const Carousel = ({ list, similar, type = 'movie' }: Props) => {
-  const router = useRouter()
-
-  const redirectToDetail = (item: MovieItem) => {
-    router.push(`/${type}/${item.id}`)
-  }
-
   const settings = {
     infinite: false,
     speed: 800,
@@ -79,16 +73,16 @@ const Carousel = ({ list, similar, type = 'movie' }: Props) => {
     <Slider {...settings}>
       {list
         ? list.map((item: MovieItem) => (
-            <div key={item.id} onClick={() => redirectToDetail(item)}>
+            <Link key={item.id} href={`/${type}/${item.id}`}>
               <Image
-                width={similar ? 93 : undefined}
-                height={similar ? 140 : undefined}
-                imageUrl={item.poster}
-                alt='img'
+                width={similar ? 93 : 185}
+                height={similar ? 140 : 278}
+                src={item.poster}
+                alt={item.title}
                 className='cursor-pointer hover:-translate-y-2 transition ease-in-out hover:scale-110 duration-200'
               />
               {!similar && <h3 className='text-center'>{item.title}</h3>}
-            </div>
+            </Link>
           ))
         : null}
     </Slider>

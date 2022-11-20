@@ -1,33 +1,7 @@
 import { BASE_IMAGE } from 'utils/constants'
-import { Nullable } from 'utils/types'
+import NextImage, { ImageProps } from 'next/image'
 
-interface Props {
-  imageUrl?: Nullable<string>
-  className?: string
-  height?: number
-  width?: number
-  alt?: string
-}
-const Image = ({ imageUrl, className = '', width = 185, height = 278, alt = '' }: Props) => {
-  if (!imageUrl)
-    return (
-      <img
-        className={className}
-        src='/assets/imageNotFound.jpeg'
-        width={width}
-        height={height}
-        alt={alt}
-      />
-    )
-  return (
-    <img
-      className={className}
-      src={`${BASE_IMAGE}${imageUrl}`}
-      width={width}
-      height={height}
-      alt={alt}
-    />
-  )
-}
+const Image = (props: ImageProps) =>
+  props?.src ? <NextImage {...props} src={`${BASE_IMAGE}${props.src}`} /> : null
 
 export default Image
