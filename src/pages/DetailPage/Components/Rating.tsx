@@ -1,6 +1,5 @@
-import { useStyles } from '../styles'
-import StarRatings from 'react-star-ratings'
-import Typography from '@material-ui/core/Typography'
+import dynamic from 'next/dynamic'
+const StarRatings = dynamic(() => import('react-star-ratings'), { ssr: false })
 
 type Props = {
   title: string
@@ -9,13 +8,10 @@ type Props = {
 }
 
 const Rating = ({ title, rankAverage, rankCount }: Props) => {
-  const classes = useStyles()
   return (
     <>
-      <Typography className={classes.bottomTitle} variant='h5'>
-        {title}
-      </Typography>
-      <div className={classes.rankStars}>
+      <h3 className='mb-2'>{title}</h3>
+      <div className='flex items-center'>
         <StarRatings
           rating={rankAverage}
           starRatedColor='#ffb300'
@@ -24,12 +20,10 @@ const Rating = ({ title, rankAverage, rankCount }: Props) => {
           starDimension='40px'
           starSpacing='5px'
         />
-        <Typography className={classes.rank} variant='h3'>
-          {rankAverage}
-        </Typography>
-        <Typography className={classes.rankSecondary} variant='h5'>
-          {rankCount}
-        </Typography>
+        <div className='flex items-end gap-2'>
+          <h1 className='ml-4 mb-0'>{rankAverage}</h1>
+          <h4 className='text-gray-300'>{rankCount}</h4>
+        </div>
       </div>
     </>
   )

@@ -1,65 +1,21 @@
-import { AppBar, Button, Toolbar } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 import SearchInput from '../SearchInput/SearchInput'
-import Slide from '@material-ui/core/Slide'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    overFlow: 'hidden',
-    background: 'rgba(8, 27, 64, 1)',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: theme.typography.pxToRem(20),
-    color: 'inherit',
-  },
-}))
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HideOnScroll = (props: any) => {
-  const { children, window } = props
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-  })
-
-  return (
-    <Slide appear={false} direction='down' in={!trigger}>
-      {children}
-    </Slide>
-  )
-}
 
 const Header = () => {
-  const classes = useStyles()
-  const { t, i18n } = useTranslation()
-
-  const handleChangeLanguage = () => {
-    if (i18n.language === 'en') {
-      i18n.changeLanguage('cs')
-    } else {
-      i18n.changeLanguage('en')
-    }
-  }
-
   return (
-    <HideOnScroll>
-      <AppBar position='fixed'>
-        <Toolbar className={classes.root}>
-          <Button component={Link} to='/' className={classes.title}>
-            {t('main.logo')}
-          </Button>
-          <SearchInput />
-          <Button className={classes.title} onClick={handleChangeLanguage}>
-            {i18n.language}
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </HideOnScroll>
+    <div className='fixed top-0 left-0 w-full z-50 overflow-hidden bg-blue-900 shadow-xl p-5 h-20'>
+      <div className='flex justify-between max-w-7xl m-auto'>
+        <div className='flex justify-start gap-4'>
+          <Link href='/'>
+            <h2>Home page</h2>
+          </Link>
+          <Link href='/top-rated-movies'>
+            <h2>Top rated movies</h2>
+          </Link>
+        </div>
+        <SearchInput />
+      </div>
+    </div>
   )
 }
 

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    color: #fff;
+    background: linear-gradient(67.49deg, #237bb8 -8.15%, #081b40 89.39%);
+  }
+  h1 {
+    @apply font-bold font-montserrat mb-3 md:mb-5 max-w-7xl;
+    font-size: 2rem;
+    line-height: 2.438rem;
+  }
+  h2 {
+    @apply font-bold font-montserrat mb-3 md:mb-5;
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    @apply font-bold font-montserrat mb-3 md:mb-5;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+  h4 {
+    @apply font-semibold mb-2;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  h5 {
+    @apply font-montserrat font-semibold mb-2;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+.swiper-button-next {
+  margin-right: 20px;
+}
+

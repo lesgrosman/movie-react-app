@@ -30,6 +30,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-ignore': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     'prettier/prettier': 'error',
+    '@typescript-eslint/no-var-requires': 0,
     semi: 'off',
     eqeqeq: 'error',
     'no-use-before-define': [
