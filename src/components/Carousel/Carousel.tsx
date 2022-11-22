@@ -29,7 +29,7 @@ const Carousel = ({ list, similar, type = 'movie' }: Props) => {
           return (
             <SwiperSlide
               key={i}
-              className='flex w-full flex-col p-0'
+              className='flex w-full flex-col p-0 select-none'
               onMouseEnter={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
             >
