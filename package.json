@@ -38,7 +38,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
     "lint": "eslint \"{pages,src}/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "yarn lint --fix"
   },
