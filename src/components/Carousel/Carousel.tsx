@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'components/Image'
 import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
+// test comment
 
 SwiperCore.use([Navigation])
 
