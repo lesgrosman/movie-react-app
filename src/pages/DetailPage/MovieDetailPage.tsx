@@ -1,61 +1,22 @@
-import { GetStaticPaths } from 'next'
-import { MovieDetailResponse, Movies } from '../../src/utils/types'
-import { QueryClient, dehydrate, useQueries } from '@tanstack/react-query'
-import { QueryKeys } from '../../src/utils/constants'
-import {
-  fetchCredits,
-  fetchDetail,
-  fetchSimilar,
-  fetchVideos,
-} from '../../src/pages/DetailPage/queries'
-import { getCountries, getCrewByJob, getGenres } from '../../src/pages/DetailPage/utils'
+import { MovieDetailResponse, Movies } from 'utils/types'
+import { QueryKeys } from 'utils/constants'
+import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from './queries'
+import { getCountries, getCrewByJob, getGenres } from './utils'
+import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import AboutTable from '../../src/components/DetailMovieLayout/AboutTable'
-import Annotation from '../../src/pages/DetailPage/Components/Annotation'
-import DetailMovieLayout from '../../src/components/DetailMovieLayout'
-import Error from '../../src/components/UI/Error/Error'
-import Image from '../../src/components/Image'
-import MovieList from '../../src/pages/DetailPage/Components/MovieList'
-import Rating from '../../src/pages/DetailPage/Components/Rating'
+import AboutTable from 'components/DetailMovieLayout/AboutTable'
+import Annotation from './Components/Annotation'
+import DetailMovieLayout from 'components/DetailMovieLayout'
+import Error from 'components/UI/Error/Error'
+import Image from 'components/Image'
+import MovieList from './Components/MovieList'
+import Rating from './Components/Rating'
 import React from 'react'
-import RightSideList from '../../src/pages/DetailPage/Components/RightSideList'
-import Seo from '../../src/components/Seo'
-import Trailer from '../../src/pages/DetailPage/Components/Trailer'
+import RightSideList from './Components/RightSideList'
+import Seo from 'components/Seo'
+import Trailer from './Components/Trailer'
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  }
-}
-
-export const getStaticProps = async ({ query }) => {
-  const queryClient = new QueryClient()
-  const id = Array.isArray(query?.id) ? query?.id?.[0] : query?.id
-
-  await Promise.all([
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_DETAIL}`, id], () =>
-      fetchDetail<MovieDetailResponse>(id as string, 'movie')
-    ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_SIMILAR}`, id], () =>
-      fetchSimilar<Movies>(id as string, 'movie')
-    ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_CREDITS}`, id], () =>
-      fetchCredits(id as string, 'movie')
-    ),
-    queryClient.prefetchQuery([`${QueryKeys.MOVIE_VIDEOS}`, id], () =>
-      fetchVideos(id as string, 'movie')
-    ),
-  ])
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  }
-}
-
-const TopRatedMovieDetail = () => {
+const MovieDetailPage = () => {
   const router = useRouter()
 
   const { id } = router.query
@@ -157,4 +118,4 @@ const TopRatedMovieDetail = () => {
   )
 }
 
-export default TopRatedMovieDetail
+export default MovieDetailPage
