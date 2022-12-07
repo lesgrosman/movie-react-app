@@ -1,13 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { MovieDetailResponse, Movies } from '../../src/utils/types'
+import { MovieDetailResponse, Movies } from '@utils/types'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
-import { QueryKeys } from '../../src/utils/constants'
-import {
-  fetchCredits,
-  fetchDetail,
-  fetchSimilar,
-  fetchVideos,
-} from '../../src/pages/DetailPage/queries'
+import { QueryKeys } from '@utils/constants'
+import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from '@pages/DetailPage/queries'
 
 export const getStaticProps: GetStaticProps = async context => {
   const queryClient = new QueryClient()

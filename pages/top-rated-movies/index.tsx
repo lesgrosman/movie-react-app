@@ -1,6 +1,6 @@
 import { QueryClient, dehydrate } from '@tanstack/react-query'
-import { QueryKeys } from '../../src/utils/constants'
-import { getTopRatedMovies } from '../../src/pages/TopRatedMovies/queries'
+import { QueryKeys } from '@utils/constants'
+import { getTopRatedMovies } from '@pages/TopRatedMovies/queries'
 
 export const getStaticProps = async () => {
   const queryClient = new QueryClient()
