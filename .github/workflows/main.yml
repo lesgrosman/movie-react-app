@@ -25,3 +25,6 @@ jobs:
 
       - name: TS
         run: yarn run tsc --noemit
+      
+      - name: test
+        run: yarn run jest
