@@ -1,6 +1,5 @@
-import { MovieListResponse } from 'pages/MainPage/types'
+import { Movies, QueryType } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import { QueryType } from 'utils/types'
 import { searchMovies } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
@@ -11,7 +10,7 @@ const SearchResultPage = () => {
 
   const { result } = router.query
 
-  const { data, isLoading, error }: QueryType<MovieListResponse> = useQuery(
+  const { data, isLoading, error }: QueryType<Movies> = useQuery(
     [`${QueryKeys.SEARCH_MOVIES}`, result as string],
     () => searchMovies(result as string)
   )

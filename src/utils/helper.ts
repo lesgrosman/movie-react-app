@@ -16,7 +16,7 @@ export const transformToPreviewItems = (
       title: 'title' in item ? item.title : item.name,
       rankAverage: item.vote_average,
       poster: item.poster_path ? item.poster_path : '',
-      itemType: 'movie',
+      itemType: 'release_date' in item ? 'movie' : 'tv',
     }
   })
 }
