@@ -1,10 +1,7 @@
 import { QueryKeys } from 'utils/constants'
 import { genres } from 'utils/constants'
-import { getPopularMovies, getPopularTVSeries } from './queries'
-import GenreMovieList from './GenreMovieList'
+import { getMoviesByGenre, getPopularMovies, getPopularTVSeries } from './queries'
 import MovieList from './MovieList'
-import PopularMovieList from './PopularMovieList'
-import PopularTVSeriesList from './PopularTVSeriesList'
 
 const MainPage = () => {
   return (
@@ -15,14 +12,20 @@ const MainPage = () => {
         fetchFn={getPopularMovies}
         type='movie'
       />
-      {/* <MovieList
+      <MovieList
         title='Popular TV Series'
         queryKey={QueryKeys.POPULAR_TV_MAIN_GROUP}
         fetchFn={getPopularTVSeries}
-      /> */}
-      <PopularTVSeriesList />
+        type='tv'
+      />
       {genres.map(genre => (
-        <GenreMovieList key={genre.id} genre={genre} />
+        <MovieList
+          key={genre.id}
+          title={genre.name}
+          queryKey={`${genre.name}-main-group`}
+          fetchFn={() => getMoviesByGenre(genre.id)}
+          type='movie'
+        />
       ))}
     </div>
   )
