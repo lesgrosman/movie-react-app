@@ -1,13 +1,12 @@
-import { MovieListResponse } from './types'
+import { Movies, QueryType } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import { QueryType } from 'utils/types'
 import { getTopRatedMovies } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import MovieGroup from 'components/MovieGroup'
 import Seo from 'components/Seo'
 
 const TopRatedRatedMovies = () => {
-  const { data, isLoading, error }: QueryType<MovieListResponse> = useQuery(
+  const { data, isLoading, error }: QueryType<Movies> = useQuery(
     [`${QueryKeys.POPULAR_MOVIES_MAIN_GROUP}`],
     getTopRatedMovies
   )
