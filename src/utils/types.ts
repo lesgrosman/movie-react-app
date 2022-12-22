@@ -36,6 +36,7 @@ export type ProductionCountry = {
 }
 
 export type Language = {
+  english_name: string
   iso_639_1: string
   name: string
 }
@@ -166,7 +167,7 @@ export type MovieDetailResponse = {
   id: number
   adult: boolean
   backdrop_path: Nullable<string>
-  belongs_to_collection: Record<string, unknown>
+  belongs_to_collection: Nullable<Record<string, unknown>>
   budget: number
   genres: Genre[]
   homepage: string
