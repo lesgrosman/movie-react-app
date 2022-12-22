@@ -4,17 +4,15 @@ import { useState } from 'react'
 import Image from 'components/Image'
 import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
-// test comment
 
 SwiperCore.use([Navigation])
 
 interface Props {
   list: Nullable<MovieItem[]>
   similar?: boolean
-  type?: 'tv' | 'movie'
 }
 
-const Carousel = ({ list, similar, type = 'movie' }: Props) => {
+const Carousel = ({ list, similar }: Props) => {
   return (
     <div className='relative flex'>
       <Swiper
@@ -24,26 +22,26 @@ const Carousel = ({ list, similar, type = 'movie' }: Props) => {
         navigation={true}
         className='relative'
       >
-        {list?.map((item, i) => {
+        {list?.map(item => {
           const [isHover, setIsHover] = useState(false)
-
+          const { id, poster, itemType, title } = item
           return (
             <SwiperSlide
-              key={i}
+              key={id}
               className='flex w-full flex-col p-0 select-none'
               onMouseEnter={() => setIsHover(true)}
               onMouseLeave={() => setIsHover(false)}
             >
-              <Link key={item.id} href={`/${type}/${item.id}`}>
+              <Link key={id} href={`/${itemType}/${id}`}>
                 <Image
                   width={similar ? 93 : 185}
                   height={similar ? 140 : 278}
-                  src={item.poster}
-                  alt={item.title}
+                  src={poster}
+                  alt={title}
                 />
               </Link>
               {isHover && (
-                <Link key={`background-${item.id}`} href={`/${type}/${item.id}`}>
+                <Link key={`background-${id}`} href={`/${itemType}/${id}`}>
                   <div
                     style={{
                       width: similar ? 93 : 185,
@@ -54,9 +52,9 @@ const Carousel = ({ list, similar, type = 'movie' }: Props) => {
                     }`}
                   >
                     {similar ? (
-                      <h4 className='text-center'>{item.title}</h4>
+                      <h4 className='text-center'>{title}</h4>
                     ) : (
-                      <h1 className='text-center'>{item.title}</h1>
+                      <h1 className='text-center'>{title}</h1>
                     )}
                   </div>
                 </Link>

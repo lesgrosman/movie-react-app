@@ -13,25 +13,6 @@ export type MovieItem = {
   title: string
 }
 
-export type MovieDetail = {
-  id: number
-  title: string
-  cast: { id: number; name: string }[]
-  countries: string[]
-  directors: string[]
-  genres: string[]
-  overview: string
-  poster: string
-  producers: string[]
-  rankAverage: number
-  rankCount: number
-  similar: MovieItem[]
-  tagline: Nullable<string>
-  trailerURL: Nullable<string>
-  writers: string[]
-  year: string
-}
-
 export type SimpleItem = {
   id: number
   name: string
@@ -55,6 +36,7 @@ export type ProductionCountry = {
 }
 
 export type Language = {
+  english_name: string
   iso_639_1: string
   name: string
 }
@@ -157,18 +139,12 @@ export type MovieItemResponse = {
   vote_average: number
 }
 
-export type TVSeriesItemResponse = {
-  poster_path: Nullable<string>
-  overview: string
-  genre_ids: number[]
-  id: number
+export type TVSeriesItemResponse = Omit<
+  MovieItemResponse,
+  'adult' | 'release_date' | 'original_title' | 'title' | 'video'
+> & {
   original_name: string
-  original_language: string
   name: string
-  backdrop_path: Nullable<string>
-  popularity: number
-  vote_count: number
-  vote_average: number
   first_air_date: string
   origin_country: string[]
 }
@@ -187,80 +163,11 @@ export type TVSeries = {
   totals_results: number
 }
 
-export type MovieResponse = {
-  id: number
-  adult: boolean
-  backdrop_path: Nullable<string>
-  belongs_to_collection: Record<string, unknown>
-  budget: number
-  genres: Genre[]
-  homepage: string
-  imdb_id: string
-  original_language: string
-  original_title: string
-  overview: string
-  popularity: number
-  poster_path: Nullable<string>
-  production_companies: ProductionCompany[]
-  production_countries: ProductionCountry[]
-  release_date: string
-  revenue: number
-  runtime: Nullable<number>
-  spoken_languages: Language[]
-  status: string
-  tagline: Nullable<string>
-  title: string
-  video: boolean
-  vote_average: number
-  vote_count: number
-  credits: Credits
-  trailers: Trailer[]
-  similar: MovieItemResponse[]
-}
-
-export type TVSeriesResponse = {
-  id: number
-  backdrop_path: Nullable<string>
-  created_by: Creator[]
-  episode_run_time: number[]
-  first_air_date: string
-  genres: Genre[]
-  homepage: string
-  in_production: boolean
-  languages: string[]
-  last_air_date: string
-  last_episode_to_air: EpisodeToAir
-  name: string
-  next_episode_to_air: null
-  networks: Network[]
-  number_of_episodes: number
-  number_of_seasons: number
-  origin_country: string[]
-  original_language: string
-  original_name: string
-  overview: string
-  popularity: number
-  poster_path: Nullable<string>
-  production_companies: ProductionCompany[]
-  production_countries: ProductionCountry[]
-  seasons: Season[]
-  spoken_languages: Language[]
-  status: string
-  tagline: string
-  type: string
-  video: boolean
-  vote_average: number
-  vote_count: number
-  credits: Credits
-  trailers: Trailer[]
-  similar: TVSeriesItemResponse[]
-}
-
 export type MovieDetailResponse = {
   id: number
   adult: boolean
   backdrop_path: Nullable<string>
-  belongs_to_collection: Record<string, unknown>
+  belongs_to_collection: Nullable<Record<string, unknown>>
   budget: number
   genres: Genre[]
   homepage: string

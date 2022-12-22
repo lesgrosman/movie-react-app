@@ -9,10 +9,9 @@ interface Props {
   data?: MovieItemResponse[] | TVSeriesItemResponse[]
   loading: boolean
   error?: Nullable<AxiosError>
-  type?: 'movie' | 'tv'
 }
 
-const MovieGroup = ({ data, loading, error, type }: Props) => {
+const MovieGroup = ({ data, loading, error }: Props) => {
   if (loading) return <h1 className='text-center'>Loading...</h1>
 
   if (error || !data) return <Error error={error?.response?.status} />
@@ -25,7 +24,7 @@ const MovieGroup = ({ data, loading, error, type }: Props) => {
     return transformToPreviewItems(data)
   }, [data])
 
-  return <Carousel list={transformedItems} type={type} />
+  return <Carousel list={transformedItems} />
 }
 
 export default MovieGroup
