@@ -7,7 +7,6 @@ import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
 import React from 'react'
-import Wrapper from '@components/Wrapper/Wrapper'
 
 import cs from '../locales/cs/translation.json'
 import en from '../locales/en/translation.json'
@@ -33,9 +32,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           defaultLocale='en'
         >
           <Header />
-          <Wrapper>
+          <div style={{ marginTop: '78px' }}>
             <Component {...pageProps} />
-          </Wrapper>
+          </div>
         </IntlProvider>
       </Hydrate>
     </QueryClientProvider>

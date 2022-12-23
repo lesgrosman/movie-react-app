@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => {
+const Container = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='max-w-7xl m-auto min-h-screen mb-20'>
       <div>{children}</div>
@@ -8,4 +8,4 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default Wrapper
+export default Container

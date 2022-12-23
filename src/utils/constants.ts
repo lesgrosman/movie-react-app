@@ -1,7 +1,7 @@
 import { Genre, MovieSectionWithTabs } from './types'
 
 export const BASE_URL = 'https://api.themoviedb.org/3'
-export const BASE_IMAGE = 'https://image.tmdb.org/t/p/w185'
+export const BASE_IMAGE = 'https://image.tmdb.org/t/p/w500'
 export const BASE_YOUTUBE = 'https://www.youtube.com/watch?v='
 
 export const genres: Genre[] = [

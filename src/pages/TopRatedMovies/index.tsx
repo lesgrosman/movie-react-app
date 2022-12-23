@@ -2,6 +2,7 @@ import { Movies, QueryType } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
 import { getTopRatedMovies } from './queries'
 import { useQuery } from '@tanstack/react-query'
+import Container from 'components/Container'
 import MovieGroup from 'components/MovieGroup'
 import Seo from 'components/Seo'
 
@@ -12,7 +13,7 @@ const TopRatedRatedMovies = () => {
   )
 
   return (
-    <>
+    <Container>
       <Seo
         title='Top rated movies'
         description='Here are the top rated movies from website movie database'
@@ -22,7 +23,7 @@ const TopRatedRatedMovies = () => {
         <h1 className='text-center'>Top rated movies</h1>
         <MovieGroup data={data?.results} loading={isLoading} error={error} />
       </div>
-    </>
+    </Container>
   )
 }
 
