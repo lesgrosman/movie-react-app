@@ -1,6 +1,18 @@
 import { AxiosError } from 'axios'
 import { UseQueryResult } from '@tanstack/react-query'
 
+export type Tab = {
+  id: number
+  title: string
+  url: string
+  queryKey: string
+}
+
+export type MovieSectionWithTabs = {
+  title: string
+  tabs: Tab[]
+}
+
 export type QueryType<T> = UseQueryResult<T, AxiosError>
 
 export type Nullable<T> = T | null
@@ -11,6 +23,7 @@ export type MovieItem = {
   poster: string
   rankAverage: number
   title: string
+  date: string
 }
 
 export type SimpleItem = {

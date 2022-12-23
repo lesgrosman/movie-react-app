@@ -103,7 +103,7 @@ const MovieDetailPage = () => {
   const trailerNode = <Trailer trailerUrl={trailerUrl} />
 
   return (
-    <>
+    <div className='mt-32'>
       <Seo title={movie?.title} description={movie?.overview} imageUrl={movie?.poster_path} />
       <DetailMovieLayout
         imageNode={imageNode}
@@ -114,7 +114,7 @@ const MovieDetailPage = () => {
         ratingNode={ratingNode}
         trailerNode={trailerNode}
       />
-    </>
+    </div>
   )
 }
 

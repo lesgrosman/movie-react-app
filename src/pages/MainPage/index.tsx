@@ -1,29 +1,13 @@
-import { QueryKeys } from 'utils/constants'
-import { genres } from 'utils/constants'
-import { getMoviesByGenre, getPopularMovies, getPopularTVSeries } from './queries'
-import MovieList from './MovieList'
+import { genresSection, popularSection } from 'utils/constants'
+import Hero from 'components/Hero'
+import MovieSection from './MovieSection'
 
 const MainPage = () => {
   return (
     <div>
-      <MovieList
-        title='Popular movies'
-        queryKey={QueryKeys.POPULAR_MOVIES_MAIN_GROUP}
-        fetchFn={getPopularMovies}
-      />
-      <MovieList
-        title='Popular TV Series'
-        queryKey={QueryKeys.POPULAR_TV_MAIN_GROUP}
-        fetchFn={getPopularTVSeries}
-      />
-      {genres.map(genre => (
-        <MovieList
-          key={genre.id}
-          title={genre.name}
-          queryKey={`${genre.name}-main-group`}
-          fetchFn={() => getMoviesByGenre(genre.id)}
-        />
-      ))}
+      <Hero />
+      <MovieSection section={popularSection} innerClassName='w-1/4' />
+      <MovieSection section={genresSection} innerClassName='w-1/2' />
     </div>
   )
 }

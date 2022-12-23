@@ -17,6 +17,7 @@ export const transformToPreviewItems = (
       rankAverage: item.vote_average,
       poster: item.poster_path ? item.poster_path : '',
       itemType: 'release_date' in item ? 'movie' : 'tv',
+      date: 'release_date' in item ? item.release_date : item.first_air_date,
     }
   })
 }

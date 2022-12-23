@@ -16,7 +16,7 @@ const SearchResultPage = () => {
   )
 
   return (
-    <div className='px-3'>
+    <div className='px-3 mt-32'>
       <h1 className='text-center mb-10'>Search results</h1>
       <MovieGroup data={data?.results} loading={isLoading} error={error} />
     </div>

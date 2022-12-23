@@ -5,7 +5,7 @@ export const mockResponseMovieItems: MovieItemResponse[] = [
     poster_path: 'poster_path',
     adult: false,
     overview: 'overview',
-    release_date: 'strign',
+    release_date: '2009-12-15',
     genre_ids: [1, 2],
     id: 1,
     original_title: 'Title 1',
@@ -21,7 +21,7 @@ export const mockResponseMovieItems: MovieItemResponse[] = [
     poster_path: null,
     adult: false,
     overview: 'overview',
-    release_date: 'some string',
+    release_date: '2009-12-16',
     genre_ids: [1, 2],
     id: 2,
     original_title: 'Title 2',
@@ -42,6 +42,7 @@ export const mockMovieItems: MovieItem[] = [
     poster: 'poster_path',
     rankAverage: 122,
     title: 'title',
+    date: '2009-12-15',
   },
   {
     id: 2,
@@ -49,6 +50,7 @@ export const mockMovieItems: MovieItem[] = [
     poster: '',
     rankAverage: 50,
     title: 'title 2',
+    date: '2009-12-16',
   },
 ]
 
