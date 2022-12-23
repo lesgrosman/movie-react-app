@@ -18,7 +18,7 @@ const TopRatedRatedMovies = () => {
         description='Here are the top rated movies from website movie database'
         imageUrl=''
       />
-      <div className='px-3 mt-10 text-center'>
+      <div className='px-3 text-center mt-32'>
         <h1 className='text-center'>Top rated movies</h1>
         <MovieGroup data={data?.results} loading={isLoading} error={error} />
       </div>

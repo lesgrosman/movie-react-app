@@ -1,6 +1,6 @@
 import { MovieItem, Nullable } from 'utils/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useState } from 'react'
+import CircularProgress from 'components/CircularProgress'
 import Image from 'components/Image'
 import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
@@ -14,54 +14,33 @@ interface Props {
 
 const Carousel = ({ list, similar }: Props) => {
   return (
-    <div className='relative flex'>
+    <div>
       <Swiper
-        modules={[Navigation]}
+        cssMode={true}
         slidesPerView={similar ? 7 : 6}
         freeMode={true}
-        navigation={true}
-        className='relative'
+        className='relative text-start'
       >
-        {list?.map(item => {
-          const [isHover, setIsHover] = useState(false)
-          const { id, poster, itemType, title } = item
-          return (
-            <SwiperSlide
-              key={id}
-              className='flex w-full flex-col p-0 select-none'
-              onMouseEnter={() => setIsHover(true)}
-              onMouseLeave={() => setIsHover(false)}
-            >
-              <Link key={id} href={`/${itemType}/${id}`}>
+        {list?.map(({ id, poster, itemType, title, rankAverage, date }) => (
+          <SwiperSlide key={id} className='flex w-full flex-col p-0 select-none'>
+            <div className='relative mb-5'>
+              <Link href={`/${itemType}/${id}`}>
                 <Image
                   width={similar ? 93 : 185}
                   height={similar ? 140 : 278}
                   src={poster}
                   alt={title}
+                  className='rounded-xl'
                 />
               </Link>
-              {isHover && (
-                <Link key={`background-${id}`} href={`/${itemType}/${id}`}>
-                  <div
-                    style={{
-                      width: similar ? 93 : 185,
-                      height: similar ? 140 : 278,
-                    }}
-                    className={`transition-all absolute top-0 left-0 cursor-pointer flex items-center justify-center ${
-                      isHover ? 'bg-black bg-opacity-75' : 'bg-transparent hidden bg-opacity-0'
-                    }`}
-                  >
-                    {similar ? (
-                      <h4 className='text-center'>{title}</h4>
-                    ) : (
-                      <h1 className='text-center'>{title}</h1>
-                    )}
-                  </div>
-                </Link>
-              )}
-            </SwiperSlide>
-          )
-        })}
+              <CircularProgress value={rankAverage} innerClassName='absolute left-3 -bottom-5' />
+            </div>
+            <Link href={`/${itemType}/${id}`}>
+              <h4 className='ml-2 mb-0 hover:text-cyan-600'>{title}</h4>
+            </Link>
+            <h5 className='ml-2 text-slate-400'>{date}</h5>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   )
