@@ -15,4 +15,4 @@ export const getPopularMovies = async (): Promise<Movies> =>
 export const getPopularTVSeries = async (): Promise<TVSeries> =>
   fetcher(`${BASE_URL}/tv/popular?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`)
 
-export const getPopular = async <T>(url: string): Promise<T> => fetcher(url)
+export const getMovieList = async <T>(url: string): Promise<T> => fetcher(url)

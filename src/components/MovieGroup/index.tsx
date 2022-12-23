@@ -12,7 +12,16 @@ interface Props {
 }
 
 const MovieGroup = ({ data, loading, error }: Props) => {
-  if (loading) return <h1 className='text-center'>Loading...</h1>
+  if (loading && !data) {
+    return (
+      <div className='flex gap-4 animate-pulse'>
+        {new Array(6).fill(1).map(() => (
+          // eslint-disable-next-line react/jsx-key
+          <div className='bg-slate-200 rounded-xl' style={{ width: 185, height: 278 }} />
+        ))}
+      </div>
+    )
+  }
 
   if (error || !data) return <Error error={error?.response?.status} />
 
