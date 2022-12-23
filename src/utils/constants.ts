@@ -62,7 +62,7 @@ export const popularSection: MovieSectionWithTabs = {
 }
 
 export const genresSection: MovieSectionWithTabs = {
-  title: 'By genres',
+  title: 'Best rated by genres',
   tabs: [
     {
       id: 1,
@@ -87,6 +87,30 @@ export const genresSection: MovieSectionWithTabs = {
       title: 'Drama',
       url: `${BASE_URL}/discover/movie?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&with_genres=18`,
       queryKey: QueryKeys.DRAMA_MAIN_GROUP,
+    },
+  ],
+}
+
+export const trendeingSection: MovieSectionWithTabs = {
+  title: 'Trending now',
+  tabs: [
+    {
+      id: 1,
+      title: 'All',
+      url: `${BASE_URL}/trending/all/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+      queryKey: QueryKeys.POPULAR_MOVIES_MAIN_GROUP,
+    },
+    {
+      id: 2,
+      title: 'Movies',
+      url: `${BASE_URL}/trending/movie/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+      queryKey: QueryKeys.POPULAR_TV_MAIN_GROUP,
+    },
+    {
+      id: 3,
+      title: 'TV Series',
+      url: `${BASE_URL}/trending/tv/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+      queryKey: QueryKeys.POPULAR_TV_MAIN_GROUP,
     },
   ],
 }
