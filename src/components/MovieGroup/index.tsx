@@ -14,7 +14,7 @@ interface Props {
 const MovieGroup = ({ data, loading, error }: Props) => {
   if (loading && !data) {
     return (
-      <div className='flex gap-4 animate-pulse'>
+      <div className='flex gap-4 animate-pulse mb-4'>
         {new Array(6).fill(1).map(() => (
           // eslint-disable-next-line react/jsx-key
           <div className='bg-slate-200 rounded-xl' style={{ width: 185, height: 278 }} />

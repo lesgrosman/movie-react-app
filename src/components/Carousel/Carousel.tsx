@@ -22,7 +22,7 @@ const Carousel = ({ list, similar }: Props) => {
         className='relative text-start'
       >
         {list?.map(({ id, poster, itemType, title, rankAverage, date }) => (
-          <SwiperSlide key={id} className='flex w-full flex-col p-0 select-none'>
+          <SwiperSlide key={id} className='flex w-full flex-col p-2 select-none'>
             <div className='relative mb-5'>
               <Link href={`/${itemType}/${id}`}>
                 <Image
@@ -30,7 +30,7 @@ const Carousel = ({ list, similar }: Props) => {
                   height={similar ? 140 : 278}
                   src={poster}
                   alt={title}
-                  className='rounded-xl'
+                  className='rounded-xl hover:scale-105 transition'
                 />
               </Link>
               <CircularProgress value={rankAverage} innerClassName='absolute left-3 -bottom-5' />
