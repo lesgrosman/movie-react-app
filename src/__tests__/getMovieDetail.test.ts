@@ -5,20 +5,19 @@ import axios from 'axios'
 
 jest.mock('axios')
 
+const mockedAxios = axios as jest.Mocked<typeof axios>
+
 describe('Fetch movie detail', () => {
   const errorMessage = 'Network Error'
   it('should return movie detail', async () => {
-    // eslint-disable-next-line prettier/prettier
-    (axios.get as jest.Mock).mockImplementation(() => Promise.resolve({data: mockDetailMovieResponse}))
-    await expect(fetchDetail<MovieDetailResponse>('255567', 'movie')).resolves.toEqual(
-      mockDetailMovieResponse
-    )
+    mockedAxios.get.mockResolvedValue({ data: mockDetailMovieResponse })
+    expect(mockedAxios.get).not.toHaveBeenCalled()
+    const result = await fetchDetail<MovieDetailResponse>('255567', 'movie')
+    expect(mockedAxios.get).toHaveBeenCalled()
+    expect(result).toEqual(mockDetailMovieResponse)
   })
 
   it('fetches erroneously data from an API', async () => {
-    // eslint-disable-next-line prettier/prettier
-    (axios.get as jest.Mock).mockImplementation(() =>
-      Promise.reject(new Error(errorMessage))
-    )
+    mockedAxios.get.mockRejectedValue(new Error(errorMessage))
   })
 })

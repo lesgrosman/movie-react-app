@@ -36,4 +36,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export { default } from '../../src/pages/DetailPage/MovieDetailPage'
+export { default } from '../../src/pages/DetailPage/MovieDetail'
