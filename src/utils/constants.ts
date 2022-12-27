@@ -32,6 +32,9 @@ export enum QueryKeys {
   DRAMA_MAIN_GROUP = 'drama-main-grup',
   SEARCH_MOVIES = 'search-movies',
   TOP_RATED_MOVIES = 'top-rated-movies',
+  TRENDING_MOVIES_MAIN_GROUP = 'trending-movies-main-group',
+  TRENDING_TV_MAIN_GROUP = 'trending-tv-main-group',
+  TRENDING_ALL_MAIN_GROUP = 'trending-all-main-group',
   // detail
   MOVIE_DETAIL = 'movie-detail',
   MOVIE_SIMILAR = 'movie-similar',
@@ -98,19 +101,19 @@ export const trendeingSection: MovieSectionWithTabs = {
       id: 1,
       title: 'All',
       url: `${BASE_URL}/trending/all/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
-      queryKey: QueryKeys.POPULAR_MOVIES_MAIN_GROUP,
+      queryKey: QueryKeys.TRENDING_ALL_MAIN_GROUP,
     },
     {
       id: 2,
       title: 'Movies',
       url: `${BASE_URL}/trending/movie/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
-      queryKey: QueryKeys.POPULAR_TV_MAIN_GROUP,
+      queryKey: QueryKeys.TRENDING_MOVIES_MAIN_GROUP,
     },
     {
       id: 3,
       title: 'TV Series',
       url: `${BASE_URL}/trending/tv/week?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
-      queryKey: QueryKeys.POPULAR_TV_MAIN_GROUP,
+      queryKey: QueryKeys.TRENDING_TV_MAIN_GROUP,
     },
   ],
 }

@@ -4,6 +4,7 @@ import { transformToPreviewItems } from 'utils/helper'
 import { useMemo } from 'react'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../UI/Error/Error'
+import shortid from 'shortid'
 
 interface Props {
   data?: MovieItemResponse[] | TVSeriesItemResponse[]
@@ -16,8 +17,11 @@ const MovieGroup = ({ data, loading, error }: Props) => {
     return (
       <div className='flex gap-4 animate-pulse mb-4'>
         {new Array(6).fill(1).map(() => (
-          // eslint-disable-next-line react/jsx-key
-          <div className='bg-slate-200 rounded-xl' style={{ width: 185, height: 278 }} />
+          <div
+            key={shortid.generate()}
+            className='bg-slate-200 rounded-xl'
+            style={{ width: 185, height: 278 }}
+          />
         ))}
       </div>
     )
