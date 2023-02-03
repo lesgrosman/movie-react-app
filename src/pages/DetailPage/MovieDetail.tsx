@@ -1,11 +1,13 @@
 import { MovieDetailResponse, Movies } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
 import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from './queries'
+import { getCast } from './utils'
 import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
+import Cast from '@components/DetailMovie/Cast'
 import Container from 'components/Container'
+import DetailHero from '@components/DetailMovie/Hero'
 import Error from 'components/UI/Error/Error'
-import HeroDetailMovie from '@components/HeroDetailMovie'
 import React from 'react'
 
 const MovieDetail = () => {
@@ -45,6 +47,8 @@ const MovieDetail = () => {
 
   const { crew } = allDataResponse[2].data || {}
 
+  const cast = getCast(allDataResponse[2].data?.cast).slice(0, 20)
+
   return (
     <div className='relative text-white'>
       <div
@@ -52,7 +56,7 @@ const MovieDetail = () => {
         className={`bg-gradient-to-r from-cyan-700 to-blue-900 absolute w-full top-0 border -z-10`}
       />
       <Container>
-        <HeroDetailMovie
+        <DetailHero
           title={title}
           genres={genres}
           releaseDate={release_date}
@@ -63,6 +67,12 @@ const MovieDetail = () => {
           tagline={tagline}
           crew={crew}
         />
+        <div className='grid grid-cols-12 text-black'>
+          <div className='col-span-10 flex flex-col gap-4'>
+            <Cast cast={cast} />
+          </div>
+          <div>Right side</div>
+        </div>
       </Container>
     </div>
   )
