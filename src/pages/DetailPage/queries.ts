@@ -1,5 +1,5 @@
 import { BASE_URL } from 'utils/constants'
-import { Credits, Trailers } from 'utils/types'
+import { Credits, Reviews, Trailers } from 'utils/types'
 import { fetcher } from 'utils/helper'
 
 export const fetchDetail = async <T>(id = '', type: 'movie' | 'tv'): Promise<T> =>
@@ -18,4 +18,9 @@ export const fetchVideos = async (id = '', type: 'movie' | 'tv'): Promise<Traile
 export const fetchCredits = async (id = '', type: 'movie' | 'tv'): Promise<Credits> =>
   fetcher(
     `${BASE_URL}/${type}/${id}/credits?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`
+  )
+
+export const fetchReviews = async (id = '', type: 'movie' | 'tv'): Promise<Reviews> =>
+  fetcher(
+    `${BASE_URL}/${type}/${id}/reviews?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
   )

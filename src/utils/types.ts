@@ -242,3 +242,26 @@ export type TVSeriesDetailResponse = {
   vote_average: number
   vote_count: number
 }
+
+export type Review = {
+  id: number
+  author: string
+  author_details: {
+    name: string
+    username: string
+    avatar_path: Nullable<string>
+    rating: Nullable<number>
+  }
+  content: string
+  created_at: string
+  updated_at: string
+  url: string
+}
+
+export type Reviews = {
+  id: number
+  page: number
+  total_pages: number
+  total_results: number
+  results: Review[]
+}

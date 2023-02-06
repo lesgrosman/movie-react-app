@@ -1,14 +1,15 @@
-import { MovieDetailResponse, Movies } from 'utils/types'
+import { MovieDetailResponse, Movies, QueryType, Reviews as ReviewsType } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from './queries'
+import { fetchCredits, fetchDetail, fetchReviews, fetchSimilar, fetchVideos } from './queries'
 import { getCast } from './utils'
-import { useQueries } from '@tanstack/react-query'
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import Cast from '@components/DetailMovie/Cast'
 import Container from 'components/Container'
 import DetailHero from '@components/DetailMovie/Hero'
 import Error from 'components/UI/Error/Error'
 import React from 'react'
+import Reviews from '@components/DetailMovie/Reviews'
 
 const MovieDetail = () => {
   const router = useRouter()
@@ -35,6 +36,10 @@ const MovieDetail = () => {
       },
     ],
   })
+
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews', id], () =>
+    fetchReviews(id as string, 'movie')
+  )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
@@ -68,8 +73,9 @@ const MovieDetail = () => {
           crew={crew}
         />
         <div className='grid grid-cols-12 text-black'>
-          <div className='col-span-10 flex flex-col gap-4'>
+          <div className='col-span-9 flex flex-col gap-4'>
             <Cast cast={cast} />
+            <Reviews data={reviews} />
           </div>
           <div>Right side</div>
         </div>

@@ -13,22 +13,20 @@ interface Props {
 const CastCarousel = ({ list }: Props) => {
   return (
     <div>
-      <Swiper cssMode={true} slidesPerView={6} freeMode={true} className='relative text-start'>
+      <Swiper cssMode={true} slidesPerView={5} freeMode={true} className='text-start h-80'>
         {list?.map(({ id, name, character, profileUrl }) => (
-          <SwiperSlide key={id} className='flex flex-col p-2 select-none w-36 h-64 border-[1px]'>
-            <div className='mb-5'>
-              <Image
-                width={138}
-                height={175}
-                src={profileUrl || ''}
-                alt={name}
-                className='rounded-xl hover:scale-105 transition'
-              />
+          <SwiperSlide key={id}>
+            <div className='select-none w-40 border-[1px] rounded-xl h-72 shadow-lg'>
+              <div className='relative w-full pt-[66.66%] h-52'>
+                <div className='absolute top-0 left-0 right-0 bottom-0'>
+                  <Image fill src={profileUrl || ''} alt={name} className='rounded-t-xl' />
+                </div>
+              </div>
+              <Link href=''>
+                <h4 className='ml-2 mb-0 hover:text-cyan-600'>{name}</h4>
+              </Link>
+              <h5 className='ml-2 text-slate-400 text-xs'>{character}</h5>
             </div>
-            <Link href=''>
-              <h4 className='ml-2 mb-0 hover:text-cyan-600'>{name}</h4>
-            </Link>
-            <h5 className='ml-2 text-slate-400'>{character}</h5>
           </SwiperSlide>
         ))}
       </Swiper>
