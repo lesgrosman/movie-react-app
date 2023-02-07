@@ -78,7 +78,6 @@ const TvDetail = () => {
     original_language,
     status,
     networks,
-    type,
     number_of_seasons,
   } = allDataResponse[0].data || {}
 
