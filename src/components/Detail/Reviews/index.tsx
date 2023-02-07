@@ -57,7 +57,7 @@ const Reviews = ({ data }: Props) => {
                 key={id}
                 disabled={!count}
                 className={({ selected }) =>
-                  `w-full ${
+                  `w-full outline-none ${
                     selected
                       ? 'text-emerald-400'
                       : `text-gray-500 ${count && 'hover:text-emerald-400'}`

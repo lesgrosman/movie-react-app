@@ -16,7 +16,7 @@ const CastCarousel = ({ list }: Props) => {
       <Swiper cssMode={true} slidesPerView={6} freeMode={true} className='text-start h-80'>
         {list?.map(({ id, name, character, profileUrl }) => (
           <SwiperSlide key={id}>
-            <div className='select-none w-40 border-[1px] rounded-xl h-72 shadow-lg'>
+            <div className='select-none w-[154px] border-[1px] rounded-xl h-72 shadow-lg'>
               <div className='relative w-full pt-[66.66%] h-52'>
                 <div className='absolute top-0 left-0 right-0 bottom-0'>
                   <Image fill src={profileUrl || ''} alt={name} className='rounded-t-xl' />
