@@ -1,7 +1,6 @@
 import { PersonItem } from 'utils/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'components/Image'
-import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
 
 SwiperCore.use([Navigation])
@@ -19,7 +18,13 @@ const CastCarousel = ({ list }: Props) => {
             <div className='select-none w-[154px] border-[1px] rounded-xl h-72 shadow-lg'>
               <div className='relative w-full pt-[66.66%] h-52'>
                 <div className='absolute top-0 left-0 right-0 bottom-0'>
-                  <Image fill src={profileUrl || ''} alt={name} className='rounded-t-xl' />
+                  <Image
+                    fill
+                    src={profileUrl || ''}
+                    alt={name}
+                    className='rounded-t-xl'
+                    noImage='/assets/noImage.png'
+                  />
                 </div>
               </div>
               {/* <Link href=''> */}

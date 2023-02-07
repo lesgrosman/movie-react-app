@@ -13,7 +13,7 @@ const LocalizedDate = ({ date, isRaw, placeholder }: Props) => {
       const parsedDate = isRaw ? new Date(date) : (date as Date)
       const intl = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         timeZone: 'UTC',
       })

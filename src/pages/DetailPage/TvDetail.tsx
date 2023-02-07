@@ -10,6 +10,7 @@ import {
   fetchCredits,
   fetchDetail,
   fetchKeywords,
+  fetchRecommendations,
   fetchReviews,
   fetchSimilar,
   fetchVideos,
@@ -24,6 +25,7 @@ import Error from 'components/UI/Error/Error'
 import Image from '@components/Image'
 import Info from '@components/Detail/Info'
 import React from 'react'
+import Recommendations from '@components/Detail/Recommendations'
 import Reviews from '@components/Detail/Reviews'
 
 const TvDetail = () => {
@@ -58,6 +60,10 @@ const TvDetail = () => {
 
   const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
     fetchKeywords(id as string, 'tv')
+  )
+
+  const { data: recommendations }: QueryType<TVSeries> = useQuery(['recommendations-tv', id], () =>
+    fetchRecommendations(id as string, 'tv')
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
@@ -106,6 +112,7 @@ const TvDetail = () => {
         <div className='grid grid-cols-12 text-black'>
           <div className='col-span-10 flex flex-col gap-4'>
             <Cast cast={cast} />
+            <Recommendations recommendations={recommendations?.results} />
             <Reviews data={reviews} />
           </div>
           <Info originalLanguage={original_language} status={status} keyWords={keywords?.results}>
