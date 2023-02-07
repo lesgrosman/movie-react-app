@@ -24,5 +24,11 @@ export const fetchReviews = async (id = '', type: 'movie' | 'tv'): Promise<Revie
   fetcher(
     `${BASE_URL}/${type}/${id}/reviews?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
   )
+
 export const fetchKeywords = async (id = '', type: 'movie' | 'tv'): Promise<Keywords> =>
   fetcher(`${BASE_URL}/${type}/${id}/keywords?api_key=${process.env.NEXT_PUBLIC_DB_API}`)
+
+export const fetchRecommendations = async <T>(id = '', type: 'movie' | 'tv'): Promise<T> =>
+  fetcher(
+    `${BASE_URL}/${type}/${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
+  )

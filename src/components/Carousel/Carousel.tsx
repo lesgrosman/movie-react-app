@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import CircularProgress from 'components/CircularProgress'
 import Image from 'components/Image'
 import Link from 'next/link'
+import LocalizedDate from '@utils/components/LocalizedDate'
 import SwiperCore, { Navigation } from 'swiper'
 
 SwiperCore.use([Navigation])
@@ -38,7 +39,9 @@ const Carousel = ({ list, similar }: Props) => {
             <Link href={`/${itemType}/${id}`}>
               <h4 className='ml-2 mb-0 hover:text-cyan-600'>{title}</h4>
             </Link>
-            <h5 className='ml-2 text-slate-400'>{date}</h5>
+            <h5 className='ml-2 text-slate-400'>
+              <LocalizedDate date={date} isRaw placeholder='' />
+            </h5>
           </SwiperSlide>
         ))}
       </Swiper>
