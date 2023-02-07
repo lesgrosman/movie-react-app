@@ -1,6 +1,6 @@
 import { MovieItemResponse, TVSeriesItemResponse } from 'utils/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import Image from 'components/Image'
+import Image from '@components/Image'
 import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
 
@@ -14,18 +14,18 @@ const RecommendationsCarousel = ({ list }: Props) => {
   return (
     <div className='mb-10'>
       <Swiper cssMode={true} slidesPerView={4} freeMode={true} className='text-start'>
-        {list?.map(item => {
+        {list.map(item => {
           const isMovie = 'title' in item
           const itemType = isMovie ? 'movie' : 'tv'
-          return (
+          return item.backdrop_path ? (
             <SwiperSlide key={item.id}>
-              <div className='select-none w-60 h-40'>
+              <div className='select-none w-60 h-48'>
                 <Link href={`/${itemType}/${item.id}`}>
                   <Image
-                    src={item.backdrop_path || ''}
+                    src={item.backdrop_path}
                     width={240}
                     height={140}
-                    alt='asd'
+                    alt=''
                     className='rounded-xl'
                   />
                 </Link>
@@ -35,7 +35,7 @@ const RecommendationsCarousel = ({ list }: Props) => {
                 </div>
               </div>
             </SwiperSlide>
-          )
+          ) : null
         })}
       </Swiper>
     </div>
