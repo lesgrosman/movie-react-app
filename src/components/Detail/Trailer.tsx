@@ -16,19 +16,18 @@ const Trailer = ({ trailerUrl }: Props) => {
     }
   }, [])
 
+  if (!trailerUrl) return null
+
   return (
-    <div>
-      {trailerUrl ? (
-        <ReactPlayer
-          url={`${BASE_YOUTUBE}${trailerUrl}`}
-          controls={true}
-          height={450}
-          width={740}
-          origin={origin}
-        />
-      ) : (
-        <h4>{'Trailer does not exist :('}</h4>
-      )}
+    <div className='mb-4'>
+      <h2>Trailer</h2>
+      <ReactPlayer
+        url={`${BASE_YOUTUBE}${trailerUrl}`}
+        controls={true}
+        height={450}
+        width={740}
+        origin={origin}
+      />
     </div>
   )
 }

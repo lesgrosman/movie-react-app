@@ -10,6 +10,7 @@ import {
   fetchCredits,
   fetchDetail,
   fetchKeywords,
+  fetchRecommendations,
   fetchReviews,
   fetchSimilar,
   fetchVideos,
@@ -24,7 +25,9 @@ import Error from 'components/UI/Error/Error'
 import Info from '@components/Detail/Info'
 import LocalizedCurrency from '@utils/components/LocalizedCurrency'
 import React from 'react'
+import Recommendations from '@components/Detail/Recommendations'
 import Reviews from '@components/Detail/Reviews'
+import Trailer from '@components/Detail/Trailer'
 
 const MovieDetail = () => {
   const router = useRouter()
@@ -60,6 +63,10 @@ const MovieDetail = () => {
     fetchKeywords(id as string, 'movie')
   )
 
+  const { data: recommendations }: QueryType<Movies> = useQuery(['recommendations-movie', id], () =>
+    fetchRecommendations(id as string, 'movie')
+  )
+
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
@@ -84,6 +91,8 @@ const MovieDetail = () => {
   const { crew } = allDataResponse[2].data || {}
 
   const cast = getCast(allDataResponse[2].data?.cast).slice(0, 20)
+  const trailerUrl = allDataResponse[3]?.data?.results?.filter(item => item.type === 'Trailer')?.[0]
+    ?.key
 
   return (
     <div className='relative text-white'>
@@ -106,16 +115,18 @@ const MovieDetail = () => {
         <div className='grid grid-cols-12 text-black'>
           <div className='col-span-10 flex flex-col gap-4'>
             <Cast cast={cast} />
+            <Trailer trailerUrl={trailerUrl} />
+            <Recommendations recommendations={recommendations?.results} />
             <Reviews data={reviews} />
           </div>
           <Info originalLanguage={original_language} status={status} keyWords={keywords?.keywords}>
             <div>
               <h4>Budget</h4>
-              <LocalizedCurrency placeholder='' amount={budget} />
+              <LocalizedCurrency placeholder='-' amount={budget} />
             </div>
             <div>
               <h4>Revenue</h4>
-              <LocalizedCurrency placeholder='' amount={revenue} />
+              <LocalizedCurrency placeholder='-' amount={revenue} />
             </div>
           </Info>
         </div>
