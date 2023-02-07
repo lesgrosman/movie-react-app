@@ -1,5 +1,5 @@
-import { MovieDetailResponse, Movies, QueryType, Reviews as ReviewsType } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
+import { QueryType, Reviews as ReviewsType, TVSeries, TVSeriesDetailResponse } from 'utils/types'
 import { fetchCredits, fetchDetail, fetchReviews, fetchSimilar, fetchVideos } from './queries'
 import { getCast } from './utils'
 import { useQueries, useQuery } from '@tanstack/react-query'
@@ -11,7 +11,7 @@ import Error from 'components/UI/Error/Error'
 import React from 'react'
 import Reviews from '@components/DetailMovie/Reviews'
 
-const MovieDetail = () => {
+const TvDetail = () => {
   const router = useRouter()
 
   const { id } = router.query
@@ -20,25 +20,25 @@ const MovieDetail = () => {
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<MovieDetailResponse>(id as string, 'movie'),
+        queryFn: () => fetchDetail<TVSeriesDetailResponse>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<Movies>(id as string, 'movie'),
+        queryFn: () => fetchSimilar<TVSeries>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits(id as string, 'movie'),
+        queryFn: () => fetchCredits(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos(id as string, 'movie'),
+        queryFn: () => fetchVideos(id as string, 'tv'),
       },
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', id], () =>
-    fetchReviews(id as string, 'movie')
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', id], () =>
+    fetchReviews(id as string, 'tv')
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
@@ -47,8 +47,16 @@ const MovieDetail = () => {
     return <Error error={404} />
   }
 
-  const { title, genres, poster_path, overview, tagline, vote_average, release_date, runtime } =
-    allDataResponse[0].data || {}
+  const {
+    name,
+    genres,
+    poster_path,
+    overview,
+    tagline,
+    vote_average,
+    first_air_date,
+    episode_run_time,
+  } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
 
@@ -62,11 +70,11 @@ const MovieDetail = () => {
       />
       <Container>
         <DetailHero
-          title={title}
+          title={name}
           genres={genres}
-          releaseDate={release_date}
+          releaseDate={first_air_date}
           vote={vote_average}
-          runtime={runtime}
+          runtime={episode_run_time?.[0]}
           posterPath={poster_path}
           overview={overview}
           tagline={tagline}
@@ -84,4 +92,4 @@ const MovieDetail = () => {
   )
 }
 
-export default MovieDetail
+export default TvDetail
