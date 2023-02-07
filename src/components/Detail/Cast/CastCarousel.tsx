@@ -13,7 +13,7 @@ interface Props {
 const CastCarousel = ({ list }: Props) => {
   return (
     <div>
-      <Swiper cssMode={true} slidesPerView={5} freeMode={true} className='text-start h-80'>
+      <Swiper cssMode={true} slidesPerView={6} freeMode={true} className='text-start h-80'>
         {list?.map(({ id, name, character, profileUrl }) => (
           <SwiperSlide key={id}>
             <div className='select-none w-40 border-[1px] rounded-xl h-72 shadow-lg'>

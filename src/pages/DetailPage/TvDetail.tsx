@@ -1,15 +1,30 @@
+import {
+  Keywords,
+  QueryType,
+  Reviews as ReviewsType,
+  TVSeries,
+  TVSeriesDetailResponse,
+} from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import { QueryType, Reviews as ReviewsType, TVSeries, TVSeriesDetailResponse } from 'utils/types'
-import { fetchCredits, fetchDetail, fetchReviews, fetchSimilar, fetchVideos } from './queries'
+import {
+  fetchCredits,
+  fetchDetail,
+  fetchKeywords,
+  fetchReviews,
+  fetchSimilar,
+  fetchVideos,
+} from './queries'
 import { getCast } from './utils'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import Cast from '@components/DetailMovie/Cast'
+import Cast from '@components/Detail/Cast'
 import Container from 'components/Container'
-import DetailHero from '@components/DetailMovie/Hero'
+import DetailHero from '@components/Detail/Hero'
 import Error from 'components/UI/Error/Error'
+import Image from '@components/Image'
+import Info from '@components/Detail/Info'
 import React from 'react'
-import Reviews from '@components/DetailMovie/Reviews'
+import Reviews from '@components/Detail/Reviews'
 
 const TvDetail = () => {
   const router = useRouter()
@@ -41,6 +56,10 @@ const TvDetail = () => {
     fetchReviews(id as string, 'tv')
   )
 
+  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
+    fetchKeywords(id as string, 'tv')
+  )
+
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
@@ -56,6 +75,11 @@ const TvDetail = () => {
     vote_average,
     first_air_date,
     episode_run_time,
+    original_language,
+    status,
+    networks,
+    type,
+    number_of_seasons,
   } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
@@ -81,11 +105,20 @@ const TvDetail = () => {
           crew={crew}
         />
         <div className='grid grid-cols-12 text-black'>
-          <div className='col-span-9 flex flex-col gap-4'>
+          <div className='col-span-10 flex flex-col gap-4'>
             <Cast cast={cast} />
             <Reviews data={reviews} />
           </div>
-          <div>Right side</div>
+          <Info originalLanguage={original_language} status={status} keyWords={keywords?.results}>
+            <div>
+              <h4>Network</h4>
+              <Image src={networks?.[0]?.logo_path || ''} alt='network' width={72} height={30} />
+            </div>
+            <div>
+              <h4>Numbers of seasons</h4>
+              <span>{number_of_seasons}</span>
+            </div>
+          </Info>
         </div>
       </Container>
     </div>

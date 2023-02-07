@@ -265,3 +265,9 @@ export type Reviews = {
   total_results: number
   results: Review[]
 }
+
+export type Keywords = {
+  id: number
+  keywords?: SimpleItem[]
+  results?: SimpleItem[]
+}
