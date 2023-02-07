@@ -22,9 +22,9 @@ const CastCarousel = ({ list }: Props) => {
                   <Image fill src={profileUrl || ''} alt={name} className='rounded-t-xl' />
                 </div>
               </div>
-              <Link href=''>
-                <h4 className='ml-2 mb-0 hover:text-cyan-600'>{name}</h4>
-              </Link>
+              {/* <Link href=''> */}
+              <h4 className='ml-2 mb-0 hover:text-cyan-600'>{name}</h4>
+              {/* </Link> */}
               <h5 className='ml-2 text-slate-400 text-xs'>{character}</h5>
             </div>
           </SwiperSlide>
