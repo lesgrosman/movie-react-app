@@ -1,4 +1,11 @@
-import { CrewMember, Genre, ProductionCompany, ProductionCountry } from 'utils/types'
+import {
+  CastMember,
+  CrewMember,
+  Genre,
+  PersonItem,
+  ProductionCompany,
+  ProductionCountry,
+} from 'utils/types'
 
 export const getCrewByJob = (arr?: CrewMember[], job = ''): string => {
   return (
@@ -6,6 +13,17 @@ export const getCrewByJob = (arr?: CrewMember[], job = ''): string => {
       ?.filter(person => person.job === job)
       ?.map(person => person.name)
       .join(', ') || '-'
+  )
+}
+
+export const getCast = (arr?: CastMember[]): PersonItem[] => {
+  return (
+    arr?.map(person => ({
+      id: person.id,
+      name: person.name,
+      character: person.character,
+      profileUrl: person.profile_path,
+    })) || []
   )
 }
 

@@ -4,6 +4,7 @@ import { transformToPreviewItems } from 'utils/helper'
 import { useMemo } from 'react'
 import Carousel from 'components/Carousel/Carousel'
 import Error from '../UI/Error/Error'
+import shortid from 'shortid'
 
 interface Props {
   data?: MovieItemResponse[] | TVSeriesItemResponse[]
@@ -12,7 +13,19 @@ interface Props {
 }
 
 const MovieGroup = ({ data, loading, error }: Props) => {
-  if (loading) return <h1 className='text-center'>Loading...</h1>
+  if (loading && !data) {
+    return (
+      <div className='flex gap-4 animate-pulse mb-4'>
+        {new Array(6).fill(1).map(() => (
+          <div
+            key={shortid.generate()}
+            className='bg-slate-200 rounded-xl'
+            style={{ width: 185, height: 278 }}
+          />
+        ))}
+      </div>
+    )
+  }
 
   if (error || !data) return <Error error={error?.response?.status} />
 

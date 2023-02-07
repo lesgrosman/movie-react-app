@@ -3,6 +3,7 @@ import { QueryKeys } from 'utils/constants'
 import { searchMovies } from './queries'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
+import Container from '@components/Container'
 import MovieGroup from 'components/MovieGroup'
 
 const SearchResultPage = () => {
@@ -16,10 +17,12 @@ const SearchResultPage = () => {
   )
 
   return (
-    <div className='px-3'>
-      <h1 className='text-center mb-10'>Search results</h1>
-      <MovieGroup data={data?.results} loading={isLoading} error={error} />
-    </div>
+    <Container>
+      <div className='px-3 mt-32'>
+        <h1 className='text-center mb-10'>Search results</h1>
+        <MovieGroup data={data?.results} loading={isLoading} error={error} />
+      </div>
+    </Container>
   )
 }
 export default SearchResultPage

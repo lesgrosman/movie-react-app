@@ -1,0 +1,127 @@
+import {
+  Keywords,
+  MovieDetailResponse,
+  Movies,
+  QueryType,
+  Reviews as ReviewsType,
+} from 'utils/types'
+import { QueryKeys } from 'utils/constants'
+import {
+  fetchCredits,
+  fetchDetail,
+  fetchKeywords,
+  fetchReviews,
+  fetchSimilar,
+  fetchVideos,
+} from './queries'
+import { getCast } from './utils'
+import { useQueries, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
+import Cast from '@components/Detail/Cast'
+import Container from 'components/Container'
+import DetailHero from '@components/Detail/Hero'
+import Error from 'components/UI/Error/Error'
+import Info from '@components/Detail/Info'
+import LocalizedCurrency from '@utils/components/LocalizedCurrency'
+import React from 'react'
+import Reviews from '@components/Detail/Reviews'
+
+const MovieDetail = () => {
+  const router = useRouter()
+
+  const { id } = router.query
+
+  const allDataResponse = useQueries({
+    queries: [
+      {
+        queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
+        queryFn: () => fetchDetail<MovieDetailResponse>(id as string, 'movie'),
+      },
+      {
+        queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
+        queryFn: () => fetchSimilar<Movies>(id as string, 'movie'),
+      },
+      {
+        queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
+        queryFn: () => fetchCredits(id as string, 'movie'),
+      },
+      {
+        queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
+        queryFn: () => fetchVideos(id as string, 'movie'),
+      },
+    ],
+  })
+
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', id], () =>
+    fetchReviews(id as string, 'movie')
+  )
+
+  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-movie', id], () =>
+    fetchKeywords(id as string, 'movie')
+  )
+
+  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
+
+  if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
+    return <Error error={404} />
+  }
+
+  const {
+    title,
+    genres,
+    poster_path,
+    overview,
+    tagline,
+    vote_average,
+    release_date,
+    runtime,
+    original_language,
+    status,
+    budget,
+    revenue,
+  } = allDataResponse[0].data || {}
+
+  const { crew } = allDataResponse[2].data || {}
+
+  const cast = getCast(allDataResponse[2].data?.cast).slice(0, 20)
+
+  return (
+    <div className='relative text-white'>
+      <div
+        style={{ height: '500px' }}
+        className={`bg-gradient-to-r from-cyan-700 to-blue-900 absolute w-full top-0 border -z-10`}
+      />
+      <Container>
+        <DetailHero
+          title={title}
+          genres={genres}
+          releaseDate={release_date}
+          vote={vote_average}
+          runtime={runtime}
+          posterPath={poster_path}
+          overview={overview}
+          tagline={tagline}
+          crew={crew}
+        />
+        <div className='grid grid-cols-12 text-black'>
+          <div className='col-span-10 flex flex-col gap-4'>
+            <Cast cast={cast} />
+            <Reviews data={reviews} />
+          </div>
+          <Info originalLanguage={original_language} status={status} keyWords={keywords?.keywords}>
+            <div>
+              <h4>Budget</h4>
+              <LocalizedCurrency placeholder='' amount={budget} />
+            </div>
+            <div>
+              <h4>Revenue</h4>
+              <LocalizedCurrency placeholder='' amount={revenue} />
+            </div>
+          </Info>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+export default MovieDetail

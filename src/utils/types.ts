@@ -1,6 +1,18 @@
 import { AxiosError } from 'axios'
 import { UseQueryResult } from '@tanstack/react-query'
 
+export type Tab = {
+  id: number
+  title: string
+  url: string
+  queryKey: string
+}
+
+export type MovieSectionWithTabs = {
+  title: string
+  tabs: Tab[]
+}
+
 export type QueryType<T> = UseQueryResult<T, AxiosError>
 
 export type Nullable<T> = T | null
@@ -11,6 +23,11 @@ export type MovieItem = {
   poster: string
   rankAverage: number
   title: string
+  date: string
+}
+
+export type PersonItem = Pick<CastMember, 'id' | 'name' | 'character'> & {
+  profileUrl: Nullable<string>
 }
 
 export type SimpleItem = {
@@ -90,10 +107,10 @@ export type CastMember = {
   character: string
   credit_id: string
   order: number
+  profile_path: Nullable<string>
 }
 
 export type CrewMember = Omit<CastMember, 'character' | 'order'> & {
-  profile_path: Nullable<string>
   department: string
   job: string
 }
@@ -224,4 +241,33 @@ export type TVSeriesDetailResponse = {
   video: boolean
   vote_average: number
   vote_count: number
+}
+
+export type Review = {
+  id: number
+  author: string
+  author_details: {
+    name: string
+    username: string
+    avatar_path: Nullable<string>
+    rating: Nullable<number>
+  }
+  content: string
+  created_at: string
+  updated_at: string
+  url: string
+}
+
+export type Reviews = {
+  id: number
+  page: number
+  total_pages: number
+  total_results: number
+  results: Review[]
+}
+
+export type Keywords = {
+  id: number
+  keywords?: SimpleItem[]
+  results?: SimpleItem[]
 }
