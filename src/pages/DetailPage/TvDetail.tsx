@@ -1,9 +1,9 @@
 import {
   Keywords,
-  MovieDetailResponse,
-  Movies,
   QueryType,
   Reviews as ReviewsType,
+  TVSeries,
+  TVSeriesDetailResponse,
 } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
 import {
@@ -21,12 +21,12 @@ import Cast from '@components/Detail/Cast'
 import Container from 'components/Container'
 import DetailHero from '@components/Detail/Hero'
 import Error from 'components/UI/Error/Error'
+import Image from '@components/Image'
 import Info from '@components/Detail/Info'
-import LocalizedCurrency from '@utils/components/LocalizedCurrency'
 import React from 'react'
 import Reviews from '@components/Detail/Reviews'
 
-const MovieDetail = () => {
+const TvDetail = () => {
   const router = useRouter()
 
   const { id } = router.query
@@ -35,29 +35,29 @@ const MovieDetail = () => {
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<MovieDetailResponse>(id as string, 'movie'),
+        queryFn: () => fetchDetail<TVSeriesDetailResponse>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<Movies>(id as string, 'movie'),
+        queryFn: () => fetchSimilar<TVSeries>(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits(id as string, 'movie'),
+        queryFn: () => fetchCredits(id as string, 'tv'),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos(id as string, 'movie'),
+        queryFn: () => fetchVideos(id as string, 'tv'),
       },
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', id], () =>
-    fetchReviews(id as string, 'movie')
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', id], () =>
+    fetchReviews(id as string, 'tv')
   )
 
-  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-movie', id], () =>
-    fetchKeywords(id as string, 'movie')
+  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
+    fetchKeywords(id as string, 'tv')
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
@@ -67,18 +67,18 @@ const MovieDetail = () => {
   }
 
   const {
-    title,
+    name,
     genres,
     poster_path,
     overview,
     tagline,
     vote_average,
-    release_date,
-    runtime,
+    first_air_date,
+    episode_run_time,
     original_language,
     status,
-    budget,
-    revenue,
+    networks,
+    number_of_seasons,
   } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
@@ -93,11 +93,11 @@ const MovieDetail = () => {
       />
       <Container>
         <DetailHero
-          title={title}
+          title={name}
           genres={genres}
-          releaseDate={release_date}
+          releaseDate={first_air_date}
           vote={vote_average}
-          runtime={runtime}
+          runtime={episode_run_time?.[0]}
           posterPath={poster_path}
           overview={overview}
           tagline={tagline}
@@ -108,14 +108,14 @@ const MovieDetail = () => {
             <Cast cast={cast} />
             <Reviews data={reviews} />
           </div>
-          <Info originalLanguage={original_language} status={status} keyWords={keywords?.keywords}>
+          <Info originalLanguage={original_language} status={status} keyWords={keywords?.results}>
             <div>
-              <h4>Budget</h4>
-              <LocalizedCurrency placeholder='' amount={budget} />
+              <h4>Network</h4>
+              <Image src={networks?.[0]?.logo_path || ''} alt='network' width={72} height={30} />
             </div>
             <div>
-              <h4>Revenue</h4>
-              <LocalizedCurrency placeholder='' amount={revenue} />
+              <h4>Numbers of seasons</h4>
+              <span>{number_of_seasons}</span>
             </div>
           </Info>
         </div>
@@ -124,4 +124,4 @@ const MovieDetail = () => {
   )
 }
 
-export default MovieDetail
+export default TvDetail

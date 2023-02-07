@@ -1,7 +1,8 @@
 import { CrewMember, Genre, Nullable } from 'utils/types'
 import { getGenres } from 'pages/DetailPage/utils'
-import CircularProgress from './CircularProgress'
-import Image from './Image'
+import { useRouter } from 'next/router'
+import CircularProgress from '../CircularProgress'
+import Image from '../Image'
 
 interface Props {
   title?: string
@@ -15,7 +16,7 @@ interface Props {
   crew?: CrewMember[]
 }
 
-const HeroDetailMovie = ({
+const DetailHero = ({
   title,
   genres,
   releaseDate,
@@ -26,12 +27,17 @@ const HeroDetailMovie = ({
   tagline,
   crew,
 }: Props) => {
-  const director = crew?.filter(person => person.job === 'Director')[0]
+  const router = useRouter()
+  const isMovie = router.pathname.includes('/movie/')
+
+  const director = crew?.filter(person =>
+    isMovie ? person.job === 'Director' : person.known_for_department === 'Directing'
+  )[0]
   const writers = crew?.filter(person => person.job === 'Screenplay').slice(0, 2)
   const producers = crew?.filter(person => person.job === 'Producer').slice(0, 3)
 
   return (
-    <div className='flex gap-8 pt-6' style={{ height: '500px' }}>
+    <div className='flex gap-8 pt-6 mb-4' style={{ height: '500px' }}>
       <div className='flex-shrink-0'>
         <Image src={posterPath || ''} alt='' width={300} height={450} className='rounded-xl' />
       </div>
@@ -59,10 +65,12 @@ const HeroDetailMovie = ({
           <span>{overview}</span>
         </div>
         <div className='flex text-start gap-5 flex-wrap'>
-          <div>
-            <span className='italic text-xs'>Director</span>
-            <h4>{director?.name}</h4>
-          </div>
+          {director && (
+            <div>
+              <span className='italic text-xs'>Director</span>
+              <h4>{director?.name}</h4>
+            </div>
+          )}
           {writers?.map(({ id, name }) => (
             <div key={id}>
               <span className='italic text-xs'>Screenplay</span>
@@ -81,4 +89,4 @@ const HeroDetailMovie = ({
   )
 }
 
-export default HeroDetailMovie
+export default DetailHero
