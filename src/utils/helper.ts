@@ -1,17 +1,15 @@
 import { MovieItem, MovieItemResponse, TVSeriesItemResponse } from './types'
+import axios from 'axios'
 
 export const fetcher = async (url: string) => {
-  const res = await fetch(url)
+  const { data } = await axios.get(url)
 
-  const json = await res.json()
-
-  if (json.success === false) {
-    const { status_message: message } = json
-
+  if (data.success === false) {
+    const { status_message: message } = data
     throw new Error(message)
   }
 
-  return json
+  return data
 }
 
 export const transformToPreviewItems = (
