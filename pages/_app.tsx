@@ -21,7 +21,16 @@ const messages: Messages = {
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { locale } = useRouter()
-  const [queryClient] = React.useState(() => new QueryClient())
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+          },
+        },
+      })
+  )
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -3,6 +3,12 @@ import axios from 'axios'
 
 export const fetcher = async (url: string) => {
   const { data } = await axios.get(url)
+
+  if (data.success === false) {
+    const { status_message: message } = data
+    throw new Error(message)
+  }
+
   return data
 }
 
