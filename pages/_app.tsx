@@ -5,9 +5,9 @@ import { AppProps } from 'next/app'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
-import Header from '@components/Header/Header'
 import React from 'react'
 
+import { AuthProvider } from '../src/context/useAuthContext'
 import cs from '../locales/cs/translation.json'
 import en from '../locales/en/translation.json'
 
@@ -40,10 +40,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           messages={messages[locale as keyof Messages]}
           defaultLocale='en'
         >
-          <Header />
-          <div style={{ marginTop: '78px' }}>
+          <AuthProvider>
             <Component {...pageProps} />
-          </div>
+          </AuthProvider>
         </IntlProvider>
       </Hydrate>
     </QueryClientProvider>
