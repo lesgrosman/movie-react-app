@@ -93,10 +93,6 @@ const TvDetail = () => {
 
   return (
     <div className='relative text-white'>
-      <div
-        style={{ height: '500px' }}
-        className={`bg-gradient-to-r from-cyan-700 to-blue-900 absolute w-full top-0 border -z-10`}
-      />
       <Container>
         <DetailHero
           title={name}

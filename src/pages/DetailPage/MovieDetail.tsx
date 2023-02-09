@@ -96,7 +96,6 @@ const MovieDetail = () => {
 
   return (
     <div className='relative text-white'>
-      <div className='absolute w-full top-0 bg-gradient-to-r from-cyan-700 to-blue-900 border -z-10 h-[500px]' />
       <Container>
         <DetailHero
           title={title}
