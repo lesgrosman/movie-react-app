@@ -2,6 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { LoginForm, initValues, schema } from './utils'
 import { useAuth } from '@utils/hooks/useAuth'
 import { useAuthContext } from 'context/useAuthContext'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@components/Button'
@@ -13,9 +14,11 @@ const Login = () => {
   const { login, isLoading } = useAuth()
   const { user } = useAuthContext()
 
-  if (user) {
-    router.push('/')
-  }
+  useEffect(() => {
+    if (user) {
+      router.push('/profile')
+    }
+  }, [user])
 
   const methods = useForm<LoginForm>({
     defaultValues: initValues,

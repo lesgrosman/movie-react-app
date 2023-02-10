@@ -1,5 +1,5 @@
 import NextImage from 'next/image'
-import SearchInput from './SearchInput/SearchInput'
+import SearchInput from '../../components/SearchInput/SearchInput'
 
 const HeroMain = () => {
   return (

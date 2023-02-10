@@ -1,8 +1,8 @@
 import { CrewMember, Genre, Nullable } from 'utils/types'
 import { getGenres } from 'pages/DetailPage/utils'
 import { useRouter } from 'next/router'
-import CircularProgress from '../CircularProgress'
-import Image from '../Image'
+import CircularProgress from '@components/CircularProgress'
+import Image from '@components/Image'
 
 interface Props {
   title?: string

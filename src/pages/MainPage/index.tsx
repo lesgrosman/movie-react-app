@@ -1,6 +1,6 @@
 import { genresSection, popularSection, trendeingSection } from 'utils/constants'
 import Container from 'components/Container'
-import HeroMain from '@components/HeroMain'
+import HeroMain from './HeroMain'
 import MovieSection from './MovieSection'
 
 const MainPage = () => {

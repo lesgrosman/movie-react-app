@@ -1,5 +1,5 @@
 import { BASE_URL } from 'utils/constants'
-import { LoginForm } from 'pages/Login/utils'
+import { LoginForm } from '../../pages/LoginPage/utils'
 import { useAuthContext } from 'context/useAuthContext'
 import { useState } from 'react'
 import axios, { AxiosError, AxiosResponse } from 'axios'
