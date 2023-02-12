@@ -1,22 +1,26 @@
 import { AccountDetail } from '../types'
-import { Movies, TVSeries } from '@utils/types'
+import { RatedMovieItemResponse, RatedTVSeriesItemResponse } from '@utils/types'
 import { useMemo } from 'react'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 
 interface Props {
   account: AccountDetail
-  movies: Movies
-  tv: TVSeries
+  movies: {
+    results: RatedMovieItemResponse[]
+  }
+  tv: {
+    results: RatedTVSeriesItemResponse[]
+  }
 }
 
 const View = ({ account, movies, tv }: Props) => {
   const averageMovieRating = useMemo(() => {
-    return movies.results?.reduce((acc, item) => item.vote_average + acc, 0) / movies.results.length
+    return movies.results.reduce((acc, item) => item.vote_average + acc, 0) / movies.results.length
   }, [movies])
 
   const averageTvRating = useMemo(() => {
-    return tv?.results?.reduce((acc, item) => item.vote_average + acc, 0) / tv.results.length
+    return tv.results.reduce((acc, item) => item.vote_average + acc, 0) / tv.results.length
   }, [tv])
 
   return (

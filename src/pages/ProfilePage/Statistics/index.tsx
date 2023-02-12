@@ -19,12 +19,18 @@ const Statistics = () => {
 
   const { data: ratedTV }: QueryType<{ results: RatedTVSeriesItemResponse[] }> = useQuery(
     [`rated-tv`],
-    () => getListItems(session, accountId, 'rated', 'tv')
+    () => getListItems(session, accountId, 'rated', 'tv'),
+    {
+      enabled: !!session,
+    }
   )
 
   const { data: movieGenres }: QueryType<{ genres: SimpleItem[] }> = useQuery(
     ['movie-genres'],
-    () => getGenres('movie')
+    () => getGenres('movie'),
+    {
+      enabled: !!session,
+    }
   )
 
   const { data: tvGenres }: QueryType<{ genres: SimpleItem[] }> = useQuery(['tv-genres'], () =>

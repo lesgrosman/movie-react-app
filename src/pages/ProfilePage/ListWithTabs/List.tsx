@@ -13,8 +13,12 @@ interface Props {
 const List = ({ type, group }: Props) => {
   const { session, accountId } = useAuthContext()
 
-  const { data }: QueryType<Movies | TVSeries> = useQuery([`${group}-${type}`], () =>
-    getListItems(session, accountId, group, type)
+  const { data }: QueryType<Movies | TVSeries> = useQuery(
+    [`${group}-${type}`],
+    () => getListItems(session, accountId, group, type),
+    {
+      enabled: !!session,
+    }
   )
 
   if (!data) return null
