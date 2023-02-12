@@ -166,16 +166,24 @@ export type TVSeriesItemResponse = Omit<
   origin_country: string[]
 }
 
+export type RatedMovieItemResponse = MovieItemResponse & {
+  rating: number
+}
+
+export type RatedTVSeriesItemResponse = TVSeriesItemResponse & {
+  rating: number
+}
+
 export type Movies = {
   page: number
-  results: MovieItemResponse[]
+  results: MovieItemResponse[] | RatedMovieItemResponse[]
   total_pages: number
   totals_results: number
 }
 
 export type TVSeries = {
   page: number
-  results: TVSeriesItemResponse[]
+  results: TVSeriesItemResponse[] | RatedTVSeriesItemResponse[]
   total_pages: number
   totals_results: number
 }

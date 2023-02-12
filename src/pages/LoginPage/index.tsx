@@ -12,13 +12,13 @@ import TextInput from '@components/Form/TextInput'
 const Login = () => {
   const router = useRouter()
   const { login, isLoading } = useAuth()
-  const { user } = useAuthContext()
+  const { session } = useAuthContext()
 
   useEffect(() => {
-    if (user) {
+    if (session) {
       router.push('/profile')
     }
-  }, [user])
+  }, [session])
 
   const methods = useForm<LoginForm>({
     defaultValues: initValues,
@@ -35,19 +35,32 @@ const Login = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit}>
           <div className='flex w-full h-full'>
-            <div className='flex flex-col gap-5 justify-center h-screen max-w-2xl w-full mx-auto'>
+            <div className='flex flex-col justify-center h-screen max-w-2xl w-full mx-auto'>
               <h1 className='text-center text-emerald-500 mb-2'>Log in</h1>
-              <span className='text-gray-400 text-center'>
-                Please make sure you have an active account on&nbsp;
-                <a
-                  href='https://www.themoviedb.org/login'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='text-emerald-500 underline cursor-pointer'
-                >
-                  TMDB
-                </a>
-              </span>
+              <div className='mb-4 flex flex-col'>
+                <span className='text-gray-400 text-center'>
+                  Login with your credentials in&nbsp;
+                  <a
+                    href='https://www.themoviedb.org'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-emerald-500 underline cursor-pointer'
+                  >
+                    TMDB
+                  </a>
+                </span>
+                <span className='text-gray-400 text-center'>
+                  Please make sure you have an active account on&nbsp;
+                  <a
+                    href='https://www.themoviedb.org/login'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-emerald-500 underline cursor-pointer'
+                  >
+                    TMDB
+                  </a>
+                </span>
+              </div>
 
               <TextInput name='username' label='Username' />
               <TextInput name='password' type='password' label='Password' />

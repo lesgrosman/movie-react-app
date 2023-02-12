@@ -55,7 +55,7 @@ const DetailHero = ({
           <span>{runtime} min</span>
         </div>
         <div className='flex items-center gap-2 mb-4'>
-          <CircularProgress value={vote || 0} innerClassName='w-20 h-20' />
+          <CircularProgress value={vote || 0} size={60} />
           <h3 className='mb-0'>User Score</h3>
         </div>
         <div className='mb-4'>

@@ -3,7 +3,7 @@ import Dropdown from './Dropdown'
 import Link from 'next/link'
 
 const Header = () => {
-  const { user } = useAuthContext()
+  const { session } = useAuthContext()
 
   return (
     <div className='text-white fixed top-0 left-0 w-full z-20 overflow-hidden bg-slate-800 shadow-xl p-5 h-20'>
@@ -16,7 +16,7 @@ const Header = () => {
             <h2>Top rated movies</h2>
           </Link>
         </div>
-        {user ? (
+        {session ? (
           <Dropdown />
         ) : (
           <Link href='/login'>

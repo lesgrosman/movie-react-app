@@ -1,33 +1,29 @@
 import { AccountDetail } from '../types'
+import { Movies, QueryType, TVSeries } from '@utils/types'
 import { QueryKeysProfile } from '../constants'
-import { QueryType } from '@utils/types'
-import { getAccountDetail } from '../queries'
+import { getAccountDetail, getRatedItems } from '../queries'
 import { useAuthContext } from 'context/useAuthContext'
 import { useQuery } from '@tanstack/react-query'
-import Image from '@components/Image'
+import View from './View'
 
 const Hero = () => {
-  const { user } = useAuthContext()
+  const { session, accountId } = useAuthContext()
+
   const { data }: QueryType<AccountDetail> = useQuery([QueryKeysProfile.ACCOUNT_DETAILS], () =>
-    getAccountDetail(user)
+    getAccountDetail(session)
   )
 
-  if (!data) return null
-
-  return (
-    <div className='flex gap-8 pt-6 mb-4 h-[300px]'>
-      <div className='absolute w-full top-0 left-0 -z-10 bg-gradient-to-r from-teal-300 to-teal-900 border h-[300px]' />
-      <div className='flex-shrink-0'>
-        <Image
-          src={data.avatar.tmdb.avatar_path}
-          alt='avatar'
-          width={150}
-          height={150}
-          className='rounded-full'
-        />
-      </div>
-    </div>
+  const { data: ratedMovies }: QueryType<Movies> = useQuery([QueryKeysProfile.RATED_MOVIES], () =>
+    getRatedItems(session, accountId, 'movies')
   )
+
+  const { data: ratedTV }: QueryType<TVSeries> = useQuery([QueryKeysProfile.RATED_TV_SERIES], () =>
+    getRatedItems(session, accountId, 'tv')
+  )
+
+  if (!data || !ratedMovies || !ratedTV) return null
+
+  return <View account={data} movies={ratedMovies} tv={ratedTV} />
 }
 
 export default Hero
