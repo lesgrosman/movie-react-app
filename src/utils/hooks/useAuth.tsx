@@ -1,5 +1,5 @@
 import { BASE_URL } from 'utils/constants'
-import { LoginForm } from 'pages/Login/utils'
+import { LoginForm } from '../../pages/LoginPage/utils'
 import { useAuthContext } from 'context/useAuthContext'
 import { useState } from 'react'
 import axios, { AxiosError, AxiosResponse } from 'axios'
@@ -32,7 +32,7 @@ type UseAuth = {
 }
 
 export const useAuth = (): UseAuth => {
-  const { setUser } = useAuthContext()
+  const { setSession, setAccountId } = useAuthContext()
   const [isLoading, setIsLoading] = useState(false)
 
   const login = async ({ username, password }: LoginForm) => {
@@ -77,8 +77,20 @@ export const useAuth = (): UseAuth => {
         throw new Error('Create session ID error')
       }
 
-      window.localStorage.setItem('session_id', createSessionId.data.session_id)
-      setUser(createSessionId.data.session_id)
+      const accountResponse = await axios.get<{ id: number }>(
+        `${BASE_URL}/account?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${createSessionId.data.session_id}`
+      )
+
+      if (!accountResponse.data || !accountResponse.data.id) {
+        throw new Error('GEt account id error')
+      }
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('session_id', createSessionId.data.session_id)
+        window.localStorage.setItem('account_id', `${accountResponse.data.id}`)
+      }
+      setSession(createSessionId.data.session_id)
+      setAccountId(`${accountResponse.data.id}`)
       setIsLoading(false)
     } catch (error) {
       const err = error as AxiosError<{ status_code: number; status_message: string }>
@@ -103,7 +115,8 @@ export const useAuth = (): UseAuth => {
         throw new Error('Something went wrong')
       }
       window.localStorage.removeItem('session_id')
-      setUser('')
+      setSession('')
+      setAccountId('')
     } catch (error) {
       const err = error as AxiosError<{ status_code: number; status_message: string }>
       throw new Error(err.response?.data?.status_message)

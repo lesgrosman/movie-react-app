@@ -166,6 +166,14 @@ export type TVSeriesItemResponse = Omit<
   origin_country: string[]
 }
 
+export type RatedMovieItemResponse = MovieItemResponse & {
+  rating: number
+}
+
+export type RatedTVSeriesItemResponse = TVSeriesItemResponse & {
+  rating: number
+}
+
 export type Movies = {
   page: number
   results: MovieItemResponse[]

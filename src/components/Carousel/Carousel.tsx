@@ -28,7 +28,11 @@ const Carousel = ({ list }: Props) => {
                   className='rounded-xl hover:scale-105 transition'
                 />
               </Link>
-              <CircularProgress value={rankAverage} innerClassName='absolute left-3 -bottom-5' />
+              <CircularProgress
+                value={rankAverage}
+                innerClassName='absolute left-3 -bottom-5'
+                size={44}
+              />
             </div>
             <Link href={`/${itemType}/${id}`}>
               <h4 className='ml-2 mb-0 hover:text-cyan-600'>{title}</h4>

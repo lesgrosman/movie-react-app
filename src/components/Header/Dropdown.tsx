@@ -2,9 +2,13 @@ import { ArrowLeftOnRectangleIcon, UserCircleIcon, UserIcon } from '@heroicons/r
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useAuth } from '@utils/hooks/useAuth'
+import { useRouter } from 'next/router'
 
 const Dropdown = () => {
   const { logout } = useAuth()
+  const router = useRouter()
+
+  const redirectToProfile = () => router.push('/profile')
 
   return (
     <div className=''>
@@ -28,6 +32,7 @@ const Dropdown = () => {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={redirectToProfile}
                     className={`${
                       active ? 'bg-emerald-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
