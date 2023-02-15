@@ -40,10 +40,12 @@ export enum QueryKeys {
   MOVIE_SIMILAR = 'movie-similar',
   MOVIE_VIDEOS = 'movie-videos',
   MOVIE_CREDITS = 'movie-credits',
+  MOVIE_ACCOUNT_STATE = 'movie-account-state',
   TV_DETAIL = 'tv-detail',
   TV_SIMILAR = 'tv-similar',
   TV_VIDEOS = 'tv-videos',
   TV_CREDITS = 'tv-credits',
+  TV_ACCOUNT_STATE = 'tv-account-state',
 }
 
 export const popularSection: MovieSectionWithTabs = {

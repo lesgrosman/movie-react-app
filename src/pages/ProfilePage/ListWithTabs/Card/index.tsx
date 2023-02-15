@@ -1,3 +1,4 @@
+import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -10,11 +11,11 @@ interface Props {
   release: string
   description: string
   rating: number
-  type: 'movies' | 'tv'
+  type: 'movie' | 'tv'
+  refetchList: () => void
 }
 
-const Card = ({ id, imageUrl, title, release, description, rating, type }: Props) => {
-  const itemType = type === 'tv' ? 'tv' : 'movie'
+const Card = ({ id, imageUrl, title, release, description, rating, type, refetchList }: Props) => {
   return (
     <div className='w-full rounded-xl border-[1px] shadow-md flex'>
       <div>
@@ -24,7 +25,7 @@ const Card = ({ id, imageUrl, title, release, description, rating, type }: Props
         <div className='flex gap-2 items-center'>
           <CircularProgress value={rating} size={40} />
           <div className='flex flex-col'>
-            <Link href={`/${itemType}/${id}`}>
+            <Link href={`/${type}/${id}`}>
               <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{title}</h3>
             </Link>
             <span className='text-gray-400'>
@@ -32,8 +33,8 @@ const Card = ({ id, imageUrl, title, release, description, rating, type }: Props
             </span>
           </div>
         </div>
-        <span>{description}</span>
-        <div className='flex'>Some actions will be there</div>
+        <span className='line-clamp-2 text-slate-500'>{description}</span>
+        <ActionButtons type={type} id={id} refetchList={refetchList} />
       </div>
     </div>
   )
