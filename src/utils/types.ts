@@ -279,3 +279,10 @@ export type Keywords = {
   keywords?: SimpleItem[]
   results?: SimpleItem[]
 }
+
+export type AccountState = {
+  id: number
+  rated: { value: number } | boolean
+  watchlist: boolean
+  favorite: boolean
+}

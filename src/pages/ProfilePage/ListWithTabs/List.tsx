@@ -13,8 +13,10 @@ interface Props {
 const List = ({ type, group }: Props) => {
   const { session, accountId } = useAuthContext()
 
-  const { data }: QueryType<Movies | TVSeries> = useQuery(
-    [`${group}-${type}`],
+  const itemType = type === 'movies' ? 'movie' : 'tv'
+
+  const { data, refetch: refetchList }: QueryType<Movies | TVSeries> = useQuery(
+    [`${group}-${itemType}`],
     () => getListItems(session, accountId, group, type),
     {
       enabled: !!session,
@@ -34,7 +36,8 @@ const List = ({ type, group }: Props) => {
           rating={elem.vote_average}
           release={'release_date' in elem ? elem.release_date : elem.first_air_date}
           imageUrl={elem.poster_path || ''}
-          type={type}
+          type={itemType}
+          refetchList={refetchList}
         />
       ))}
     </div>

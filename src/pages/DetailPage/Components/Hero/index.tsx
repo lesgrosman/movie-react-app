@@ -1,6 +1,7 @@
 import { CrewMember, Genre, Nullable } from 'utils/types'
 import { getGenres } from 'pages/DetailPage/utils'
 import { useRouter } from 'next/router'
+import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 
@@ -54,10 +55,14 @@ const DetailHero = ({
           &nbsp; &#x2022; &nbsp;
           <span>{runtime} min</span>
         </div>
-        <div className='flex items-center gap-2 mb-4'>
-          <CircularProgress value={vote || 0} size={60} />
-          <h3 className='mb-0'>User Score</h3>
+        <div className='flex items-center gap-6 mb-4'>
+          <div className='flex items-center gap-2'>
+            <CircularProgress value={vote || 0} size={60} />
+            <h3 className='mb-0'>User Score</h3>
+          </div>
+          <ActionButtons type={isMovie ? 'movie' : 'tv'} />
         </div>
+
         <div className='mb-4'>
           <span className='italic'>{tagline}</span>
         </div>

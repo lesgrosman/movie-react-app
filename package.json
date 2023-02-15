@@ -8,6 +8,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@sentry/nextjs": "^7.36.0",
     "@tanstack/react-query": "^4.14.5",
+    "@tanstack/react-query-devtools": "^4.24.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -32,6 +33,7 @@
     "react-player": "^2.7.2",
     "react-router": "^5.2.0",
     "react-test-render": "^1.1.2",
+    "react-toastify": "^9.1.1",
     "recharts": "^2.4.1",
     "remark-gfm": "^3.0.1",
     "shortid": "^2.2.16",
@@ -68,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.17",
     "@types/react-router-dom": "^5.3.3",

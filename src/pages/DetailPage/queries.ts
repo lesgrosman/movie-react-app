@@ -32,3 +32,12 @@ export const fetchRecommendations = async <T>(id = '', type: 'movie' | 'tv'): Pr
   fetcher(
     `${BASE_URL}/${type}/${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
   )
+
+export const fetchAccountState = async <T>(
+  id = '',
+  type: 'movie' | 'tv',
+  sessionId: string
+): Promise<T> =>
+  fetcher(
+    `${BASE_URL}/${type}/${id}/account_states?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${sessionId}`
+  )
