@@ -32,7 +32,7 @@ const ActionButtons = ({ type, id, refetchList }: Props) => {
     onSuccess: data => {
       refetchList(),
         refetchAccount(),
-        showNofication(data?.favorite ? 'Removed from favorite' : 'Marked as favorite!', 'success')
+        showNofication(data?.favorite ? 'Marked as favorite!' : 'Removed from favorite', 'success')
     },
     onError: () => showNofication('Something went wrong', 'error'),
   })
