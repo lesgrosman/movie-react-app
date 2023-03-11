@@ -5,11 +5,11 @@
         "name": "typescript-plugin-css-modules"
       }
     ],
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
     "baseUrl": "src",
     "paths": {

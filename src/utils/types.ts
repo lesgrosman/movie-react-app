@@ -166,6 +166,14 @@ export type TVSeriesItemResponse = Omit<
   origin_country: string[]
 }
 
+export type RatedMovieItemResponse = MovieItemResponse & {
+  rating: number
+}
+
+export type RatedTVSeriesItemResponse = TVSeriesItemResponse & {
+  rating: number
+}
+
 export type Movies = {
   page: number
   results: MovieItemResponse[]
@@ -270,4 +278,11 @@ export type Keywords = {
   id: number
   keywords?: SimpleItem[]
   results?: SimpleItem[]
+}
+
+export type AccountState = {
+  id: number
+  rated: { value: number } | boolean
+  watchlist: boolean
+  favorite: boolean
 }

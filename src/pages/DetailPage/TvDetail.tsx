@@ -18,15 +18,15 @@ import {
 import { getCast } from './utils'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import Cast from '@components/Detail/Cast'
+import Cast from './Components/Cast'
 import Container from 'components/Container'
-import DetailHero from '@components/Detail/Hero'
+import DetailHero from './Components/Hero'
 import Error from 'components/UI/Error/Error'
 import Image from '@components/Image'
-import Info from '@components/Detail/Info'
+import Info from './Components/Info'
 import React from 'react'
-import Recommendations from '@components/Detail/Recommendations'
-import Reviews from '@components/Detail/Reviews'
+import Recommendations from './Components/Recommendations'
+import Reviews from './Components/Reviews'
 
 const TvDetail = () => {
   const router = useRouter()
@@ -93,10 +93,6 @@ const TvDetail = () => {
 
   return (
     <div className='relative text-white'>
-      <div
-        style={{ height: '500px' }}
-        className={`bg-gradient-to-r from-cyan-700 to-blue-900 absolute w-full top-0 border -z-10`}
-      />
       <Container>
         <DetailHero
           title={name}

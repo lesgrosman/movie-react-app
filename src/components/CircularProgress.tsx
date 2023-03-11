@@ -3,11 +3,11 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 
 interface Props {
   value: number
+  size: number
   innerClassName?: string
-  size?: string
 }
 
-const CircularProgress = ({ value, innerClassName = '', size = 'w-11 h-11' }: Props) => {
+const CircularProgress = ({ value, innerClassName = '', size }: Props) => {
   const percentage = Math.ceil(value * 10)
   const [pathColor, trailColor] =
     value >= 7
@@ -17,7 +17,7 @@ const CircularProgress = ({ value, innerClassName = '', size = 'w-11 h-11' }: Pr
       : ['#d3d530', '#423d0f']
 
   return (
-    <div className={`${innerClassName} ${size}`}>
+    <div className={`${innerClassName}`} style={{ width: size }}>
       <CircularProgressbar
         background
         backgroundPadding={4}

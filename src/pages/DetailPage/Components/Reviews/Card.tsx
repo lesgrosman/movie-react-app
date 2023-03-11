@@ -29,7 +29,7 @@ const Card = ({ review }: Props) => {
           Written on&nbsp;
           <LocalizedDate date={review.created_at} isRaw />
         </span>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} className='mt-4'>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} className='mt-4 text-slate-500'>
           {review.content}
         </ReactMarkdown>
       </div>
