@@ -12,9 +12,6 @@ const Header = () => {
           <Link href='/'>
             <h2>Home page</h2>
           </Link>
-          <Link href='/top-rated-movies'>
-            <h2>Top rated movies</h2>
-          </Link>
         </div>
         {session ? (
           <Dropdown />
