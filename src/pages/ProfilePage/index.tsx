@@ -1,9 +1,9 @@
 import { useAuthContext } from 'context/useAuthContext'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Container from '@components/Container'
 import GroupTabs from './GroupTabs'
 import ProfileHero from './Hero'
+import ProfileLayout from '@components/Layout/ProfileLayout'
 import Statistics from './Statistics'
 
 const ProfilePage = () => {
@@ -17,11 +17,10 @@ const ProfilePage = () => {
   }, [session])
 
   return (
-    <Container>
-      <ProfileHero />
+    <ProfileLayout hero={<ProfileHero />}>
       <Statistics />
       <GroupTabs />
-    </Container>
+    </ProfileLayout>
   )
 }
 
