@@ -38,8 +38,7 @@ const DetailHero = ({
   const producers = crew?.filter(person => person.job === 'Producer').slice(0, 3)
 
   return (
-    <div className='flex gap-8 pt-6 mb-4 h-[500px]'>
-      <div className='absolute w-full top-0 left-0 -z-10 bg-gradient-to-r from-cyan-700 to-blue-900 border h-[500px]' />
+    <div className='flex gap-8 px-28 py-6 mb-4 bg-gradient-to-r from-cyan-700 to-blue-900 text-white'>
       <div className='flex-shrink-0'>
         <Image src={posterPath || ''} alt='' width={300} height={450} className='rounded-xl' />
       </div>
