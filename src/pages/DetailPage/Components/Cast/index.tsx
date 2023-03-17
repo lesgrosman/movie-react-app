@@ -9,7 +9,7 @@ const Cast = ({ cast }: Props) => {
   return (
     <div className='flex flex-col'>
       <h2>Top billed Cast</h2>
-      <CastCarousel list={cast} />
+      {cast.length ? <CastCarousel list={cast} /> : <span>-</span>}
     </div>
   )
 }
