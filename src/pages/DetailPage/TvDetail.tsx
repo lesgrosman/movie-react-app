@@ -85,6 +85,7 @@ const TvDetail = () => {
     status,
     networks,
     number_of_seasons,
+    backdrop_path,
   } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
@@ -104,6 +105,7 @@ const TvDetail = () => {
           overview={overview}
           tagline={tagline}
           crew={crew}
+          bgImage={backdrop_path}
         />
       }
     >
