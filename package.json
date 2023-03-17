@@ -20,6 +20,7 @@
     "dotenv": "^16.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
+    "fast-average-color": "^9.3.0",
     "font-awesome": "^4.7.0",
     "next": "^13.0.4",
     "postcss": "^8.4.19",

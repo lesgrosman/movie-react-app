@@ -86,6 +86,7 @@ const MovieDetail = () => {
     status,
     budget,
     revenue,
+    backdrop_path,
   } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
@@ -107,6 +108,7 @@ const MovieDetail = () => {
           overview={overview}
           tagline={tagline}
           crew={crew}
+          bgImage={backdrop_path}
         />
       }
     >
