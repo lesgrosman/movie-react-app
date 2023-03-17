@@ -1,5 +1,7 @@
+import { BASE_BACKDROP } from '@utils/constants'
 import { CrewMember, Genre, Nullable } from 'utils/types'
 import { getGenres } from 'pages/DetailPage/utils'
+import { useAverageColor } from '@utils/hooks/useAverageColor'
 import { useRouter } from 'next/router'
 import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
@@ -15,6 +17,7 @@ interface Props {
   overview?: Nullable<string>
   tagline?: Nullable<string>
   crew?: CrewMember[]
+  bgImage?: Nullable<string>
 }
 
 const DetailHero = ({
@@ -27,10 +30,12 @@ const DetailHero = ({
   overview,
   tagline,
   crew,
+  bgImage,
 }: Props) => {
   const router = useRouter()
-  const isMovie = router.pathname.includes('/movie/')
+  const { averageColor } = useAverageColor(posterPath)
 
+  const isMovie = router.pathname.includes('/movie/')
   const director = crew?.filter(person =>
     isMovie ? person.job === 'Director' : person.known_for_department === 'Directing'
   )[0]
@@ -38,8 +43,29 @@ const DetailHero = ({
   const producers = crew?.filter(person => person.job === 'Producer').slice(0, 3)
 
   return (
-    <div className='flex gap-8 pt-6 mb-4 h-[500px]'>
-      <div className='absolute w-full top-0 left-0 -z-10 bg-gradient-to-r from-cyan-700 to-blue-900 border h-[500px]' />
+    <div
+      className={`${
+        bgImage ? 'relative' : 'bg-gradient-to-r from-cyan-700 to-blue-900'
+      } flex gap-8 px-28 py-6 mb-4 text-white`}
+    >
+      {bgImage && averageColor && (
+        <>
+          <Image
+            src={`${BASE_BACKDROP}${bgImage}`}
+            alt=''
+            fill
+            className='object-cover absolute -z-20'
+            priority
+            loading='eager'
+          />
+          <div
+            style={{
+              background: `${averageColor}`,
+            }}
+            className={`absolute left-0 top-0 w-full h-full opacity-80 -z-10`}
+          />
+        </>
+      )}
       <div className='flex-shrink-0'>
         <Image src={posterPath || ''} alt='' width={300} height={450} className='rounded-xl' />
       </div>

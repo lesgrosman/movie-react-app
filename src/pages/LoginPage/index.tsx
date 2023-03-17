@@ -35,7 +35,7 @@ const Login = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit}>
           <div className='flex w-full h-full'>
-            <div className='flex flex-col justify-center h-screen max-w-2xl w-full mx-auto'>
+            <div className='flex flex-col gap-4 justify-center h-screen max-w-2xl w-full mx-auto'>
               <h1 className='text-center text-emerald-500 mb-2'>Log in</h1>
               <div className='mb-4 flex flex-col'>
                 <span className='text-gray-400 text-center'>

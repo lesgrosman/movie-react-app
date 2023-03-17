@@ -24,8 +24,7 @@ const View = ({ account, movies, tv }: Props) => {
   }, [tv])
 
   return (
-    <div className='flex gap-8 pt-6 mb-4 h-[220px]'>
-      <div className='absolute w-full top-0 left-0 -z-10 bg-gradient-to-r from-teal-900 to-teal-300 border h-[300px]' />
+    <div className='flex gap-8 px-28 pt-6 mb-4 h-[220px] bg-gradient-to-r from-teal-900 to-teal-300'>
       <div className='flex-shrink-0'>
         <Image
           src={account.avatar.tmdb.avatar_path}

@@ -14,8 +14,6 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'image.tmdb.org',
-        port: '',
-        pathname: '/t/p/w500/**',
       },
     ],
   },

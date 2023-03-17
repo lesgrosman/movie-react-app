@@ -1,5 +1,6 @@
 import { useAuthContext } from 'context/useAuthContext'
 import Dropdown from './Dropdown'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const Header = () => {
@@ -10,10 +11,7 @@ const Header = () => {
       <div className='flex justify-between max-w-7xl m-auto'>
         <div className='flex justify-start gap-4'>
           <Link href='/'>
-            <h2>Home page</h2>
-          </Link>
-          <Link href='/top-rated-movies'>
-            <h2>Top rated movies</h2>
+            <Image src='/assets/logo.svg' alt='' width={150} height={40} />
           </Link>
         </div>
         {session ? (

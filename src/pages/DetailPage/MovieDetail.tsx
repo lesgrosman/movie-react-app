@@ -19,8 +19,8 @@ import { getCast } from './utils'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import Cast from './Components/Cast'
-import Container from 'components/Container'
 import DetailHero from './Components/Hero'
+import DetailLayout from '@components/Layout/DetailLayout'
 import Error from 'components/UI/Error/Error'
 import Info from './Components/Info'
 import LocalizedCurrency from '@utils/components/LocalizedCurrency'
@@ -86,6 +86,7 @@ const MovieDetail = () => {
     status,
     budget,
     revenue,
+    backdrop_path,
   } = allDataResponse[0].data || {}
 
   const { crew } = allDataResponse[2].data || {}
@@ -95,8 +96,8 @@ const MovieDetail = () => {
     ?.key
 
   return (
-    <div className='relative text-white'>
-      <Container>
+    <DetailLayout
+      hero={
         <DetailHero
           title={title}
           genres={genres}
@@ -107,27 +108,29 @@ const MovieDetail = () => {
           overview={overview}
           tagline={tagline}
           crew={crew}
+          bgImage={backdrop_path}
         />
-        <div className='grid grid-cols-12 text-black'>
-          <div className='col-span-10 flex flex-col gap-4'>
-            <Cast cast={cast} />
-            <Trailer trailerUrl={trailerUrl} />
-            <Recommendations recommendations={recommendations?.results} />
-            <Reviews data={reviews} />
-          </div>
-          <Info originalLanguage={original_language} status={status} keyWords={keywords?.keywords}>
-            <div>
-              <h4>Budget</h4>
-              <LocalizedCurrency placeholder='-' amount={budget} />
-            </div>
-            <div>
-              <h4>Revenue</h4>
-              <LocalizedCurrency placeholder='-' amount={revenue} />
-            </div>
-          </Info>
+      }
+    >
+      <div className='grid grid-cols-12 text-black'>
+        <div className='col-span-10 flex flex-col gap-4'>
+          <Cast cast={cast} />
+          <Trailer trailerUrl={trailerUrl} />
+          <Recommendations recommendations={recommendations?.results} />
+          <Reviews data={reviews} />
         </div>
-      </Container>
-    </div>
+        <Info originalLanguage={original_language} status={status} keyWords={keywords?.keywords}>
+          <div>
+            <h4>Budget</h4>
+            <LocalizedCurrency placeholder='-' amount={budget} />
+          </div>
+          <div>
+            <h4>Revenue</h4>
+            <LocalizedCurrency placeholder='-' amount={revenue} />
+          </div>
+        </Info>
+      </div>
+    </DetailLayout>
   )
 }
 
