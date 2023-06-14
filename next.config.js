@@ -20,7 +20,7 @@ module.exports = {
   async header() {
     return [
       {
-        source: '/',
+        source: '/(.*)',
         headers: [
           {
             key: 'X-Frame-Options',
