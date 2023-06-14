@@ -17,6 +17,19 @@ module.exports = {
       },
     ],
   },
+  async header() {
+    return [
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self'",
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = withSentryConfig(module.exports, { silent: true }, { hideSourcemaps: true })
