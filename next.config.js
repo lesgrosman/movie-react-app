@@ -4,6 +4,17 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 const { withSentryConfig } = require('@sentry/nextjs')
 
+const securityHeaders = [
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: "frame-ancestors 'none'",
+  },
+]
+
 module.exports = {
   i18n: {
     locales: ['cs', 'en'],
@@ -21,15 +32,9 @@ module.exports = {
     return [
       {
         source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-        ],
+        headers: securityHeaders,
       },
     ]
   },
 }
-
 module.exports = withSentryConfig(module.exports, { silent: true }, { hideSourcemaps: true })
