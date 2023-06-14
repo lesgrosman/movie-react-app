@@ -20,11 +20,15 @@ module.exports = {
   async header() {
     return [
       {
-        source: '/',
+        source: '/(.*)',
         headers: [
           {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self'",
+            value: "frame-ancestors 'none'",
           },
         ],
       },
