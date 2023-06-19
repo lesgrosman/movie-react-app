@@ -56,16 +56,16 @@ const TvDetail = () => {
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', id], () =>
-    fetchReviews('tv', id as string)
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', tvId], () =>
+    fetchReviews('tv', tvId)
   )
 
   const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
-    fetchKeywords('tv', id as string)
+    fetchKeywords('tv', tvId)
   )
 
   const { data: recommendations }: QueryType<TVSeries> = useQuery(['recommendations-tv', id], () =>
-    fetchRecommendations('tv', id as string)
+    fetchRecommendations('tv', tvId)
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>

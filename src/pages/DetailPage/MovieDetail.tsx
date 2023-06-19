@@ -57,16 +57,16 @@ const MovieDetail = () => {
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', id], () =>
-    fetchReviews('movie', id as string)
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', movieId], () =>
+    fetchReviews('movie', movieId)
   )
 
   const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-movie', id], () =>
-    fetchKeywords('movie', id as string)
+    fetchKeywords('movie', movieId)
   )
 
   const { data: recommendations }: QueryType<Movies> = useQuery(['recommendations-movie', id], () =>
-    fetchRecommendations('movie', id as string)
+    fetchRecommendations('movie', movieId)
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
