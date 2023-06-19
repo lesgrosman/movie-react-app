@@ -34,23 +34,25 @@ const MovieDetail = () => {
 
   const { id } = router.query
 
+  const movieId = id as string
+
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<MovieDetailResponse>('movie', id as string),
+        queryFn: () => fetchDetail<MovieDetailResponse>('movie', movieId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<Movies>('movie', id as string),
+        queryFn: () => fetchSimilar<Movies>('movie', movieId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits('movie', id as string),
+        queryFn: () => fetchCredits('movie', movieId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos('movie', id as string),
+        queryFn: () => fetchVideos('movie', movieId),
       },
     ],
   })

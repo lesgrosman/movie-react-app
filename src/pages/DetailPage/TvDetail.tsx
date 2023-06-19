@@ -33,23 +33,25 @@ const TvDetail = () => {
 
   const { id } = router.query
 
+  const tvId = id as string
+
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<TVSeriesDetailResponse>('tv', id as string),
+        queryFn: () => fetchDetail<TVSeriesDetailResponse>('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<TVSeries>('tv', id as string),
+        queryFn: () => fetchSimilar<TVSeries>('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits('tv', id as string),
+        queryFn: () => fetchCredits('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos('tv', id as string),
+        queryFn: () => fetchVideos('tv', tvId),
       },
     ],
   })
