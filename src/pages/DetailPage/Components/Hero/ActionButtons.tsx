@@ -18,7 +18,7 @@ const ActionButtons = ({ type }: Props) => {
 
   const { data, refetch }: QueryType<AccountState> = useQuery(
     [`${type}-account-state`, id],
-    () => fetchAccountState(id as string, type, session),
+    () => fetchAccountState(type, session, id as string),
     { enabled: !!session }
   )
 
