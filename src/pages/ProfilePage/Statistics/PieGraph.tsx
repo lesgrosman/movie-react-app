@@ -1,6 +1,5 @@
 import { COLORS, RADIAN } from '../constants'
-import { Cell, Legend } from 'recharts'
-import { Pie, PieChart, Tooltip } from 'recharts'
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts'
 import { PieChartProps } from '../types'
 import { RatedMovieItemResponse, RatedTVSeriesItemResponse, SimpleItem } from '@utils/types'
 import { useMemo } from 'react'
