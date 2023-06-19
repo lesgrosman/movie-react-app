@@ -30,9 +30,9 @@ const ActionButtons = ({ type, id, refetchList }: Props) => {
         favorite: !data?.favorite,
       }),
     onSuccess: () => {
-      refetchList(),
-        refetchAccount(),
-        showNofication(data?.favorite ? 'Removed from favorite' : 'Mark as favorite', 'success')
+      refetchList()
+      refetchAccount()
+      showNofication(data?.favorite ? 'Removed from favorite' : 'Mark as favorite', 'success')
     },
     onError: () => showNofication('Something went wrong', 'error'),
   })
@@ -46,9 +46,9 @@ const ActionButtons = ({ type, id, refetchList }: Props) => {
         watchlist: !data?.watchlist,
       }),
     onSuccess: () => {
-      refetchList(),
-        refetchAccount(),
-        showNofication(data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist', 'success')
+      refetchList()
+      refetchAccount()
+      showNofication(data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist', 'success')
     },
     onError: () => showNofication('Something went wrong', 'error'),
   })
