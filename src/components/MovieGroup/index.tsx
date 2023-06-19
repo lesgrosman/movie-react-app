@@ -3,7 +3,7 @@ import { MovieItemResponse, Nullable, TVSeriesItemResponse } from 'utils/types'
 import { transformToPreviewItems } from 'utils/helper'
 import { useMemo } from 'react'
 import Carousel from 'components/Carousel/Carousel'
-import Error from '../UI/Error/Error'
+import ErrorMessage from '../UI/Error/ErrorMessage'
 import shortid from 'shortid'
 
 interface Props {
@@ -27,7 +27,7 @@ const MovieGroup = ({ data, loading, error }: Props) => {
     )
   }
 
-  if (error || !data) return <Error error={error?.response?.status} />
+  if (error || !data) return <ErrorMessage error={error?.response?.status} />
 
   if (data?.length < 1) {
     return <h1 className='text-center'>It seems like there are no movies you are looking for...</h1>

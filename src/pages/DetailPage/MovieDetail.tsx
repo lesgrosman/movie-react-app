@@ -21,7 +21,7 @@ import { useRouter } from 'next/router'
 import Cast from './Components/Cast'
 import DetailHero from './Components/Hero'
 import DetailLayout from '@components/Layout/DetailLayout'
-import Error from 'components/UI/Error/Error'
+import ErrorMessage from '@components/UI/Error/ErrorMessage'
 import Info from './Components/Info'
 import LocalizedCurrency from '@utils/components/LocalizedCurrency'
 import React from 'react'
@@ -70,7 +70,7 @@ const MovieDetail = () => {
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
-    return <Error error={404} />
+    return <ErrorMessage error={404} />
   }
 
   const {
