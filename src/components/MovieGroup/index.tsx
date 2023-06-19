@@ -13,6 +13,10 @@ interface Props {
 }
 
 const MovieGroup = ({ data, loading, error }: Props) => {
+  const transformedItems = useMemo(() => {
+    return transformToPreviewItems(data)
+  }, [data])
+
   if (loading && !data) {
     return (
       <div className='flex gap-4 animate-pulse mb-4'>
@@ -26,10 +30,6 @@ const MovieGroup = ({ data, loading, error }: Props) => {
       </div>
     )
   }
-
-  const transformedItems = useMemo(() => {
-    return transformToPreviewItems(data)
-  }, [data])
 
   if (error || !data) return <ErrorMessage error={error?.response?.status} />
 
