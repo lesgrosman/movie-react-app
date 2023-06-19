@@ -12,7 +12,7 @@ describe('Fetch movie detail', () => {
   it('should return movie detail', async () => {
     mockedAxios.get.mockResolvedValue({ data: mockDetailMovieResponse })
     expect(mockedAxios.get).not.toHaveBeenCalled()
-    const result = await fetchDetail<MovieDetailResponse>('255567', 'movie')
+    const result = await fetchDetail<MovieDetailResponse>('movie', '255567')
     expect(mockedAxios.get).toHaveBeenCalled()
     expect(result).toEqual(mockDetailMovieResponse)
   })

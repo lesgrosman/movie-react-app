@@ -9,16 +9,16 @@ export const getStaticProps: GetStaticProps = async context => {
 
   await Promise.all([
     queryClient.prefetchQuery([`${QueryKeys.MOVIE_DETAIL}`, context.params?.id], () =>
-      fetchDetail<MovieDetailResponse>(context.params?.id as string, 'movie')
+      fetchDetail<MovieDetailResponse>('movie', context.params?.id as string)
     ),
     queryClient.prefetchQuery([`${QueryKeys.MOVIE_SIMILAR}`, context.params?.id], () =>
-      fetchSimilar<Movies>(context.params?.id as string, 'movie')
+      fetchSimilar<Movies>('movie', context.params?.id as string)
     ),
     queryClient.prefetchQuery([`${QueryKeys.MOVIE_CREDITS}`, context.params?.id], () =>
-      fetchCredits(context.params?.id as string, 'movie')
+      fetchCredits('movie', context.params?.id as string)
     ),
     queryClient.prefetchQuery([`${QueryKeys.MOVIE_VIDEOS}`, context.params?.id], () =>
-      fetchVideos(context.params?.id as string, 'movie')
+      fetchVideos('movie', context.params?.id as string)
     ),
   ])
 
