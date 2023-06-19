@@ -33,37 +33,39 @@ const TvDetail = () => {
 
   const { id } = router.query
 
+  const tvId = id as string
+
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<TVSeriesDetailResponse>(id as string, 'tv'),
+        queryFn: () => fetchDetail<TVSeriesDetailResponse>('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<TVSeries>(id as string, 'tv'),
+        queryFn: () => fetchSimilar<TVSeries>('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits(id as string, 'tv'),
+        queryFn: () => fetchCredits('tv', tvId),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos(id as string, 'tv'),
+        queryFn: () => fetchVideos('tv', tvId),
       },
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', id], () =>
-    fetchReviews(id as string, 'tv')
+  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', tvId], () =>
+    fetchReviews('tv', tvId)
   )
 
   const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
-    fetchKeywords(id as string, 'tv')
+    fetchKeywords('tv', tvId)
   )
 
   const { data: recommendations }: QueryType<TVSeries> = useQuery(['recommendations-tv', id], () =>
-    fetchRecommendations(id as string, 'tv')
+    fetchRecommendations('tv', tvId)
   )
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
