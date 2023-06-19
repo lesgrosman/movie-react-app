@@ -26,8 +26,8 @@ type CreateRequestTokenResponse = {
 }
 
 type UseAuth = {
-  login: (params: LoginForm) => void
-  logout: () => void
+  login: (params: LoginForm) => Promise<void>
+  logout: () => Promise<void>
   isLoading: boolean
 }
 
