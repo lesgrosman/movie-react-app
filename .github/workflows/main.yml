@@ -3,7 +3,7 @@ name: lint, ts, sonar
 on:
   pull_request:
     branches:
-      - development
+      - develop
 
 concurrency:
   group: ${{ github.ref }}
