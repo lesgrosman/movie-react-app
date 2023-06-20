@@ -16,6 +16,8 @@ const Trailer = ({ trailerUrl }: Props) => {
     }
   }, [])
 
+  console.log(origin)
+
   if (!trailerUrl) return null
 
   return (
