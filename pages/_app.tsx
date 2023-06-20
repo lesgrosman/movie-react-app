@@ -23,6 +23,7 @@ const messages: Messages = {
 }
 
 const App = ({ Component, pageProps }: AppProps) => {
+  console.log('test)
   const { locale } = useRouter()
   const [queryClient] = React.useState(
     () =>
