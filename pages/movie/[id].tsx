@@ -3,6 +3,8 @@ import { MovieDetailResponse, Movies } from '@utils/types'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { QueryKeys } from '@utils/constants'
 import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from '@pages/DetailPage/queries'
+import MovieDetail from '../../src/pages/DetailPage/MovieDetail'
+import NextHead from '@components/NextHead'
 
 export const getStaticProps: GetStaticProps = async context => {
   const queryClient = new QueryClient()
@@ -36,4 +38,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export { default } from '../../src/pages/DetailPage/MovieDetail'
+const MovieDetailPage = () => (
+  <>
+    <NextHead />
+    <MovieDetail />
+  </>
+)
+
+export default MovieDetailPage
