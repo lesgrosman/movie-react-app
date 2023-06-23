@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { AuthProvider } from '../src/context/useAuthContext'
+import GoogleAnalytics from '@components/GoogleAnalytics'
 import cs from '../locales/cs/translation.json'
 import en from '../locales/en/translation.json'
 
@@ -36,21 +37,24 @@ const App = ({ Component, pageProps }: AppProps) => {
   )
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ToastContainer />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Hydrate state={pageProps.dehydratedState}>
-        <IntlProvider
-          locale={locale || 'en'}
-          messages={messages[locale as keyof Messages]}
-          defaultLocale='en'
-        >
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
-        </IntlProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <>
+      <GoogleAnalytics />
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Hydrate state={pageProps.dehydratedState}>
+          <IntlProvider
+            locale={locale || 'en'}
+            messages={messages[locale as keyof Messages]}
+            defaultLocale='en'
+          >
+            <AuthProvider>
+              <Component {...pageProps} />
+            </AuthProvider>
+          </IntlProvider>
+        </Hydrate>
+      </QueryClientProvider>
+    </>
   )
 }
 
