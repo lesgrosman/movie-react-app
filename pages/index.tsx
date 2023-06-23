@@ -1,16 +1,7 @@
 import { NextApiResponse } from 'next'
 import Main from '@pages/MainPage'
-import NextHead from '@components/NextHead'
 
-const MainPage = () => {
-  return (
-    <>
-      <NextHead />
-      <Main />
-    </>
-  )
-}
-
+const MainPage = () => <Main />
 export default MainPage
 
 export async function getServerSideProps({ res }: { res: NextApiResponse }) {
