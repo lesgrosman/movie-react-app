@@ -1,8 +1,14 @@
 import { NextApiResponse } from 'next'
 import Main from '@pages/MainPage'
+import NextHead from '@components/NextHead'
 
 const MainPage = () => {
-  return <Main />
+  return (
+    <>
+      <NextHead />
+      <Main />
+    </>
+  )
 }
 
 export default MainPage
