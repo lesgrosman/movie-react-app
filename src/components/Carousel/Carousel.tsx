@@ -1,5 +1,6 @@
 import { MovieItem, Nullable } from 'utils/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { clickListItem } from '@utils/analytics'
 import CircularProgress from 'components/CircularProgress'
 import Image from 'components/Image'
 import Link from 'next/link'
@@ -19,7 +20,7 @@ const Carousel = ({ list }: Props) => {
         {list?.map(({ id, poster, itemType, title, rankAverage, date }) => (
           <SwiperSlide key={id} className='flex w-full flex-col p-2 select-none'>
             <div className='relative mb-5'>
-              <Link href={`/${itemType}/${id}`}>
+              <Link href={`/${itemType}/${id}`} onClick={() => clickListItem(itemType, title)}>
                 <Image
                   width={185}
                   height={278}
@@ -34,7 +35,7 @@ const Carousel = ({ list }: Props) => {
                 size={44}
               />
             </div>
-            <Link href={`/${itemType}/${id}`}>
+            <Link href={`/${itemType}/${id}`} onClick={() => clickListItem(itemType, title)}>
               <h4 className='ml-2 mb-0 hover:text-cyan-600'>{title}</h4>
             </Link>
             <h5 className='ml-2 text-slate-400'>

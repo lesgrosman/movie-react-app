@@ -1,3 +1,4 @@
+import { searchMovie } from '@utils/analytics'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -7,13 +8,14 @@ interface Props {
 
 const SearchInput = ({ innerClassName }: Props) => {
   const router = useRouter()
-  const [searchValue, setSearchValue] = useState('')
+  const [query, setQuery] = useState('')
 
   const handleSubmit = (e: React.SyntheticEvent) => {
-    if (searchValue) {
+    if (query) {
+      searchMovie(query)
       e.preventDefault()
-      router.push(`/search/${searchValue}`)
-      setSearchValue('')
+      router.push(`/search/${query}`)
+      setQuery('')
     }
   }
 
@@ -24,8 +26,8 @@ const SearchInput = ({ innerClassName }: Props) => {
           <input
             autoComplete='off'
             placeholder='Search movie'
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
+            value={query}
+            onChange={e => setQuery(e.target.value)}
             name='query'
             className='outline-none rounded-3xl px-3 py-2 w-full'
           />
