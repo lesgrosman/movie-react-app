@@ -15,7 +15,7 @@ const SearchInput = ({ innerClassName }: Props) => {
       searchMovie(query)
       e.preventDefault()
       router.push(`/search/${query}`)
-      setQuery(query)
+      setQuery('')
     }
   }
 
