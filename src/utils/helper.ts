@@ -24,6 +24,17 @@ export const sender = async <T>(url: string, dto: T) => {
   return data
 }
 
+export const remover = async (url: string) => {
+  const { data } = await axios.delete(url)
+
+  if (data.success === false) {
+    const { status_message: message } = data
+    throw new Error(message)
+  }
+
+  return data
+}
+
 export const transformToPreviewItems = (
   arr?: MovieItemResponse[] | TVSeriesItemResponse[]
 ): MovieItem[] => {

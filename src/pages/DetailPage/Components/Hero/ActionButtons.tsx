@@ -1,11 +1,12 @@
 import { AccountState, QueryType } from '@utils/types'
 import { BookmarkIcon, HeartIcon } from '@heroicons/react/24/solid'
-import { addToWatchList, markAsFavorite } from '@pages/DetailPage/mutations'
+import { addToWatchList, markAsFavorite, rate, removeRating } from '@pages/DetailPage/mutations'
 import { fetchAccountState } from '@pages/DetailPage/queries'
 import { showNofication } from '@utils/helper'
 import { useAuthContext } from 'context/useAuthContext'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
+import StarRating from './Rating'
 
 interface Props {
   type: 'movie' | 'tv'
@@ -15,8 +16,9 @@ const ActionButtons = ({ type }: Props) => {
   const router = useRouter()
   const { id } = router.query
   const { session, accountId } = useAuthContext()
+  const queryClient = useQueryClient()
 
-  const { data, refetch }: QueryType<AccountState> = useQuery(
+  const { data }: QueryType<AccountState> = useQuery(
     [`${type}-account-state`, id],
     () => fetchAccountState(type, session, id as string),
     { enabled: !!session }
@@ -31,7 +33,12 @@ const ActionButtons = ({ type }: Props) => {
         favorite: !data?.favorite,
       }),
     onSuccess: () => {
-      refetch()
+      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+        return {
+          ...oldData,
+          favorite: !data?.favorite,
+        }
+      })
       showNofication(data?.favorite ? 'Removed from favorite' : 'Marked as favorite!', 'success')
     },
     onError: () => showNofication('Something went wrong', 'error'),
@@ -46,8 +53,48 @@ const ActionButtons = ({ type }: Props) => {
         watchlist: !data?.watchlist,
       }),
     onSuccess: () => {
-      refetch()
+      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+        return {
+          ...oldData,
+          watchlist: !data?.watchlist,
+        }
+      })
       showNofication(data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist', 'success')
+    },
+    onError: () => showNofication('Something went wrong', 'error'),
+  })
+
+  const { mutate: rateMutation } = useMutation({
+    mutationKey: [`${type}-account-state`, id],
+    mutationFn: (value: number) => rate(session, type, id as string, value),
+    onSuccess: (data, variables) => {
+      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+        return {
+          ...oldData,
+          rated: {
+            value: variables,
+          },
+          watchlist: false,
+        }
+      })
+      showNofication(`You have rated the ${type}`, 'success')
+    },
+    onError: () => showNofication('Something went wrong', 'error'),
+  })
+
+  const { mutate: removeRatingMutation } = useMutation({
+    mutationKey: [`${type}-account-state`, id],
+    mutationFn: () => removeRating(session, type, id as string),
+    onSuccess: () => {
+      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+        return {
+          ...oldData,
+          rated: {
+            value: false,
+          },
+        }
+      })
+      showNofication(`You have removed ${type} rating`, 'success')
     },
     onError: () => showNofication('Something went wrong', 'error'),
   })
@@ -55,6 +102,12 @@ const ActionButtons = ({ type }: Props) => {
   const handleMarkAsFavorite = () => markAsFavoriteMutation()
 
   const handleAddToWatchList = () => addToWatchListMutation()
+
+  const handleRate = (value: number) => rateMutation(value)
+
+  const handleRemoveRating = () => removeRatingMutation()
+
+  const initialRating = typeof data?.rated === 'boolean' ? 0 : data?.rated.value
 
   return (
     <div className='flex gap-5'>
@@ -72,6 +125,7 @@ const ActionButtons = ({ type }: Props) => {
       >
         <BookmarkIcon className={`w-4 h-4 mx-auto ${data?.watchlist ? 'text-red-500' : ''}`} />
       </button>
+      <StarRating rating={initialRating ?? 0} rate={handleRate} removeRating={handleRemoveRating} />
     </div>
   )
 }
