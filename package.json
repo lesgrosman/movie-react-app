@@ -33,6 +33,7 @@
     "react-markdown": "^8.0.5",
     "react-player": "^2.7.2",
     "react-router": "^5.2.0",
+    "react-simple-star-rating": "^5.1.7",
     "react-test-render": "^1.1.2",
     "react-toastify": "^9.1.1",
     "recharts": "^2.4.1",

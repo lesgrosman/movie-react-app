@@ -5528,6 +5528,11 @@ react-shallow-testutils@2.0.x:
   resolved "https://registry.yarnpkg.com/react-shallow-testutils/-/react-shallow-testutils-2.0.0.tgz#9087b40b368b124674c7bfcf9fdd6ad983914a97"
   integrity sha512-kTkOENZkxgAOC+G1UEdy8VspNcwLx6H77CQMM28FUUUxV+RAXKK8z5qtiorOCnf+vT2TxF/0Qd+g7RMqpggIbA==
 
+react-simple-star-rating@^5.1.7:
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/react-simple-star-rating/-/react-simple-star-rating-5.1.7.tgz#5406ade8d0e117a654e979ebd702d89389876c29"
+  integrity sha512-NTFkW8W3uwvI82Fv7JW5i7gmDjEZKxJmj+Z9vn+BjYIXT6ILdnU9qnSUP2cWrWN/WAUlue81f9SgM4CQcenltQ==
+
 react-smooth@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-smooth/-/react-smooth-2.0.1.tgz#74c7309916d6ccca182c4b30c8992f179e6c5a05"

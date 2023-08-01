@@ -9,3 +9,7 @@ export type MarkAsFavoriteDto = {
   media_type: 'tv' | 'movie'
   favorite: boolean
 }
+
+export type RateDto = {
+  value: number
+}
