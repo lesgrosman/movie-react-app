@@ -1,7 +1,6 @@
 import { Popover, Transition } from '@headlessui/react'
 import { Rating } from 'react-simple-star-rating'
-import { StarIcon } from '@heroicons/react/24/solid'
-import { TrashIcon } from '@heroicons/react/24/solid'
+import { StarIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React, { Fragment } from 'react'
 
 interface Props {
