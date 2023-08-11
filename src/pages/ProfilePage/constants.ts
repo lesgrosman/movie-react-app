@@ -2,6 +2,8 @@ export enum QueryKeysProfile {
   ACCOUNT_DETAILS = 'account-details',
   RATED_MOVIES = 'rated-movies',
   RATED_TV_SERIES = 'rated-tv',
+  MOVIE_GENRES = 'movie-genres',
+  TV_GENRES = 'tv-genres',
 }
 
 export const RADIAN = Math.PI / 180

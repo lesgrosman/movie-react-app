@@ -1,15 +1,13 @@
-import { AxiosError } from 'axios'
-import { MovieItemResponse, Nullable, TVSeriesItemResponse } from 'utils/types'
+import { MovieItemResponse, TVSeriesItemResponse } from 'utils/types'
 import { transformToPreviewItems } from 'utils/helper'
 import { useMemo } from 'react'
 import Carousel from 'components/Carousel/Carousel'
-import ErrorMessage from '../UI/Error/ErrorMessage'
 import shortid from 'shortid'
 
 interface Props {
   data?: MovieItemResponse[] | TVSeriesItemResponse[]
   loading: boolean
-  error?: Nullable<AxiosError>
+  error?: unknown
 }
 
 const MovieGroup = ({ data, loading, error }: Props) => {
@@ -31,7 +29,7 @@ const MovieGroup = ({ data, loading, error }: Props) => {
     )
   }
 
-  if (error || !data) return <ErrorMessage error={error?.response?.status} />
+  if (error || !data) return <>Something went wrong. Please try again later</>
 
   if (data?.length < 1) {
     return <h1 className='text-center'>It seems like there are no movies you are looking for...</h1>

@@ -2,17 +2,6 @@ import { MovieItem, MovieItemResponse, TVSeriesItemResponse } from './types'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
-export const fetcher = async (url: string) => {
-  const { data } = await axios.get(url)
-
-  if (data.success === false) {
-    const { status_message: message } = data
-    throw new Error(message)
-  }
-
-  return data
-}
-
 export const sender = async <T>(url: string, dto: T) => {
   const { data } = await axios.post(url, dto)
 

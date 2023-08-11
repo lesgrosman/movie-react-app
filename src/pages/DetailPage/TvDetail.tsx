@@ -1,22 +1,9 @@
-import {
-  Keywords,
-  QueryType,
-  Reviews as ReviewsType,
-  TVSeries,
-  TVSeriesDetailResponse,
-} from 'utils/types'
+import { MovieOrTv, TVSeries, TVSeriesDetailResponse } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import {
-  fetchCredits,
-  fetchDetail,
-  fetchKeywords,
-  fetchRecommendations,
-  fetchReviews,
-  fetchSimilar,
-  fetchVideos,
-} from './queries'
 import { getCast } from './utils'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import { getCredits, getDetail, getSimilar, getVideos } from './helpers'
+import { getKeywordsData, getRecommendationsData, getReviewsData } from './queries'
+import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import Cast from './Components/Cast'
 import DetailHero from './Components/Hero'
@@ -35,38 +22,37 @@ const TvDetail = () => {
 
   const tvId = id as string
 
+  const fetchParams = {
+    type: 'tv' as MovieOrTv,
+    id: tvId,
+  }
+
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<TVSeriesDetailResponse>('tv', tvId),
+        queryFn: () => getDetail<TVSeriesDetailResponse>(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<TVSeries>('tv', tvId),
+        queryFn: () => getSimilar<TVSeries>(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits('tv', tvId),
+        queryFn: () => getCredits(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos('tv', tvId),
+        queryFn: () => getVideos(fetchParams),
       },
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-tv', tvId], () =>
-    fetchReviews('tv', tvId)
-  )
+  const { data: reviews } = getReviewsData(fetchParams)
 
-  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-tv', id], () =>
-    fetchKeywords('tv', tvId)
-  )
+  const { data: keywords } = getKeywordsData(fetchParams)
 
-  const { data: recommendations }: QueryType<TVSeries> = useQuery(['recommendations-tv', id], () =>
-    fetchRecommendations('tv', tvId)
-  )
+  const { data: recommendations } = getRecommendationsData<TVSeries>(fetchParams)
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 

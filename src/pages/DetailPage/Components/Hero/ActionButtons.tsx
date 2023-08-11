@@ -1,15 +1,15 @@
-import { AccountState, QueryType } from '@utils/types'
 import { BookmarkIcon, HeartIcon } from '@heroicons/react/24/solid'
+import { MovieOrTv } from '@utils/types'
 import { addToWatchList, markAsFavorite, rate, removeRating } from '@pages/DetailPage/mutations'
-import { fetchAccountState } from '@pages/DetailPage/queries'
+import { getAccountStateData } from '@pages/DetailPage/queries'
 import { showNofication } from '@utils/helper'
 import { useAuthContext } from 'context/useAuthContext'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import StarRating from './Rating'
 
 interface Props {
-  type: 'movie' | 'tv'
+  type: MovieOrTv
 }
 
 const ActionButtons = ({ type }: Props) => {
@@ -18,11 +18,7 @@ const ActionButtons = ({ type }: Props) => {
   const { session, accountId } = useAuthContext()
   const queryClient = useQueryClient()
 
-  const { data }: QueryType<AccountState> = useQuery(
-    [`${type}-account-state`, id],
-    () => fetchAccountState(type, session, id as string),
-    { enabled: !!session }
-  )
+  const { data } = getAccountStateData({ type, id: id as string, session })
 
   const { mutate: markAsFavoriteMutation, isLoading: markAsFavoriteLoading } = useMutation({
     mutationKey: [`${type}-account-state`, id],

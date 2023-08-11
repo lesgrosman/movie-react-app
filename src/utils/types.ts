@@ -1,6 +1,8 @@
 import { AxiosError } from 'axios'
 import { UseQueryResult } from '@tanstack/react-query'
 
+export type MovieOrTv = 'movie' | 'tv'
+
 export type Tab = {
   id: number
   title: string
