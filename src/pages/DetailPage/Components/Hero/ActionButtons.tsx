@@ -1,10 +1,15 @@
 import { BookmarkIcon, HeartIcon } from '@heroicons/react/24/solid'
 import { MovieOrTv } from '@utils/types'
-import { addToWatchList, markAsFavorite, rate, removeRating } from '@pages/DetailPage/mutations'
 import { getAccountStateData } from '@pages/DetailPage/queries'
 import { showNofication } from '@utils/helper'
+import {
+  useAddRating,
+  useAddToWatchlist,
+  useMarkAsFavorite,
+  useRemoveRating,
+} from '@pages/DetailPage/mutations'
 import { useAuthContext } from 'context/useAuthContext'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import StarRating from './Rating'
 
@@ -20,88 +25,119 @@ const ActionButtons = ({ type }: Props) => {
 
   const { data } = getAccountStateData({ type, id: id as string, session })
 
-  const { mutate: markAsFavoriteMutation, isLoading: markAsFavoriteLoading } = useMutation({
-    mutationKey: [`${type}-account-state`, id],
-    mutationFn: () =>
-      markAsFavorite(accountId, session, {
-        media_id: Number(id),
-        media_type: type,
-        favorite: !data?.favorite,
-      }),
-    onSuccess: () => {
-      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
-        return {
-          ...oldData,
+  const { mutate: markAsFavoriteMutation, isLoading: markAsFavoriteLoading } = useMarkAsFavorite({
+    media_id: Number(id),
+    media_type: type,
+    favorite: !data?.favorite,
+  })
+
+  const { mutate: addToWatchListMutation, isLoading: addToWatchListLoading } = useAddToWatchlist({
+    media_id: Number(id),
+    media_type: type,
+    watchlist: !data?.watchlist,
+  })
+
+  const { mutate: addRatingMutation } = useAddRating({
+    id: id as string,
+    type,
+  })
+
+  const { mutate: removeRatingMutation } = useRemoveRating({
+    id: id as string,
+    type,
+  })
+
+  const handleMarkAsFavorite = () =>
+    markAsFavoriteMutation(
+      {
+        session,
+        accountId,
+        body: {
+          media_id: Number(id),
+          media_type: type,
           favorite: !data?.favorite,
-        }
-      })
-      showNofication(data?.favorite ? 'Removed from favorite' : 'Marked as favorite!', 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
-  })
+        },
+      },
+      {
+        onSuccess: () => {
+          queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+            return {
+              ...oldData,
+              favorite: !data?.favorite,
+            }
+          })
+          showNofication(data?.favorite ? 'Removed from favorite' : 'Mark as favorite', 'success')
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
-  const { mutate: addToWatchListMutation, isLoading: addToWatchListLoading } = useMutation({
-    mutationKey: [`${type}-account-state`, id],
-    mutationFn: () =>
-      addToWatchList(accountId, session, {
-        media_id: Number(id),
-        media_type: type,
-        watchlist: !data?.watchlist,
-      }),
-    onSuccess: () => {
-      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
-        return {
-          ...oldData,
+  const handleAddToWatchList = () =>
+    addToWatchListMutation(
+      {
+        session,
+        accountId,
+        body: {
+          media_id: Number(id),
+          media_type: type,
           watchlist: !data?.watchlist,
-        }
-      })
-      showNofication(data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist', 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
-  })
+        },
+      },
+      {
+        onSuccess: () => {
+          queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+            return {
+              ...oldData,
+              watchlist: !data?.watchlist,
+            }
+          })
+          showNofication(
+            data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist',
+            'success'
+          )
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
-  const { mutate: rateMutation } = useMutation({
-    mutationKey: [`${type}-account-state`, id],
-    mutationFn: (value: number) => rate(session, type, id as string, value),
-    onSuccess: (data, variables) => {
-      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
-        return {
-          ...oldData,
-          rated: {
-            value: variables,
-          },
-          watchlist: false,
-        }
-      })
-      showNofication(`You have rated the ${type}`, 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
-  })
+  const handleRate = (value: number) =>
+    addRatingMutation(
+      { session, mediaId: id as string, mediaType: type, body: { value: value } },
+      {
+        onSuccess: (_, variables) => {
+          queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+            return {
+              ...oldData,
+              rated: {
+                value: variables.body.value,
+              },
+              watchlist: false,
+            }
+          })
+          showNofication(`You have rated the ${type}`, 'success')
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
-  const { mutate: removeRatingMutation } = useMutation({
-    mutationKey: [`${type}-account-state`, id],
-    mutationFn: () => removeRating(session, type, id as string),
-    onSuccess: () => {
-      queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
-        return {
-          ...oldData,
-          rated: {
-            value: false,
-          },
-        }
-      })
-      showNofication(`You have removed ${type} rating`, 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
-  })
-
-  const handleMarkAsFavorite = () => markAsFavoriteMutation()
-
-  const handleAddToWatchList = () => addToWatchListMutation()
-
-  const handleRate = (value: number) => rateMutation(value)
-
-  const handleRemoveRating = () => removeRatingMutation()
+  const handleRemoveRating = () =>
+    removeRatingMutation(
+      { id: id as string, session, type },
+      {
+        onSuccess: () => {
+          queryClient.setQueryData([`${type}-account-state`, id], (oldData: any) => {
+            return {
+              ...oldData,
+              rated: {
+                value: false,
+              },
+            }
+          })
+          showNofication(`You have removed ${type} rating`, 'success')
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
   const initialRating = typeof data?.rated === 'boolean' ? 0 : data?.rated.value
 

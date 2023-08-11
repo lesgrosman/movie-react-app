@@ -1,16 +1,9 @@
-interface Props {
-  url: string
-  options?: Record<string, string>
-  init?: RequestInit
-}
-
-export const fetcher = async <T>({ url, options, init }: Props): Promise<T> => {
-  const response = await fetch(url, {
+export const fetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
+  const response = await fetch(input, {
     ...init,
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json;charset=utf-8',
-      ...options,
     },
   })
 
