@@ -1,6 +1,7 @@
+import { ArrowUpCircleIcon } from '@heroicons/react/24/solid'
 import { MovieOrTv } from '@utils/types'
 import { getSearchData } from './queries'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Card from './Card'
 import Spinner from '@components/Spinner'
 
@@ -16,6 +17,23 @@ const List = ({ type, param, totalPages }: Props) => {
     param,
     totalPages,
   })
+
+  const [showUpButton, setShowUpButton] = useState(false)
+
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setShowUpButton(true)
+    } else {
+      setShowUpButton(false)
+    }
+  }
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
 
   useEffect(() => {
     if (hasNextPage) {
@@ -37,9 +55,16 @@ const List = ({ type, param, totalPages }: Props) => {
     }
   }, [hasNextPage])
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   if (!data || isLoading) return <>Loading</>
 
-  return (
+  return data.pages[0].results.length ? (
     <div className='flex flex-col gap-6'>
       {data.pages.map(page =>
         page.results.map(item => (
@@ -60,6 +85,15 @@ const List = ({ type, param, totalPages }: Props) => {
           <Spinner innerClassName='w-12 h-12' />
         </div>
       )}
+      {showUpButton && (
+        <button className='fixed bottom-3 right-3' onClick={handleScrollToTop}>
+          <ArrowUpCircleIcon className='w-14 h-14 text-emerald-400' />
+        </button>
+      )}
+    </div>
+  ) : (
+    <div className='w-full flex justify-center'>
+      <span className='text-center'>No results </span>
     </div>
   )
 }

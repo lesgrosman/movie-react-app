@@ -32,11 +32,17 @@ const Layout = ({ movieResults, tvResutls, param }: Props) => {
     },
   ]
 
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+    })
+  }
+
   return (
     <div className='grid grid-cols-12 gap-4'>
       <Tab.Group>
         <div className='col-span-3'>
-          <Tab.List className='w-full flex flex-col justify-start items-start gap-2 border-[1px] rounded-lg'>
+          <Tab.List className='sticky top-32 w-full flex flex-col justify-start items-start gap-2 border-[1px] rounded-lg'>
             <div className='bg-emerald-400 w-full h-16 flex items-center justify-center rounded-t-lg'>
               <h3 className='text-white mb-0'>Search Results</h3>
             </div>
@@ -47,6 +53,7 @@ const Layout = ({ movieResults, tvResutls, param }: Props) => {
                   className={({ selected }) =>
                     `w-full outline-none ${selected ? 'text-emerald-400' : `text-black`}`
                   }
+                  onClick={handleScrollToTop}
                 >
                   {({ selected }) => (
                     <div
