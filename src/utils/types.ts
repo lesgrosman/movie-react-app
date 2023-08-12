@@ -175,14 +175,14 @@ export type Movies = {
   page: number
   results: MovieItemResponse[]
   total_pages: number
-  totals_results: number
+  total_results: number
 }
 
 export type TVSeries = {
   page: number
   results: TVSeriesItemResponse[]
   total_pages: number
-  totals_results: number
+  total_results: number
 }
 
 export type MovieDetailResponse = {
