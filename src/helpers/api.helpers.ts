@@ -4,6 +4,7 @@ export const fetcher = async <T>(input: RequestInfo, init?: RequestInit): Promis
     headers: {
       accept: 'application/json',
       'Content-Type': 'application/json;charset=utf-8',
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
     },
   })
 

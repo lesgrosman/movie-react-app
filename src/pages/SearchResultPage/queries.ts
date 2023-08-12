@@ -1,12 +1,24 @@
-import { BASE_URL, QueryKeys } from 'utils/constants'
-import { Movies } from 'utils/types'
-import { fetcher } from 'helpers/api.helpers'
-import { useQuery } from '@tanstack/react-query'
+import { MovieOrTv } from '@utils/types'
+import { QueryKeys } from 'utils/constants'
+import { getSearchItems, getSearchResults } from './helpers'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-const getSearchMovies = async (param?: string) =>
-  fetcher<Movies>(
-    `${BASE_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&query=${param}&page=1&include_adult=true`
+interface Props {
+  param?: string
+  type: MovieOrTv
+  totalPages: number
+}
+
+export const getSearchResultsData = ({ param, type }: { param?: string; type: MovieOrTv }) =>
+  useQuery([`${QueryKeys.SEARCH_RESULTS}-${type}`, param as string], () =>
+    getSearchResults({ param, type })
   )
 
-export const getSearchMoviesData = (param = '') =>
-  useQuery([`${QueryKeys.SEARCH_MOVIES}`, param as string], () => getSearchMovies(param))
+export const getSearchData = ({ param, type, totalPages }: Props) =>
+  useInfiniteQuery(
+    [`${QueryKeys.SEARCH_DATA}-${type}`, param as string],
+    ({ pageParam = 1 }) => getSearchItems({ param, type, page: pageParam }),
+    {
+      getNextPageParam: (_, pages) => (pages.length < totalPages ? pages.length + 1 : undefined),
+    }
+  )
