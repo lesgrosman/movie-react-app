@@ -1,4 +1,4 @@
-import { getSearchMoviesData, getSearchTvData } from './queries'
+import { getSearchResultsData } from './queries'
 import { useRouter } from 'next/router'
 import Container from '@components/Container'
 import Layout from './Layout'
@@ -8,16 +8,23 @@ const SearchResultPage = () => {
 
   const { result } = router.query
 
-  const { data: moviesData, isLoading } = getSearchMoviesData(result as string)
+  const { data: movieResutls, isLoading: movieResultsIsLoading } = getSearchResultsData({
+    param: result as string,
+    type: 'movie',
+  })
 
-  const { data: tvData, isLoading: looadingTv } = getSearchTvData(result as string)
+  const { data: tvResults, isLoading: tvResultsIsLoading } = getSearchResultsData({
+    param: result as string,
+    type: 'tv',
+  })
 
-  if (isLoading || looadingTv || !tvData || !moviesData) return <>Loading...</>
+  if (movieResultsIsLoading || tvResultsIsLoading || !movieResutls || !tvResults)
+    return <>Loading...</>
 
   return (
     <Container>
       <div className='px-3 mt-32'>
-        <Layout moviesData={moviesData} tvData={tvData} />
+        <Layout movieResults={movieResutls} tvResutls={tvResults} param={result as string} />
       </div>
     </Container>
   )

@@ -1,9 +1,24 @@
+import { MovieOrTv } from '@utils/types'
 import { QueryKeys } from 'utils/constants'
-import { getSearchMovies, getSearchTv } from './helpers'
-import { useQuery } from '@tanstack/react-query'
+import { getSearchItems, getSearchResults } from './helpers'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
-export const getSearchMoviesData = (param = '') =>
-  useQuery([`${QueryKeys.SEARCH_MOVIES}`, param as string], () => getSearchMovies({ param }))
+interface Props {
+  param?: string
+  type: MovieOrTv
+  totalPages: number
+}
 
-export const getSearchTvData = (param = '') =>
-  useQuery([`${QueryKeys.SEARCH_TV}`, param as string], () => getSearchTv({ param }))
+export const getSearchResultsData = ({ param, type }: { param?: string; type: MovieOrTv }) =>
+  useQuery([`${QueryKeys.SEARCH_RESULTS}-${type}`, param as string], () =>
+    getSearchResults({ param, type })
+  )
+
+export const getSearchData = ({ param, type, totalPages }: Props) =>
+  useInfiniteQuery(
+    [`${QueryKeys.SEARCH_DATA}-${type}`, param as string],
+    ({ pageParam = 1 }) => getSearchItems({ param, type, page: pageParam }),
+    {
+      getNextPageParam: (_, pages) => (pages.length < totalPages ? pages.length + 1 : undefined),
+    }
+  )

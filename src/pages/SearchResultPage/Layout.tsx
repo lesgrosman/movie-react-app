@@ -1,31 +1,33 @@
-import { MovieItemResponse, MovieOrTv, Movies, TVSeries, TVSeriesItemResponse } from '@utils/types'
+import { MovieOrTv } from '@utils/types'
+import { Results } from './types'
 import { Tab } from '@headlessui/react'
 import List from './List'
 
-type Tab = {
+interface Tab {
   title: string
   itemsCount: number
-  data: MovieItemResponse[] | TVSeriesItemResponse[]
   type: MovieOrTv
+  totalPages: number
 }
 
 interface Props {
-  moviesData: Movies
-  tvData: TVSeries
+  movieResults: Results
+  tvResutls: Results
+  param: string
 }
 
-const Layout = ({ moviesData, tvData }: Props) => {
+const Layout = ({ movieResults, tvResutls, param }: Props) => {
   const tabs: Tab[] = [
     {
       title: 'Movies',
-      itemsCount: moviesData.total_results,
-      data: moviesData.results,
+      itemsCount: movieResults.total_results,
       type: 'movie',
+      totalPages: movieResults.total_pages,
     },
     {
       title: 'TV Series',
-      itemsCount: tvData.total_results,
-      data: tvData.results,
+      itemsCount: tvResutls.total_results,
+      totalPages: tvResutls.total_pages,
       type: 'tv',
     },
   ]
@@ -64,9 +66,9 @@ const Layout = ({ moviesData, tvData }: Props) => {
           </Tab.List>
         </div>
         <Tab.Panels className='col-span-9'>
-          {tabs.map(({ type, data }) => (
+          {tabs.map(({ type, totalPages }) => (
             <Tab.Panel key={type}>
-              <List type={type} data={data} />
+              <List type={type} param={param} totalPages={totalPages} />
             </Tab.Panel>
           ))}
         </Tab.Panels>
