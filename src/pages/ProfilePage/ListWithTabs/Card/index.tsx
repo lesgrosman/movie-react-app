@@ -1,3 +1,4 @@
+import { MovieOrTv } from '@utils/types'
 import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
@@ -11,7 +12,7 @@ interface Props {
   release: string
   description: string
   rating: number
-  type: 'movie' | 'tv'
+  type: MovieOrTv
   refetchList: () => void
 }
 

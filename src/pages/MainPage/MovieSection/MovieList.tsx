@@ -1,6 +1,4 @@
-import { Movies, QueryType, TVSeries } from 'utils/types'
-import { getMovieList } from '../queries'
-import { useQuery } from '@tanstack/react-query'
+import { getMovieListData } from '../queries'
 import MovieGroup from 'components/MovieGroup'
 
 interface Props {
@@ -9,9 +7,7 @@ interface Props {
 }
 
 const MovieList = ({ url, queryKey }: Props) => {
-  const { data, isLoading, error }: QueryType<Movies | TVSeries> = useQuery([queryKey], () =>
-    getMovieList(url)
-  )
+  const { data, isLoading, error } = getMovieListData({ url, key: queryKey })
 
   return (
     <div className='px-3 mt-10 text-center'>

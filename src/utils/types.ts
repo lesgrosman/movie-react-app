@@ -1,5 +1,4 @@
-import { AxiosError } from 'axios'
-import { UseQueryResult } from '@tanstack/react-query'
+export type MovieOrTv = 'movie' | 'tv'
 
 export type Tab = {
   id: number
@@ -12,8 +11,6 @@ export type MovieSectionWithTabs = {
   title: string
   tabs: Tab[]
 }
-
-export type QueryType<T> = UseQueryResult<T, AxiosError>
 
 export type Nullable<T> = T | null
 
@@ -285,4 +282,10 @@ export type AccountState = {
   rated: { value: number } | boolean
   watchlist: boolean
   favorite: boolean
+}
+
+// mutations
+export type MutationResponse = {
+  status_code: number
+  status_message: string
 }

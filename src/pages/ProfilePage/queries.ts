@@ -1,28 +1,53 @@
-import { BASE_URL } from '../../utils/constants'
-import { Movies, SimpleItem, TVSeries } from '@utils/types'
-import { fetcher } from '../../utils/helper'
+import { Group } from './types'
+import { QueryKeysProfile } from './constants'
+import { RatedMovieItemResponse, RatedTVSeriesItemResponse } from '@utils/types'
+import { getAccountDetail, getGenres, getGroupItems, getRatedItems } from './helpers'
+import { useQuery } from '@tanstack/react-query'
 
-export const getAccountDetail = async <Account>(sessionId: string): Promise<Account> =>
-  fetcher(`${BASE_URL}/account?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${sessionId}`)
+export const getAccountDetailData = ({ session }: { session: string }) =>
+  useQuery([QueryKeysProfile.ACCOUNT_DETAILS], () => getAccountDetail({ session }), {
+    enabled: !!session,
+  })
 
-export const getRatedItems = async <T>(
-  sessionId: string,
-  accountId: string,
-  type: 'movies' | 'tv'
-): Promise<T> =>
-  fetcher(
-    `${BASE_URL}/account/${accountId}/rated/${type}?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&session_id=${sessionId}&sort_by=created_at.desc`
+export const getMovieGenresData = () =>
+  useQuery([QueryKeysProfile.MOVIE_GENRES], () => getGenres({ type: 'movie' }))
+
+export const getTvGenresData = () =>
+  useQuery([QueryKeysProfile.TV_GENRES], () => getGenres({ type: 'tv' }))
+
+export const getRatedMoviesData = ({
+  session,
+  accountId,
+}: {
+  session: string
+  accountId: string
+}) =>
+  useQuery(
+    [QueryKeysProfile.RATED_MOVIES],
+    () =>
+      getRatedItems<{ results: RatedMovieItemResponse[] }>({ session, accountId, type: 'movies' }),
+    { enabled: !!session }
   )
 
-export const getListItems = async (
-  sessionId: string,
-  accountId: string,
-  group: 'favorite' | 'rated' | 'watchlist',
-  type: 'movies' | 'tv'
-): Promise<Movies | TVSeries> =>
-  fetcher(
-    `${BASE_URL}/account/${accountId}/${group}/${type}?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&session_id=${sessionId}&sort_by=created_at.desc`
+export const getRatedTvData = ({ session, accountId }: { session: string; accountId: string }) =>
+  useQuery(
+    [QueryKeysProfile.RATED_TV_SERIES],
+    () =>
+      getRatedItems<{ results: RatedTVSeriesItemResponse[] }>({ session, accountId, type: 'tv' }),
+    { enabled: !!session }
   )
 
-export const getGenres = async (type: 'movie' | 'tv'): Promise<SimpleItem> =>
-  fetcher(`${BASE_URL}/genre/${type}/list?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`)
+export const getGroupItemsData = <T>({
+  session,
+  accountId,
+  group,
+  type,
+}: {
+  session: string
+  accountId: string
+  group: Group
+  type: 'movies' | 'tv'
+}) =>
+  useQuery([`${group}-${type}`], () => getGroupItems<T>({ session, accountId, group, type }), {
+    enabled: !!session,
+  })

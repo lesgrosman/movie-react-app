@@ -1,8 +1,7 @@
 import { Group } from '../types'
-import { Movies, QueryType, TVSeries } from '@utils/types'
-import { getListItems } from '../queries'
+import { Movies, TVSeries } from '@utils/types'
+import { getGroupItemsData } from '../queries'
 import { useAuthContext } from 'context/useAuthContext'
-import { useQuery } from '@tanstack/react-query'
 import Card from './Card'
 
 interface Props {
@@ -15,13 +14,12 @@ const List = ({ type, group }: Props) => {
 
   const itemType = type === 'movies' ? 'movie' : 'tv'
 
-  const { data, refetch: refetchList }: QueryType<Movies | TVSeries> = useQuery(
-    [`${group}-${itemType}`],
-    () => getListItems(session, accountId, group, type),
-    {
-      enabled: !!session,
-    }
-  )
+  const { data, refetch: refetchList } = getGroupItemsData<Movies | TVSeries>({
+    session,
+    accountId,
+    group,
+    type,
+  })
 
   if (!data) return null
 

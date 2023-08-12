@@ -1,13 +1,12 @@
-import { AccountState, QueryType } from '@utils/types'
 import { BookmarkIcon, HeartIcon } from '@heroicons/react/24/solid'
-import { addToWatchList, markAsFavorite } from '@pages/DetailPage/mutations'
-import { fetchAccountState } from '@pages/DetailPage/queries'
+import { MovieOrTv } from '@utils/types'
+import { getAccountStateData } from '@pages/DetailPage/queries'
 import { showNofication } from '@utils/helper'
+import { useAddToWatchlist, useMarkAsFavorite } from '@pages/DetailPage/mutations'
 import { useAuthContext } from 'context/useAuthContext'
-import { useMutation, useQuery } from '@tanstack/react-query'
 
 interface Props {
-  type: 'movie' | 'tv'
+  type: MovieOrTv
   id: number
   refetchList: () => void
 }
@@ -15,47 +14,64 @@ interface Props {
 const ActionButtons = ({ type, id, refetchList }: Props) => {
   const { session, accountId } = useAuthContext()
 
-  const { data, refetch: refetchAccount }: QueryType<AccountState> = useQuery(
-    [`${type}-account-state`, id],
-    () => fetchAccountState(type, session, `${id}`),
-    { enabled: !!session }
-  )
+  const { data, refetch: refetchAccount } = getAccountStateData({ type, id: `${id}`, session })
 
-  const { mutate: markAsFavoriteMutation, isLoading: markAsFavoriteLoading } = useMutation({
-    mutationKey: [`favorite-${type}`, id],
-    mutationFn: () =>
-      markAsFavorite(accountId, session, {
-        media_id: Number(id),
-        media_type: type,
-        favorite: !data?.favorite,
-      }),
-    onSuccess: () => {
-      refetchList()
-      refetchAccount()
-      showNofication(data?.favorite ? 'Removed from favorite' : 'Mark as favorite', 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
+  const { mutate: markAsFavoriteMutation, isLoading: markAsFavoriteLoading } = useMarkAsFavorite({
+    media_id: Number(id),
+    media_type: type,
+    favorite: !data?.favorite,
   })
 
-  const { mutate: addToWatchListMutation, isLoading: addToWatchListLoading } = useMutation({
-    mutationKey: [`${type}-account-state`, id],
-    mutationFn: () =>
-      addToWatchList(accountId, session, {
-        media_id: Number(id),
-        media_type: type,
-        watchlist: !data?.watchlist,
-      }),
-    onSuccess: () => {
-      refetchList()
-      refetchAccount()
-      showNofication(data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist', 'success')
-    },
-    onError: () => showNofication('Something went wrong', 'error'),
+  const { mutate: addToWatchlistMutation, isLoading: addToWatchListLoading } = useAddToWatchlist({
+    media_id: Number(id),
+    media_type: type,
+    watchlist: !data?.watchlist,
   })
 
-  const handleMarkAsFavorite = () => markAsFavoriteMutation()
+  const handleMarkAsFavorite = () =>
+    markAsFavoriteMutation(
+      {
+        session,
+        accountId,
+        body: {
+          media_id: Number(id),
+          media_type: type,
+          favorite: !data?.favorite,
+        },
+      },
+      {
+        onSuccess: () => {
+          refetchList()
+          refetchAccount()
+          showNofication(data?.favorite ? 'Removed from favorite' : 'Mark as favorite', 'success')
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
-  const handleAddToWatchList = () => addToWatchListMutation()
+  const handleAddToWatchList = () =>
+    addToWatchlistMutation(
+      {
+        session,
+        accountId,
+        body: {
+          media_id: Number(id),
+          media_type: type,
+          watchlist: !data?.watchlist,
+        },
+      },
+      {
+        onSuccess: () => {
+          refetchList()
+          refetchAccount()
+          showNofication(
+            data?.watchlist ? 'Removed from watchlist' : 'Added to watchlist',
+            'success'
+          )
+        },
+        onError: () => showNofication('Something went wrong', 'error'),
+      }
+    )
 
   return (
     <div className='flex gap-5'>
