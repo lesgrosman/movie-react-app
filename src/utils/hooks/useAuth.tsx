@@ -35,7 +35,7 @@ export const useAuth = (): UseAuth => {
 
     try {
       const createRequestTokenResponse = await fetcher<CreateRequestTokenResponse>(
-        `${BASE_URL}/authentication/token/new?api_key=${process.env.NEXT_PUBLIC_DB_API}`
+        `${BASE_URL}/authentication/token/new`
       )
 
       if (!createRequestTokenResponse || !createRequestTokenResponse.request_token) {
@@ -45,7 +45,7 @@ export const useAuth = (): UseAuth => {
       const { request_token } = createRequestTokenResponse
 
       await fetcher<CreateRequestTokenResponse>(
-        `${BASE_URL}/authentication/token/validate_with_login?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+        `${BASE_URL}/authentication/token/validate_with_login`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -57,7 +57,7 @@ export const useAuth = (): UseAuth => {
       )
 
       const createSessionId = await fetcher<CreateSessionIdResponse>(
-        `https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+        `https://api.themoviedb.org/3/authentication/session/new`,
         {
           method: 'POST',
           body: JSON.stringify({ request_token }),
@@ -65,7 +65,7 @@ export const useAuth = (): UseAuth => {
       )
 
       const accountResponse = await fetcher<{ id: number }>(
-        `${BASE_URL}/account?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${createSessionId.session_id}`
+        `${BASE_URL}/account?session_id=${createSessionId.session_id}`
       )
 
       if (typeof window !== 'undefined') {
@@ -87,7 +87,7 @@ export const useAuth = (): UseAuth => {
       const sessionId = window.localStorage.getItem('session_id')
 
       const deleteSession = await fetcher<{ success: boolean }>(
-        `${BASE_URL}/authentication/session?api_key=${process.env.NEXT_PUBLIC_DB_API}`,
+        `${BASE_URL}/authentication/session`,
         {
           method: 'DELETE',
           body: JSON.stringify({

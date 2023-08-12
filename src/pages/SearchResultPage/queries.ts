@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 
 const getSearchMovies = async (param?: string) =>
   fetcher<Movies>(
-    `${BASE_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&query=${param}&page=1&include_adult=true`
+    `${BASE_URL}/search/movie?language=en-US&query=${param}&page=1&include_adult=true`
   )
 
 export const getSearchMoviesData = (param = '') =>

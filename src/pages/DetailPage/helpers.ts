@@ -17,40 +17,28 @@ interface Props {
 }
 // queries
 export const getDetail = async <T>({ type, id }: Props) =>
-  fetcher<T>(`${BASE_URL}/${type}/${id}?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`)
+  fetcher<T>(`${BASE_URL}/${type}/${id}?language=en-US`)
 
 export const getSimilar = async <T>({ type, id }: Props) =>
-  fetcher<T>(
-    `${BASE_URL}/${type}/${id}/similar?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US$page=1`
-  )
+  fetcher<T>(`${BASE_URL}/${type}/${id}/similar?language=en-US$page=1`)
 
 export const getVideos = async ({ type, id }: Props) =>
-  fetcher<Trailers>(
-    `${BASE_URL}/${type}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`
-  )
+  fetcher<Trailers>(`${BASE_URL}/${type}/${id}/videos?language=en-US`)
 
 export const getCredits = async ({ type, id }: Props) =>
-  fetcher<Credits>(
-    `${BASE_URL}/${type}/${id}/credits?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`
-  )
+  fetcher<Credits>(`${BASE_URL}/${type}/${id}/credits?language=en-US`)
 
 export const getReviews = async ({ type, id }: Props) =>
-  fetcher<Reviews>(
-    `${BASE_URL}/${type}/${id}/reviews?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
-  )
+  fetcher<Reviews>(`${BASE_URL}/${type}/${id}/reviews?language=en-US&page=1`)
 
 export const getKeywords = async ({ type, id }: Props) =>
-  fetcher<Keywords>(`${BASE_URL}/${type}/${id}/keywords?api_key=${process.env.NEXT_PUBLIC_DB_API}`)
+  fetcher<Keywords>(`${BASE_URL}/${type}/${id}/keywords`)
 
 export const getRecommendations = async <T>({ type, id }: Props) =>
-  fetcher<T>(
-    `${BASE_URL}/${type}/${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
-  )
+  fetcher<T>(`${BASE_URL}/${type}/${id}/recommendations?language=en-US&page=1`)
 
 export const getAccountState = async ({ type, id, session }: Props & { session: string }) =>
-  fetcher<AccountState>(
-    `${BASE_URL}/${type}/${id}/account_states?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${session}`
-  )
+  fetcher<AccountState>(`${BASE_URL}/${type}/${id}/account_states?session_id=${session}`)
 
 // mutations
 export const addToWatchList = async ({
@@ -58,26 +46,20 @@ export const addToWatchList = async ({
   accountId,
   body,
 }: AddToWatchlistArgs): Promise<MutationResponse> =>
-  fetcher(
-    `${BASE_URL}/account/${accountId}/watchlist?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${session}`,
-    {
-      body: JSON.stringify(body),
-      method: 'POST',
-    }
-  )
+  fetcher(`${BASE_URL}/account/${accountId}/watchlist?session_id=${session}`, {
+    body: JSON.stringify(body),
+    method: 'POST',
+  })
 
 export const markAsFavorite = async ({
   session,
   accountId,
   body,
 }: MarkAsFavoriteArgs): Promise<MutationResponse> =>
-  fetcher(
-    `${BASE_URL}/account/${accountId}/favorite?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${session}`,
-    {
-      body: JSON.stringify(body),
-      method: 'POST',
-    }
-  )
+  fetcher(`${BASE_URL}/account/${accountId}/favorite?session_id=${session}`, {
+    body: JSON.stringify(body),
+    method: 'POST',
+  })
 
 export const addRating = async ({
   session,
@@ -85,10 +67,10 @@ export const addRating = async ({
   mediaType,
   body,
 }: AddRatingArgs): Promise<MutationResponse> =>
-  fetcher(
-    `${BASE_URL}/${mediaType}/${mediaId}/rating?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${session}`,
-    { body: JSON.stringify(body), method: 'POST' }
-  )
+  fetcher(`${BASE_URL}/${mediaType}/${mediaId}/rating?session_id=${session}`, {
+    body: JSON.stringify(body),
+    method: 'POST',
+  })
 
 export const removeRating = async ({
   id,
@@ -99,9 +81,6 @@ export const removeRating = async ({
   type: string
   session: string
 }): Promise<MutationResponse> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/rating?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${session}`,
-    {
-      method: 'DELETE',
-    }
-  )
+  fetcher(`${BASE_URL}/${type}/${id}/rating?session_id=${session}`, {
+    method: 'DELETE',
+  })
