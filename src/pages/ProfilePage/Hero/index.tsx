@@ -1,37 +1,15 @@
-import { AccountDetail } from '../types'
-import { QueryKeysProfile } from '../constants'
-import { QueryType, RatedMovieItemResponse, RatedTVSeriesItemResponse } from '@utils/types'
-import { getAccountDetail, getRatedItems } from '../queries'
+import { getAccountDetailData, getRatedMoviesData, getRatedTvData } from '../queries'
 import { useAuthContext } from 'context/useAuthContext'
-import { useQuery } from '@tanstack/react-query'
 import View from './View'
 
 const Hero = () => {
   const { session, accountId } = useAuthContext()
 
-  const { data }: QueryType<AccountDetail> = useQuery(
-    [QueryKeysProfile.ACCOUNT_DETAILS],
-    () => getAccountDetail(session),
-    {
-      enabled: !!session,
-    }
-  )
+  const { data } = getAccountDetailData({ session })
 
-  const { data: ratedMovies }: QueryType<{ results: RatedMovieItemResponse[] }> = useQuery(
-    [QueryKeysProfile.RATED_MOVIES],
-    () => getRatedItems(session, accountId, 'movies'),
-    {
-      enabled: !!session,
-    }
-  )
+  const { data: ratedMovies } = getRatedMoviesData({ session, accountId })
 
-  const { data: ratedTV }: QueryType<{ results: RatedTVSeriesItemResponse[] }> = useQuery(
-    [QueryKeysProfile.RATED_TV_SERIES],
-    () => getRatedItems(session, accountId, 'tv'),
-    {
-      enabled: !!session,
-    }
-  )
+  const { data: ratedTV } = getRatedTvData({ session, accountId })
 
   if (!data || !ratedMovies || !ratedTV) return null
 

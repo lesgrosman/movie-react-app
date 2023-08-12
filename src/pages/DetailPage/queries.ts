@@ -1,43 +1,22 @@
-import { BASE_URL } from 'utils/constants'
-import { Credits, Keywords, Reviews, Trailers } from 'utils/types'
-import { fetcher } from 'utils/helper'
+import { MovieOrTv } from '@utils/types'
+import { getAccountState, getKeywords, getRecommendations, getReviews } from './helpers'
+import { useQuery } from '@tanstack/react-query'
 
-export const fetchDetail = async <T>(type: 'movie' | 'tv', id = ''): Promise<T> =>
-  fetcher(`${BASE_URL}/${type}/${id}?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`)
+interface Props {
+  type: MovieOrTv
+  id: string
+}
 
-export const fetchSimilar = async <T>(type: 'movie' | 'tv', id = ''): Promise<T> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/similar?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US$page=1`
-  )
+export const getReviewsData = ({ type, id }: Props) =>
+  useQuery([`reviews-${type}`, id], () => getReviews({ type, id }))
 
-export const fetchVideos = async (type: 'movie' | 'tv', id = ''): Promise<Trailers> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/videos?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`
-  )
+export const getKeywordsData = ({ type, id }: Props) =>
+  useQuery([`keywords-${type}`, id], () => getKeywords({ type, id }))
 
-export const fetchCredits = async (type: 'movie' | 'tv', id = ''): Promise<Credits> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/credits?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US`
-  )
+export const getRecommendationsData = <T>({ type, id }: Props) =>
+  useQuery([`recommendations-${type}`, id], () => getRecommendations<T>({ type, id }))
 
-export const fetchReviews = async (type: 'movie' | 'tv', id = ''): Promise<Reviews> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/reviews?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
-  )
-
-export const fetchKeywords = async (type: 'movie' | 'tv', id = ''): Promise<Keywords> =>
-  fetcher(`${BASE_URL}/${type}/${id}/keywords?api_key=${process.env.NEXT_PUBLIC_DB_API}`)
-
-export const fetchRecommendations = async <T>(type: 'movie' | 'tv', id = ''): Promise<T> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_DB_API}&language=en-US&page=1`
-  )
-
-export const fetchAccountState = async <T>(
-  type: 'movie' | 'tv',
-  sessionId: string,
-  id = ''
-): Promise<T> =>
-  fetcher(
-    `${BASE_URL}/${type}/${id}/account_states?api_key=${process.env.NEXT_PUBLIC_DB_API}&session_id=${sessionId}`
-  )
+export const getAccountStateData = ({ type, id, session }: Props & { session: string }) =>
+  useQuery([`${type}-account-state`, id], () => getAccountState({ type, id, session }), {
+    enabled: !!session,
+  })

@@ -1,22 +1,9 @@
-import {
-  Keywords,
-  MovieDetailResponse,
-  Movies,
-  QueryType,
-  Reviews as ReviewsType,
-} from 'utils/types'
+import { MovieDetailResponse, MovieOrTv, Movies } from 'utils/types'
 import { QueryKeys } from 'utils/constants'
-import {
-  fetchCredits,
-  fetchDetail,
-  fetchKeywords,
-  fetchRecommendations,
-  fetchReviews,
-  fetchSimilar,
-  fetchVideos,
-} from './queries'
 import { getCast } from './utils'
-import { useQueries, useQuery } from '@tanstack/react-query'
+import { getCredits, getDetail, getSimilar, getVideos } from './helpers'
+import { getKeywordsData, getRecommendationsData, getReviewsData } from './queries'
+import { useQueries } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import Cast from './Components/Cast'
 import DetailHero from './Components/Hero'
@@ -36,38 +23,37 @@ const MovieDetail = () => {
 
   const movieId = id as string
 
+  const fetchParams = {
+    type: 'movie' as MovieOrTv,
+    id: movieId,
+  }
+
   const allDataResponse = useQueries({
     queries: [
       {
         queryKey: [`${QueryKeys.MOVIE_DETAIL}`, id],
-        queryFn: () => fetchDetail<MovieDetailResponse>('movie', movieId),
+        queryFn: () => getDetail<MovieDetailResponse>(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_SIMILAR}`, id],
-        queryFn: () => fetchSimilar<Movies>('movie', movieId),
+        queryFn: () => getSimilar<Movies>(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_CREDITS}`, id],
-        queryFn: () => fetchCredits('movie', movieId),
+        queryFn: () => getCredits(fetchParams),
       },
       {
         queryKey: [`${QueryKeys.MOVIE_VIDEOS}`, id],
-        queryFn: () => fetchVideos('movie', movieId),
+        queryFn: () => getVideos(fetchParams),
       },
     ],
   })
 
-  const { data: reviews }: QueryType<ReviewsType> = useQuery(['reviews-movie', movieId], () =>
-    fetchReviews('movie', movieId)
-  )
+  const { data: reviews } = getReviewsData(fetchParams)
 
-  const { data: keywords }: QueryType<Keywords> = useQuery(['keywords-movie', id], () =>
-    fetchKeywords('movie', movieId)
-  )
+  const { data: keywords } = getKeywordsData(fetchParams)
 
-  const { data: recommendations }: QueryType<Movies> = useQuery(['recommendations-movie', id], () =>
-    fetchRecommendations('movie', movieId)
-  )
+  const { data: recommendations } = getRecommendationsData<Movies>(fetchParams)
 
   if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
 

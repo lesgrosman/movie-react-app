@@ -1,3 +1,5 @@
-import { fetcher } from 'utils/helper'
+import { getMovieList } from './helpers'
+import { useQuery } from '@tanstack/react-query'
 
-export const getMovieList = async <T>(url: string): Promise<T> => fetcher(url)
+export const getMovieListData = ({ url, key }: { url: string; key: string }) =>
+  useQuery([key], () => getMovieList(url))

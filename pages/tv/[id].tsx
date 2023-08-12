@@ -2,23 +2,28 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { QueryKeys } from '@utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '@utils/types'
-import { fetchCredits, fetchDetail, fetchSimilar, fetchVideos } from '@pages/DetailPage/queries'
+import { getCredits, getDetail, getSimilar, getVideos } from '@pages/DetailPage/helpers'
 
 export const getStaticProps: GetStaticProps = async context => {
   const queryClient = new QueryClient()
 
+  const fetchParams = {
+    type: 'tv' as 'movie' | 'tv',
+    id: context.params?.id as string,
+  }
+
   await Promise.all([
     queryClient.prefetchQuery([`${QueryKeys.TV_DETAIL}`, context.params?.id], () =>
-      fetchDetail<TVSeriesDetailResponse>('tv', context.params?.id as string)
+      getDetail<TVSeriesDetailResponse>(fetchParams)
     ),
     queryClient.prefetchQuery([`${QueryKeys.TV_SIMILAR}`, context.params?.id], () =>
-      fetchSimilar<TVSeries>('tv', context.params?.id as string)
+      getSimilar<TVSeries>(fetchParams)
     ),
     queryClient.prefetchQuery([`${QueryKeys.TV_CREDITS}`, context.params?.id], () =>
-      fetchCredits('tv', context.params?.id as string)
+      getCredits(fetchParams)
     ),
     queryClient.prefetchQuery([`${QueryKeys.TV_VIDEOS}`, context.params?.id], () =>
-      fetchVideos('tv', context.params?.id as string)
+      getVideos(fetchParams)
     ),
   ])
 

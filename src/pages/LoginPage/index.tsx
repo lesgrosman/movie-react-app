@@ -11,7 +11,7 @@ import TextInput from '@components/Form/TextInput'
 
 const Login = () => {
   const router = useRouter()
-  const { login, isLoading } = useAuth()
+  const { login, isLoading, error } = useAuth()
   const { session } = useAuthContext()
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Login = () => {
               <h1 className='text-center text-emerald-500 mb-2'>Log in</h1>
               <div className='mb-4 flex flex-col'>
                 <span className='text-gray-400 text-center'>
-                  Login with your credentials in&nbsp;
+                  Login with your credentials from&nbsp;
                   <a
                     href='https://www.themoviedb.org'
                     target='_blank'
@@ -66,6 +66,9 @@ const Login = () => {
               <TextInput name='password' type='password' label='Password' />
               <div className='flex w-full justify-end'>
                 <Button label='Log in' type='submit' disabled={isLoading} />
+              </div>
+              <div className='flex w-full justify-end text-red-500'>
+                <p>{error}</p>
               </div>
             </div>
           </div>
