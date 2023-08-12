@@ -10,6 +10,8 @@ interface Props {
   error?: unknown
 }
 
+const skeletonIds = new Array(6).fill(1).map(() => shortid.generate())
+
 const MovieGroup = ({ data, loading, error }: Props) => {
   const transformedItems = useMemo(() => {
     return transformToPreviewItems(data)
@@ -18,9 +20,9 @@ const MovieGroup = ({ data, loading, error }: Props) => {
   if (loading && !data) {
     return (
       <div className='flex gap-4 animate-pulse mb-4'>
-        {new Array(6).fill(1).map(() => (
+        {new Array(6).fill(1).map((_, index) => (
           <div
-            key={shortid.generate()}
+            key={skeletonIds[index]}
             className='bg-slate-200 rounded-xl'
             style={{ width: 185, height: 278 }}
           />
