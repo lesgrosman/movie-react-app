@@ -18,13 +18,30 @@ const SearchResultPage = () => {
     type: 'tv',
   })
 
-  if (movieResultsIsLoading || tvResultsIsLoading || !movieResutls || !tvResults)
+  const { data: personResults, isLoading: personResultsIsLoading } = getSearchResultsData({
+    param: result as string,
+    type: 'person',
+  })
+
+  if (
+    movieResultsIsLoading ||
+    tvResultsIsLoading ||
+    personResultsIsLoading ||
+    !movieResutls ||
+    !tvResults ||
+    !personResults
+  )
     return <>Loading...</>
 
   return (
     <Container>
       <div className='px-3 mt-32'>
-        <Layout movieResults={movieResutls} tvResutls={tvResults} param={result as string} />
+        <Layout
+          movieResults={movieResutls}
+          tvResutls={tvResults}
+          personResults={personResults}
+          param={result as string}
+        />
       </div>
     </Container>
   )
