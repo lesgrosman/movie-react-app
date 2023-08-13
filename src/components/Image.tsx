@@ -7,10 +7,19 @@ interface Props extends ImageProps {
 
 const Image = (props: Props) => {
   const { src, noImage, ...rest } = props
+
   return props?.src ? (
-    <NextImage {...rest} src={`${BASE_IMAGE}${src}`} />
+    <NextImage
+      {...rest}
+      src={`${BASE_IMAGE}${src}`}
+      style={!props.fill ? { width: 'auto', height: 'auto' } : {}}
+    />
   ) : (
-    <NextImage {...rest} src={noImage || ''} />
+    <NextImage
+      {...rest}
+      src={noImage || ''}
+      style={!props.fill ? { width: 'auto', height: 'auto' } : {}}
+    />
   )
 }
 
