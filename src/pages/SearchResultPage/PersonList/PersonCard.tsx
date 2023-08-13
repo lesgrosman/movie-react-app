@@ -27,7 +27,7 @@ const PersonCard = ({ person }: Props) => {
               <p className='mr-1'>{person.known_for_department}</p>
               {!!person.known_for.length && ' • '}
               {!!person.known_for.length && (
-                <div className='ml-1 flex gap-2'>
+                <div className='ml-1 flex gap-2 flex-wrap'>
                   {person.known_for.map((item, index) => (
                     <Link
                       key={item.id}
