@@ -50,6 +50,9 @@ export enum QueryKeys {
   TV_VIDEOS = 'tv-videos',
   TV_CREDITS = 'tv-credits',
   TV_ACCOUNT_STATE = 'tv-account-state',
+  // person
+  PERSON_DETAIL = 'person-detail',
+  PERSON_CREDITS = 'person-credits',
 }
 
 export const popularSection: MovieSectionWithTabs = {

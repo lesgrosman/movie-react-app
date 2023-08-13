@@ -1,4 +1,4 @@
-import { MovieOrTv } from '@utils/types'
+import { SearchType } from '../types'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -11,10 +11,10 @@ interface Props {
   release: string
   description: string
   rating: number
-  type: MovieOrTv
+  type: SearchType
 }
 
-const Card = ({ id, imageUrl, title, release, description, rating, type }: Props) => {
+const MovieCard = ({ id, imageUrl, title, release, description, rating, type }: Props) => {
   return (
     <div className='w-full rounded-xl border-[1px] shadow-md flex'>
       <div>
@@ -45,4 +45,4 @@ const Card = ({ id, imageUrl, title, release, description, rating, type }: Props
   )
 }
 
-export default Card
+export default MovieCard

@@ -1,22 +1,23 @@
-import { MovieOrTv } from '@utils/types'
-import { Results } from './types'
+import { Results, SearchType } from './types'
 import { Tab } from '@headlessui/react'
-import List from './List'
+import MovieList from './MovieList/MovieList'
+import PersonList from './PersonList/PersonList'
 
 interface Tab {
   title: string
   itemsCount: number
-  type: MovieOrTv
+  type: SearchType
   totalPages: number
 }
 
 interface Props {
   movieResults: Results
   tvResutls: Results
+  personResults: Results
   param: string
 }
 
-const Layout = ({ movieResults, tvResutls, param }: Props) => {
+const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
   const tabs: Tab[] = [
     {
       title: 'Movies',
@@ -69,15 +70,37 @@ const Layout = ({ movieResults, tvResutls, param }: Props) => {
                   )}
                 </Tab>
               ))}
+              <Tab
+                key='person'
+                className={({ selected }) =>
+                  `w-full outline-none ${selected ? 'text-emerald-400' : `text-black`}`
+                }
+                onClick={handleScrollToTop}
+              >
+                {({ selected }) => (
+                  <div
+                    className={`${selected ? 'bg-slate-100' : 'hover:bg-slate-100'} cursor-pointer`}
+                  >
+                    <div className='flex justify-between p-3'>
+                      <h4>Persons</h4>
+                      <span>{personResults.total_results}</span>
+                    </div>
+                  </div>
+                )}
+              </Tab>
             </div>
           </Tab.List>
         </div>
         <Tab.Panels className='col-span-9'>
           {tabs.map(({ type, totalPages }) => (
             <Tab.Panel key={type}>
-              <List type={type} param={param} totalPages={totalPages} />
+              <MovieList type={type} param={param} totalPages={totalPages} />
             </Tab.Panel>
           ))}
+          <Tab.Panel key='person'>
+            {/* <List type={type} param={param} totalPages={totalPages} /> */}
+            <PersonList param={param} totalPages={personResults.total_pages} />
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>

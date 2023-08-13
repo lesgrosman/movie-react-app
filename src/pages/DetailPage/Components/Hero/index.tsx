@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
+import LocalizedDate from '@utils/components/LocalizedDate'
 
 interface Props {
   title?: string
@@ -75,7 +76,9 @@ const DetailHero = ({
           <h1 className='text-normal'>({releaseDate?.split('-')[0] || '-'})</h1>
         </div>
         <div className='flex mb-4'>
-          <span>{releaseDate}</span>
+          <span>
+            <LocalizedDate date={releaseDate} isRaw />
+          </span>
           &nbsp; &#x2022; &nbsp;
           <span>{getGenres(genres?.slice(0, 3))}</span>
           &nbsp; &#x2022; &nbsp;

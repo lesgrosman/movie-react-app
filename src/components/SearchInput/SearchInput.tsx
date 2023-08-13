@@ -25,7 +25,7 @@ const SearchInput = ({ innerClassName }: Props) => {
         <div className='relative'>
           <input
             autoComplete='off'
-            placeholder='Search movie'
+            placeholder='Search movie, TV series or person...'
             value={query}
             onChange={e => setQuery(e.target.value)}
             name='query'
