@@ -7,7 +7,7 @@ interface Props {
   innerClassName?: string
 }
 
-const CircularProgress = ({ value, innerClassName = '', size }: Props) => {
+const CircularProgress = ({ value, size, innerClassName = '' }: Props) => {
   const percentage = Math.ceil(value * 10)
   const [pathColor, trailColor] =
     value >= 7

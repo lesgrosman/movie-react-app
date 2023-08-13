@@ -1,6 +1,7 @@
 import { PersonItem } from 'utils/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'components/Image'
+import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
 
 SwiperCore.use([Navigation])
@@ -27,9 +28,9 @@ const CastCarousel = ({ list }: Props) => {
                   />
                 </div>
               </div>
-              {/* <Link href=''> */}
-              <h4 className='ml-2 mb-0 hover:text-cyan-600'>{name}</h4>
-              {/* </Link> */}
+              <Link href={`/person/${id}`}>
+                <h4 className='ml-2 mb-0 hover:text-emerald-500'>{name}</h4>
+              </Link>
               <h5 className='ml-2 text-slate-400 text-xs'>{character}</h5>
             </div>
           </SwiperSlide>
