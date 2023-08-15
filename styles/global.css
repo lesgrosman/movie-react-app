@@ -9,7 +9,7 @@
   }
   h1 {
     @apply font-bold font-montserrat mb-3 md:mb-5 max-w-7xl;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 2.438rem;
   }
   h2 {
@@ -39,4 +39,3 @@
 .swiper-button-next {
   margin-right: 20px;
 }
-

@@ -9,9 +9,9 @@ interface Props {
 
 const MovieSection = ({ section, innerClassName = '' }: Props) => {
   return (
-    <div className='w-full px-2 py-16 sm:px-0 items-center gap-10'>
+    <div className='w-full px-2 pb-2 pt-16 sm:px-0 items-center gap-10'>
       <Tab.Group>
-        <div className='flex items-center gap-5'>
+        <div className='flex md:flex-row flex-col md:items-center gap-5'>
           <h2 className='mb-0'>{section.title}</h2>
           <Tab.List className={`flex space-x-1 rounded-3xl bg-blue-900/20 p-0.5 ${innerClassName}`}>
             {section.tabs.map(({ id, title }) => (
