@@ -47,7 +47,7 @@ const DetailHero = ({
     <div
       className={`${
         bgImage ? 'relative' : 'bg-gradient-to-r from-cyan-700 to-blue-900'
-      } flex gap-8 px-28 py-6 mb-4 text-white`}
+      } grid grid-cols-12 gap-8 px-0 py-6 mb-4 text-white`}
     >
       {bgImage && averageColor && (
         <>
@@ -67,24 +67,26 @@ const DetailHero = ({
           />
         </>
       )}
-      <div className='flex-shrink-0'>
+      <div className='flex-shrink-0 col-span-12 sm:col-span-4 flex justify-center sm:justify-end'>
         <Image src={posterPath || ''} alt='' width={300} height={450} className='rounded-xl' />
       </div>
-      <div>
-        <div className='flex'>
-          <h1 className='mb-0'>{title}</h1>&nbsp;
-          <h1 className='text-normal'>({releaseDate?.split('-')[0] || '-'})</h1>
+      <div className='col-span-12 sm:col-span-8 sm:px-0 px-2'>
+        <div className='flex sm:flex-row flex-col sm:justify-start justify-center gap-0'>
+          <h1 className='mb-0 sm:text-start text-center'>{title}</h1>
+          <h1 className='text-normal sm:text-start text-center'>
+            ({releaseDate?.split('-')[0] || '-'})
+          </h1>
         </div>
-        <div className='flex mb-4'>
+        <div className='flex mb-4 sm:justify-start justify-center gap-2'>
           <span>
             <LocalizedDate date={releaseDate} isRaw />
           </span>
-          &nbsp; &#x2022; &nbsp;
+          {' • '}
           <span>{getGenres(genres?.slice(0, 3))}</span>
-          &nbsp; &#x2022; &nbsp;
-          <span>{runtime} min</span>
+          {runtime && ' • '}
+          {runtime && <span>{runtime} min</span>}
         </div>
-        <div className='flex items-center gap-6 mb-4'>
+        <div className='flex items-center gap-6 mb-4 sm:justify-start justify-center'>
           <div className='flex items-center gap-2'>
             <CircularProgress value={vote || 0} size={60} />
             <h3 className='mb-0'>User Score</h3>
@@ -92,14 +94,14 @@ const DetailHero = ({
           <ActionButtons type={isMovie ? 'movie' : 'tv'} />
         </div>
 
-        <div className='mb-4'>
+        <div className='mb-4 flex sm:justify-start justify-center'>
           <span className='italic'>{tagline}</span>
         </div>
-        <div className='mb-8'>
+        <div className='mb-8 sm:text-start text-center'>
           <h3>Overview</h3>
           <span>{overview}</span>
         </div>
-        <div className='flex text-start gap-5 flex-wrap'>
+        <div className='flex text-start gap-5 flex-wrap sm:justify-start justify-center'>
           {director && (
             <div>
               <span className='italic text-xs'>Director</span>

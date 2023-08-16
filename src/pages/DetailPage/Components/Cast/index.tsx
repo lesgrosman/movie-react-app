@@ -1,5 +1,5 @@
 import { PersonItem } from 'utils/types'
-import CastCarousel from './CastCarousel'
+import Carousel from './Carousel'
 
 interface Props {
   cast: PersonItem[]
@@ -8,8 +8,10 @@ interface Props {
 const Cast = ({ cast }: Props) => {
   return (
     <div className='flex flex-col'>
-      <h2>Top billed Cast</h2>
-      {cast.length ? <CastCarousel list={cast} /> : <span>-</span>}
+      <div className='px-2'>
+        <h2 className='mb-0'>Top billed Cast</h2>
+      </div>
+      {cast.length ? <Carousel list={cast} /> : <span>-</span>}
     </div>
   )
 }

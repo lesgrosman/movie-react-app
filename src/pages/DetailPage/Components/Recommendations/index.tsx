@@ -1,5 +1,5 @@
 import { MovieItemResponse, TVSeriesItemResponse } from '@utils/types'
-import RecommendationsCarousel from './RecommendationsCarousel'
+import Carousel from './Carousel'
 
 interface Props {
   recommendations?: MovieItemResponse[] | TVSeriesItemResponse[]
@@ -10,8 +10,10 @@ const Recommendations = ({ recommendations }: Props) => {
 
   return (
     <div className='flex flex-col'>
-      <h2>Recommendations</h2>
-      <RecommendationsCarousel list={recommendations} />
+      <div className='px-2'>
+        <h2 className='mb-0'>Recommendations</h2>
+      </div>{' '}
+      <Carousel list={recommendations} />
     </div>
   )
 }
