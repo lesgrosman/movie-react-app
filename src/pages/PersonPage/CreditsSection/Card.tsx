@@ -2,19 +2,22 @@ import { MediaItem } from '../types'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
+import useWindowSize from '@utils/hooks/useWindowSize'
 
 interface Props {
   item: MediaItem
 }
 
 const Card = ({ item }: Props) => {
+  const isSmall = useWindowSize('sm')
+
   return (
     <div className='flex py-1 border-b-[1px] items-center justify-between'>
       <div className='flex'>
         <Image
           src={item.poster || ''}
           alt={item.title}
-          width={50}
+          width={55}
           height={60}
           noImage='/assets/noImage.png'
         />
@@ -29,7 +32,9 @@ const Card = ({ item }: Props) => {
         </div>
       </div>
       <div className='flex items-center gap-4'>
-        {item.release !== 'Upcoming' && <CircularProgress value={item.vote ?? 0} size={36} />}
+        {item.release !== 'Upcoming' && (
+          <CircularProgress value={item.vote ?? 0} size={isSmall ? 26 : 36} />
+        )}
         <h4>{item.release}</h4>
       </div>
     </div>

@@ -52,10 +52,10 @@ const PersonPage = () => {
 
   return (
     <div className='grid grid-cols-12 gap-4'>
-      <div className='col-span-3'>
+      <div className='sm:col-span-3 col-span-12'>
         <InfoSection detail={allDataResponse[0].data} />
       </div>
-      <div className='col-span-9 flex flex-col gap-4'>
+      <div className='sm:col-span-9 col-span-12 flex flex-col gap-4'>
         <BioSection
           name={allDataResponse[0].data.name}
           biography={allDataResponse[0].data.biography}

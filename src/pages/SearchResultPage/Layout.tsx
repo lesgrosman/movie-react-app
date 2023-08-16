@@ -42,7 +42,7 @@ const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
   return (
     <div className='grid grid-cols-12 gap-4'>
       <Tab.Group>
-        <div className='col-span-3'>
+        <div className='sm:col-span-3 col-span-12'>
           <Tab.List className='sticky top-32 w-full flex flex-col justify-start items-start gap-2 border-[1px] rounded-lg'>
             <div className='bg-emerald-400 w-full h-16 flex items-center justify-center rounded-t-lg'>
               <h3 className='text-white mb-0'>Search Results</h3>
@@ -91,7 +91,7 @@ const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
             </div>
           </Tab.List>
         </div>
-        <Tab.Panels className='col-span-9'>
+        <Tab.Panels className='sm:col-span-9 col-span-12'>
           {tabs.map(({ type, totalPages }) => (
             <Tab.Panel key={type}>
               <MovieList type={type} param={param} totalPages={totalPages} />

@@ -47,10 +47,10 @@ const Reviews = ({ data }: Props) => {
   if (tabs.length === 0) return null
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col px-2'>
       <Tab.Group>
-        <div className='flex items-center gap-5'>
-          <h2>Reviews</h2>
+        <div className='flex sm:flex-row flex-col items-start gap-5'>
+          <h2 className='mb-0 text-start'>Reviews</h2>
           <Tab.List className='flex gap-5'>
             {tabs.map(({ id, title, count }) => (
               <Tab
