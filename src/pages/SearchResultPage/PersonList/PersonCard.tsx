@@ -1,33 +1,42 @@
 import { SearchPersonItem } from '../types'
 import Image from '@components/Image'
 import Link from 'next/link'
+import useWindowSize from '@utils/hooks/useWindowSize'
 
 interface Props {
   person: SearchPersonItem
 }
 
 const PersonCard = ({ person }: Props) => {
+  const isSmall = useWindowSize('sm')
+
   return (
     <div className='w-full flex'>
-      <Image
-        src={person.profile_path ?? ''}
-        alt={person.name}
-        width={90}
-        height={70}
-        className='rounded-xl'
-        noImage='/assets/noImage.png'
-      />
+      <Link href={`/person/${person.id}`}>
+        <Image
+          src={person.profile_path ?? ''}
+          alt={person.name}
+          width={90}
+          height={70}
+          className='rounded-xl'
+          noImage='/assets/noImage.png'
+        />
+      </Link>
       <div className='w-full p-3 flex flex-col'>
         <div className='flex gap-2'>
           <div className='flex flex-col'>
-            <Link href={`/person/${person.id}`}>
-              <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{person.name}</h3>
-            </Link>
+            <div className='flex items-center'>
+              <Link href={`/person/${person.id}`}>
+                <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{person.name}</h3>
+              </Link>
+              <p className='ml-2 sm:hidden flex'>{person.known_for_department}</p>
+            </div>
+
             <div className='flex'>
-              <p className='mr-1'>{person.known_for_department}</p>
-              {!!person.known_for.length && ' • '}
+              <p className='mr-1 sm:block hidden'>{person.known_for_department}</p>
+              {!isSmall && !!person.known_for.length && ' • '}
               {!!person.known_for.length && (
-                <div className='ml-1 flex gap-2 flex-wrap'>
+                <div className='ml-1 flex gap-1 flex-wrap'>
                   {person.known_for.map((item, index) => (
                     <Link
                       key={item.id}

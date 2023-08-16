@@ -101,7 +101,7 @@ const MovieDetail = () => {
       }
     >
       <div className='grid grid-cols-12 text-black'>
-        <div className='col-span-10 flex flex-col gap-4'>
+        <div className='sm:col-span-10 col-span-12 flex flex-col gap-4'>
           <Cast cast={cast} />
           <Trailer trailerUrl={trailerUrl} />
           <Recommendations recommendations={recommendations?.results} />

@@ -24,8 +24,8 @@ const CreditsSection = ({ tabs }: Props) => {
               }
             >
               <div className='text-start'>
-                <h3 className='mb-0'>{title}</h3>
-                <span className='text-sm'>{itemsCount} items</span>
+                <h3 className='mb-0 sm:text-xl text-xs'>{title}</h3>
+                <span className='sm:text-sm text-xs'>{itemsCount} items</span>
               </div>
             </Tab>
           ))}
