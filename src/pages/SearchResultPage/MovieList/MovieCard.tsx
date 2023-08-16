@@ -16,7 +16,10 @@ interface Props {
 
 const MovieCard = ({ id, imageUrl, title, release, description, rating, type }: Props) => {
   return (
-    <div className='w-full rounded-xl border-[1px] shadow-md flex'>
+    <Link
+      href={`/${type}/${id}`}
+      className='w-full rounded-xl border-[1px] shadow-md flex hover:scale-[101%] transition duration-100'
+    >
       <div>
         <Image
           src={imageUrl}
@@ -29,11 +32,9 @@ const MovieCard = ({ id, imageUrl, title, release, description, rating, type }: 
       </div>
       <div className='w-full p-3 flex flex-col justify-between'>
         <div className='flex gap-2 items-center'>
-          <CircularProgress value={rating} size={40} />
+          <CircularProgress value={rating} size={40} innerClassName='sm:block hidden' />
           <div className='flex flex-col'>
-            <Link href={`/${type}/${id}`}>
-              <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{title}</h3>
-            </Link>
+            <h3 className='mb-0 cursor-pointer line-clamp-2'>{title}</h3>
             <span className='text-gray-400'>
               <LocalizedDate date={release} isRaw />
             </span>
@@ -41,7 +42,7 @@ const MovieCard = ({ id, imageUrl, title, release, description, rating, type }: 
         </div>
         <span className='line-clamp-3 text-slate-500'>{description}</span>
       </div>
-    </div>
+    </Link>
   )
 }
 
