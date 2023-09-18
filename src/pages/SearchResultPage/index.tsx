@@ -1,7 +1,7 @@
 import { getSearchResultsData } from './queries'
 import { useRouter } from 'next/router'
-import Container from '@components/Container'
 import Layout from './Layout'
+import LoadingPlaceholder from './LoadingPlaceholder'
 
 const SearchResultPage = () => {
   const router = useRouter()
@@ -31,19 +31,15 @@ const SearchResultPage = () => {
     !tvResults ||
     !personResults
   )
-    return <>Loading...</>
+    return <LoadingPlaceholder />
 
   return (
-    <Container>
-      <div className='px-3 mt-32'>
-        <Layout
-          movieResults={movieResutls}
-          tvResutls={tvResults}
-          personResults={personResults}
-          param={result as string}
-        />
-      </div>
-    </Container>
+    <Layout
+      movieResults={movieResutls}
+      tvResutls={tvResults}
+      personResults={personResults}
+      param={result as string}
+    />
   )
 }
 export default SearchResultPage

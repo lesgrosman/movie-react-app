@@ -10,6 +10,7 @@ import DetailHero from './Components/Hero'
 import DetailLayout from '@components/Layout/DetailLayout'
 import ErrorMessage from '@components/UI/Error/ErrorMessage'
 import Info from './Components/Info'
+import LoadingPlaceholder from './LoadingPlaceholder'
 import LocalizedCurrency from '@utils/components/LocalizedCurrency'
 import React from 'react'
 import Recommendations from './Components/Recommendations'
@@ -55,7 +56,7 @@ const MovieDetail = () => {
 
   const { data: recommendations } = getRecommendationsData<Movies>(fetchParams)
 
-  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
+  if (allDataResponse.some(data => data.isLoading)) return <LoadingPlaceholder />
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
     return <ErrorMessage error={404} />
