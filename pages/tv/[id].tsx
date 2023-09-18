@@ -3,6 +3,8 @@ import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { QueryKeys } from '@utils/constants'
 import { TVSeries, TVSeriesDetailResponse } from '@utils/types'
 import { getCredits, getDetail, getSimilar, getVideos } from '@pages/DetailPage/helpers'
+import Header from '@components/Header'
+import TvDetail from '@pages/DetailPage/TvDetail'
 
 export const getStaticProps: GetStaticProps = async context => {
   const queryClient = new QueryClient()
@@ -41,4 +43,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export { default } from '../../src/pages/DetailPage/TvDetail'
+const TvDetailPage = () => (
+  <div className='mb-20'>
+    <Header />
+    <TvDetail />
+  </div>
+)
+
+export default TvDetailPage

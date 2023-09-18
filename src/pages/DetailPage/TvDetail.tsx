@@ -11,6 +11,7 @@ import DetailLayout from '@components/Layout/DetailLayout'
 import ErrorMessage from '@components/UI/Error/ErrorMessage'
 import Image from '@components/Image'
 import Info from './Components/Info'
+import LoadingPlaceholder from './LoadingPlaceholder'
 import React from 'react'
 import Recommendations from './Components/Recommendations'
 import Reviews from './Components/Reviews'
@@ -54,7 +55,7 @@ const TvDetail = () => {
 
   const { data: recommendations } = getRecommendationsData<TVSeries>(fetchParams)
 
-  if (allDataResponse.some(data => data.isLoading)) return <h1>Loading...</h1>
+  if (allDataResponse.some(data => data.isLoading)) return <LoadingPlaceholder />
 
   if (allDataResponse.some(data => data.error) || allDataResponse.some(data => !data)) {
     return <ErrorMessage error={404} />
