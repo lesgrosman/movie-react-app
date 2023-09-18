@@ -12,7 +12,7 @@ const ButtonUp = ({ isVisible }: { isVisible: boolean }) => {
 
   return (
     <button className='fixed bottom-3 right-3' onClick={handleScrollToTop}>
-      <ArrowUpCircleIcon className='w-14 h-14 text-emerald-400' />
+      <ArrowUpCircleIcon className='w-14 h-14 text-primary-light' />
     </button>
   )
 }

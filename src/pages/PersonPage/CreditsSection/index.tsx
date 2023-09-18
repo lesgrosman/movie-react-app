@@ -19,7 +19,7 @@ const CreditsSection = ({ tabs }: Props) => {
               key={id}
               className={({ selected }) =>
                 `flex justify-start w-full py-2.5 text-sm font-medium leading-5 text-slate-400 outline-none ${
-                  selected ? 'border-b-[2px] border-emerald-400 text-black' : ''
+                  selected ? 'border-b-[2px] border-primary-light text-black' : ''
                 }`
               }
             >

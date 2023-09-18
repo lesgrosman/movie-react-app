@@ -44,7 +44,7 @@ const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
       <Tab.Group>
         <div className='sm:col-span-3 col-span-12'>
           <Tab.List className='sticky top-32 w-full flex flex-col justify-start items-start gap-2 border-[1px] rounded-lg'>
-            <div className='bg-emerald-400 w-full h-16 flex items-center justify-center rounded-t-lg'>
+            <div className='bg-primary-light w-full h-16 flex items-center justify-center rounded-t-lg'>
               <h3 className='text-white mb-0'>Search Results</h3>
             </div>
             <div className='w-full'>
@@ -52,7 +52,7 @@ const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
                 <Tab
                   key={type}
                   className={({ selected }) =>
-                    `w-full outline-none ${selected ? 'text-emerald-400' : `text-black`}`
+                    `w-full outline-none ${selected ? 'text-primary-light' : `text-black`}`
                   }
                   onClick={handleScrollToTop}
                 >
@@ -73,7 +73,7 @@ const Layout = ({ movieResults, tvResutls, param, personResults }: Props) => {
               <Tab
                 key='person'
                 className={({ selected }) =>
-                  `w-full outline-none ${selected ? 'text-emerald-400' : `text-black`}`
+                  `w-full outline-none ${selected ? 'text-primary-light' : `text-black`}`
                 }
                 onClick={handleScrollToTop}
               >

@@ -59,8 +59,8 @@ const Reviews = ({ data }: Props) => {
                 className={({ selected }) =>
                   `w-full outline-none ${
                     selected
-                      ? 'text-emerald-400'
-                      : `text-gray-500 ${count && 'hover:text-emerald-400'}`
+                      ? 'text-primary-light'
+                      : `text-gray-500 ${count && 'hover:text-primary-light'}`
                   }`
                 }
               >

@@ -14,7 +14,7 @@ const StarRating = ({ rating, rate, removeRating }: Props) => {
 
   return (
     <Popover className='relative'>
-      <Popover.Button className='w-11 h-11 bg-cyan-900 rounded-full justify-center items-center outline-none'>
+      <Popover.Button className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'>
         <StarIcon className={`w-4 h-4 mx-auto ${rating ? 'text-yellow-400' : ''}`} />
       </Popover.Button>
       <Transition
@@ -29,7 +29,7 @@ const StarRating = ({ rating, rate, removeRating }: Props) => {
         <Popover.Panel className='absolute left-1/2 z-10 mt-3 max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl'>
           {({ close }) => (
             <div className='overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5'>
-              <div className='relative bg-cyan-900 p-2 flex items-center gap-2'>
+              <div className='relative bg-secondary-light p-2 flex items-center gap-2'>
                 <button
                   onClick={
                     rating

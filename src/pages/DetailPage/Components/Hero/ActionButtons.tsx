@@ -145,14 +145,14 @@ const ActionButtons = ({ type }: Props) => {
     <div className='flex gap-5'>
       <button
         disabled={markAsFavoriteLoading || !session}
-        className='w-11 h-11 bg-cyan-900 rounded-full justify-center items-center outline-none'
+        className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'
         onClick={handleMarkAsFavorite}
       >
         <HeartIcon className={`w-4 h-4 mx-auto ${data?.favorite ? 'text-pink-500' : ''}`} />
       </button>
       <button
         disabled={addToWatchListLoading || !session}
-        className='w-11 h-11 bg-cyan-900 rounded-full justify-center items-center outline-none'
+        className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'
         onClick={handleAddToWatchList}
       >
         <BookmarkIcon className={`w-4 h-4 mx-auto ${data?.watchlist ? 'text-red-500' : ''}`} />
