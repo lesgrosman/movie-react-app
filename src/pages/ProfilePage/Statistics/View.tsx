@@ -50,11 +50,11 @@ const View = ({ movies, tv, allGenres }: Props) => {
     <div className='flex justify-between w-full'>
       <div>
         <span className='text-xl'>Total ratings</span>
-        <h1 className='text-emerald-500 text-5xl'>{totalRatings}</h1>
+        <h1 className='text-primary-default text-5xl'>{totalRatings}</h1>
       </div>
       <div>
         <span className='text-xl'>Most watched genre</span>
-        <h1 className='text-emerald-500 text-5xl'>{mostViewedGenred?.name}</h1>
+        <h1 className='text-primary-default text-5xl'>{mostViewedGenred?.name}</h1>
       </div>
       <div>
         <span className='text-xl'>Quick rating review</span>

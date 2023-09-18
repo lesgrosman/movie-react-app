@@ -36,7 +36,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className='flex w-full h-full'>
             <div className='flex flex-col gap-4 justify-center h-screen max-w-2xl w-full mx-auto'>
-              <h1 className='text-center text-emerald-500 mb-2'>Log in</h1>
+              <h1 className='text-center text-primary-default mb-2'>Log in</h1>
               <div className='mb-4 flex flex-col'>
                 <span className='text-gray-400 text-center'>
                   Login with your credentials from&nbsp;
@@ -44,7 +44,7 @@ const Login = () => {
                     href='https://www.themoviedb.org'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-emerald-500 underline cursor-pointer'
+                    className='text-primary-default underline cursor-pointer'
                   >
                     TMDB
                   </a>
@@ -55,7 +55,7 @@ const Login = () => {
                     href='https://www.themoviedb.org/login'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='text-emerald-500 underline cursor-pointer'
+                    className='text-primary-default underline cursor-pointer'
                   >
                     TMDB
                   </a>

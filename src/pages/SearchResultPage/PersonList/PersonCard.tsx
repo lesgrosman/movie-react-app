@@ -27,7 +27,7 @@ const PersonCard = ({ person }: Props) => {
           <div className='flex flex-col'>
             <div className='flex items-center'>
               <Link href={`/person/${person.id}`}>
-                <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{person.name}</h3>
+                <h3 className='mb-0 cursor-pointer hover:text-primary-default'>{person.name}</h3>
               </Link>
               <p className='ml-2 sm:hidden flex'>{person.known_for_department}</p>
             </div>
@@ -41,7 +41,7 @@ const PersonCard = ({ person }: Props) => {
                     <Link
                       key={item.id}
                       href={`/${item.media_type}/${item.id}`}
-                      className='hover:text-emerald-400'
+                      className='hover:text-primary-light'
                     >
                       {item.name ?? item.title}
                       {index !== person.known_for.length - 1 && ', '}

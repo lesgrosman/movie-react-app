@@ -37,11 +37,11 @@ const TextInput = ({
 
   return (
     <div className={`flex flex-col gap-2 ${innerClassName}`}>
-      {label && <span className='text-emerald-500'>{label}</span>}
+      {label && <span className='text-primary-default'>{label}</span>}
       <input
         {...rest}
         autoComplete='off'
-        className='outline-emerald-500 py-1 px-4 rounded-xl border-emerald-500 border-[1px]'
+        className='outline-primary-default py-1 px-4 rounded-xl border-primary-default border-[1px]'
         value={value}
         onChange={handleChange}
       />
