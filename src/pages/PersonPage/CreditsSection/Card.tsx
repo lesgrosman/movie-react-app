@@ -23,7 +23,7 @@ const Card = ({ item }: Props) => {
         />
         <div className='p-3 flex flex-col'>
           <div className='mb-2'>
-            <Link href={`/${item.mediaType}/${item.id}`} className='hover:text-emerald-400'>
+            <Link href={`/${item.mediaType}/${item.id}`} className='hover:text-primary-light'>
               <h4 className='mb-0'>{item.title}</h4>
             </Link>
             {item.mediaType === 'tv' && <span className='text-sm text-slate-400'>TV Series</span>}

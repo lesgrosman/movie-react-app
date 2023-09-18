@@ -27,7 +27,7 @@ const Card = ({ id, imageUrl, title, release, description, rating, type, refetch
           <CircularProgress value={rating} size={40} />
           <div className='flex flex-col'>
             <Link href={`/${type}/${id}`}>
-              <h3 className='mb-0 cursor-pointer hover:text-emerald-500'>{title}</h3>
+              <h3 className='mb-0 cursor-pointer hover:text-primary-default'>{title}</h3>
             </Link>
             <span className='text-gray-400'>
               <LocalizedDate date={release} isRaw />

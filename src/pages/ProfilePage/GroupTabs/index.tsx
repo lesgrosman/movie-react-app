@@ -36,7 +36,7 @@ const GroupTabs = () => {
               <Tab
                 key={id}
                 className={({ selected }) =>
-                  `w-full outline-none ${selected ? 'text-emerald-400' : `text-black`}`
+                  `w-full outline-none ${selected ? 'text-primary-light' : `text-black`}`
                 }
               >
                 <h4>{title}</h4>

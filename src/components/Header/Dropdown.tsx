@@ -34,7 +34,7 @@ const Dropdown = () => {
                   <button
                     onClick={redirectToProfile}
                     className={`${
-                      active ? 'bg-emerald-500 text-white' : 'text-gray-900'
+                      active ? 'bg-primary-default text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     <UserIcon className='mr-2 h-5 w-5' aria-hidden='true' />
@@ -47,7 +47,7 @@ const Dropdown = () => {
                   <button
                     onClick={logout}
                     className={`${
-                      active ? 'bg-emerald-500 text-white' : 'text-gray-900'
+                      active ? 'bg-primary-default text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     <ArrowLeftOnRectangleIcon className='mr-2 h-5 w-5' aria-hidden='true' />

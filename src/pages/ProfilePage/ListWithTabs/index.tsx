@@ -37,7 +37,7 @@ const ListWithTabs = ({ group, title }: Props) => {
               <Tab
                 key={id}
                 className={({ selected }) =>
-                  `w-full outline-none ${selected ? 'text-emerald-400' : `text-gray-500`}`
+                  `w-full outline-none ${selected ? 'text-primary-light' : `text-gray-500`}`
                 }
               >
                 <h3>{title}</h3>

@@ -47,12 +47,12 @@ const Carousel = ({ list }: Props) => {
       <div className='hidden sm:flex w-full justify-end'>
         <button onClick={scrollPrev} disabled={prevBtnDisabled}>
           <ArrowLeftCircleIcon
-            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-emerald-400'} `}
+            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
           />
         </button>
         <button onClick={scrollNext} disabled={nextBtnDisabled}>
           <ArrowRightCircleIcon
-            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-emerald-400'} `}
+            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
           />
         </button>
       </div>
@@ -76,7 +76,7 @@ const Carousel = ({ list }: Props) => {
                     />
                   </div>
                 </div>
-                <h4 className='ml-2 mb-0 hover:text-emerald-500'>{name}</h4>
+                <h4 className='ml-2 mb-0 hover:text-primary-default'>{name}</h4>
                 <h5 className='ml-2 text-slate-400 text-xs'>{character}</h5>
               </Link>
             </div>
