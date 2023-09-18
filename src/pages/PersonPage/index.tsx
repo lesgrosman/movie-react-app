@@ -8,6 +8,7 @@ import ButtonUp from '@components/ButtonUp'
 import CreditsModel from './models'
 import CreditsSection from './CreditsSection'
 import InfoSection from './InfoSection'
+import LoadingPlaceholder from './LoadingPlaceholder'
 import useShowUpButton from '@utils/hooks/useShowUpButton'
 
 const PersonPage = () => {
@@ -40,7 +41,7 @@ const PersonPage = () => {
     (allDataResponse[0].isLoading || allDataResponse[1].isLoading) &&
     (!allDataResponse[0].data || !allDataResponse[1].data)
   )
-    return <>Loading...</>
+    return <LoadingPlaceholder />
 
   if (
     allDataResponse[0].error ||
