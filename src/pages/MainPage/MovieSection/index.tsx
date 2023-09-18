@@ -20,7 +20,7 @@ const MovieSection = ({ section, innerClassName = '' }: Props) => {
                 className={({ selected }) =>
                   `w-full rounded-3xl py-1 text-sm font-medium leading-5 ring-opacity-60 ring-offset-2  focus:outline-none ${
                     selected
-                      ? 'bg-slate-800 text-primary-light'
+                      ? 'bg-secondary-default text-primary-light'
                       : 'text-slate-800 hover:bg-white/[0.12] hover:text-primary-light'
                   }`
                 }
