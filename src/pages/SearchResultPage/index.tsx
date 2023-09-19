@@ -1,45 +1,47 @@
-import { getSearchResultsData } from './queries'
+import { searchMovie } from '@utils/analytics'
 import { useRouter } from 'next/router'
-import Layout from './Layout'
-import LoadingPlaceholder from './LoadingPlaceholder'
+import { useState } from 'react'
+import SearchResults from './SearchResulsts'
 
 const SearchResultPage = () => {
   const router = useRouter()
 
   const { result } = router.query
 
-  const { data: movieResutls, isLoading: movieResultsIsLoading } = getSearchResultsData({
-    param: result as string,
-    type: 'movie',
-  })
+  const [searchQuery, setSearchQuery] = useState(result as string)
 
-  const { data: tvResults, isLoading: tvResultsIsLoading } = getSearchResultsData({
-    param: result as string,
-    type: 'tv',
-  })
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value ?? '')
+  }
 
-  const { data: personResults, isLoading: personResultsIsLoading } = getSearchResultsData({
-    param: result as string,
-    type: 'person',
-  })
-
-  if (
-    movieResultsIsLoading ||
-    tvResultsIsLoading ||
-    personResultsIsLoading ||
-    !movieResutls ||
-    !tvResults ||
-    !personResults
-  )
-    return <LoadingPlaceholder />
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    if (searchQuery) {
+      searchMovie(searchQuery)
+      e.preventDefault()
+      router.push(`/search/${searchQuery}`)
+    }
+  }
 
   return (
-    <Layout
-      movieResults={movieResutls}
-      tvResutls={tvResults}
-      personResults={personResults}
-      param={result as string}
-    />
+    <div>
+      <form onSubmit={handleSubmit} className='relative mb-3'>
+        <input
+          type='text'
+          autoComplete='off'
+          placeholder='Search movie, TV series or person...'
+          value={searchQuery}
+          onChange={handleSearch}
+          className='outline-none rounded-3xl px-3 py-2 w-full border-[1px] border-gray-200 focus:border-primary-default text-gray-400'
+        />
+        <button
+          className='absolute bg-primary-default h-full rounded-3xl px-4 text-white right-0'
+          onClick={handleSubmit}
+        >
+          Search
+        </button>
+      </form>
+      <SearchResults />
+    </div>
   )
 }
 export default SearchResultPage
