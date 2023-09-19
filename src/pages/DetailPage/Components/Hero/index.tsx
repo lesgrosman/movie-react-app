@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import ActionButtons from './ActionButtons'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
+import Link from 'next/link'
 import LocalizedDate from '@utils/components/LocalizedDate'
 
 interface Props {
@@ -105,19 +106,25 @@ const DetailHero = ({
           {director && (
             <div>
               <span className='italic text-xs'>Director</span>
-              <h4>{director?.name}</h4>
+              <Link href={`/person/${director.id}`}>
+                <h4>{director?.name}</h4>
+              </Link>
             </div>
           )}
           {writers?.map(({ id, name }) => (
             <div key={id}>
               <span className='italic text-xs'>Screenplay</span>
-              <h4>{name}</h4>
+              <Link href={`/person/${id}`}>
+                <h4>{name}</h4>
+              </Link>
             </div>
           ))}
           {producers?.map(({ id, name }) => (
             <div key={id}>
               <span className='italic text-xs'>Producer</span>
-              <h4>{name}</h4>
+              <Link href={`/person/${id}`}>
+                <h4>{name}</h4>
+              </Link>
             </div>
           ))}
         </div>
