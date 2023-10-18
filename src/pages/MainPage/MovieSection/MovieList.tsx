@@ -27,7 +27,7 @@ const MovieList = ({ url, queryKey }: Props) => {
         {new Array(count).fill(1).map((_, index) => (
           <div
             key={skeletonIds[index]}
-            className='bg-slate-200 rounded-xl sm:w-[185] sm:h-[278px] w-[174px] h-[261px]'
+            className='bg-slate-200 sm:w-[185] sm:h-[278px] w-[174px] h-[261px]'
             style={{ width: 185, height: 278 }}
           />
         ))}

@@ -11,20 +11,20 @@ const CreditsSection = ({ tabs }: Props) => {
 
   return (
     <div>
-      <h3>Credits</h3>
+      <h3 className='font-montserratAlt'>Credits</h3>
       <Tab.Group>
         <Tab.List className='w-full flex mb-4'>
           {filteredTabs.map(({ id, title, itemsCount }) => (
             <Tab
               key={id}
               className={({ selected }) =>
-                `flex justify-start w-full py-2.5 text-sm font-medium leading-5 text-slate-400 outline-none ${
-                  selected ? 'border-b-[2px] border-primary-light text-black' : ''
+                `flex justify-start w-full py-2.5 text-sm font-medium leading-5 outline-none ${
+                  selected ? 'border-b-[2px] border-primary-light text-black' : 'text-slate-400'
                 }`
               }
             >
               <div className='text-start'>
-                <h3 className='mb-0 sm:text-xl text-xs'>{title}</h3>
+                <h3 className='mb-0 sm:text-xl text-xs font-montserratAlt'>{title}</h3>
                 <span className='sm:text-sm text-xs'>{itemsCount} items</span>
               </div>
             </Tab>

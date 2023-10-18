@@ -50,7 +50,7 @@ const Reviews = ({ data }: Props) => {
     <div className='flex flex-col px-2'>
       <Tab.Group>
         <div className='flex sm:flex-row flex-col items-start gap-5'>
-          <h2 className='mb-0 text-start'>Reviews</h2>
+          <h2 className='mb-0 text-start font-montserratAlt'>Reviews</h2>
           <Tab.List className='flex gap-5'>
             {tabs.map(({ id, title, count }) => (
               <Tab
