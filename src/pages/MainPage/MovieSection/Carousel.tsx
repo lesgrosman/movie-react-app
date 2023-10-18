@@ -49,12 +49,12 @@ const Carousel = ({ list }: Props) => {
       <div className='hidden sm:flex w-full justify-end'>
         <button onClick={scrollPrev} disabled={prevBtnDisabled}>
           <ArrowLeftCircleIcon
-            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
+            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-primary-dark'} `}
           />
         </button>
         <button onClick={scrollNext} disabled={nextBtnDisabled}>
           <ArrowRightCircleIcon
-            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
+            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-primary-dark'} `}
           />
         </button>
       </div>
@@ -66,24 +66,26 @@ const Carousel = ({ list }: Props) => {
               <div>
                 <div className='relative'>
                   <Link href={`/${itemType}/${id}`} onClick={() => clickListItem(itemType, title)}>
-                    <Image
-                      width={isSmall ? 130 : 185}
-                      height={278}
-                      src={poster}
-                      alt={title}
-                      className='rounded-xl'
-                    />
+                    <Image width={isSmall ? 130 : 185} height={278} src={poster} alt={title} />
                   </Link>
-                  <CircularProgress
-                    value={rankAverage}
-                    innerClassName='absolute left-2 -bottom-5'
-                    size={44}
-                  />
+                  <div
+                    className={`${
+                      rankAverage < 5
+                        ? 'bg-rate-danger'
+                        : rankAverage < 7
+                        ? 'bg-rate-warning'
+                        : 'bg-rate-success'
+                    } flex justify-center items-center absolute w-12 h-12 top-0 right-0`}
+                  >
+                    <span className='font-montserratAlt font-bold text-white'>
+                      {rankAverage.toFixed(1)}
+                    </span>
+                  </div>
                 </div>
                 <Link href={`/${itemType}/${id}`} onClick={() => clickListItem(itemType, title)}>
-                  <h4 className='ml-2 mb-0 mt-5 hover:text-cyan-600 text-start'>{title}</h4>
+                  <h4 className='ml-2 mb-0 mt-3 hover:text-cyan-600 text-start'>{title}</h4>
                 </Link>
-                <h5 className='ml-2 text-slate-400 text-start'>
+                <h5 className='ml-2 font-normal text-xs text-start'>
                   <LocalizedDate date={date} isRaw placeholder='' />
                 </h5>
               </div>

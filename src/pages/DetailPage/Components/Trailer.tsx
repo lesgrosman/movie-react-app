@@ -22,7 +22,7 @@ const Trailer = ({ trailerUrl }: Props) => {
 
   return (
     <div className='mb-4 px-2'>
-      <h2>Trailer</h2>
+      <h2 className='font-montserratAlt'>Trailer</h2>
       <ReactPlayer
         url={`${BASE_YOUTUBE}${trailerUrl}`}
         controls={true}

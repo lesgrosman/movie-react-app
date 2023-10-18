@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +8,7 @@
   html,
   body {
     overflow-x: hidden;
+    @apply font-montserrat;
   }
   h1 {
     @apply font-bold font-montserrat mb-3 md:mb-5 max-w-7xl;
@@ -33,6 +36,9 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     letter-spacing: 0.05em;
+  }
+  button {
+    @apply font-montserratAlt font-semibold text-sm text-black;
   }
 }
 

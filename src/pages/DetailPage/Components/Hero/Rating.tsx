@@ -1,6 +1,7 @@
 import { Popover, Transition } from '@headlessui/react'
 import { Rating } from 'react-simple-star-rating'
 import { StarIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { useAuthContext } from 'context/useAuthContext'
 import React, { Fragment } from 'react'
 
 interface Props {
@@ -11,11 +12,15 @@ interface Props {
 
 const StarRating = ({ rating, rate, removeRating }: Props) => {
   const handleRating = (newRating: number) => rate(newRating * 2)
+  const { session } = useAuthContext()
 
   return (
     <Popover className='relative'>
-      <Popover.Button className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'>
-        <StarIcon className={`w-4 h-4 mx-auto ${rating ? 'text-yellow-400' : ''}`} />
+      <Popover.Button
+        disabled={!session}
+        className='w-11 h-11 bg-black rounded-full justify-center items-center outline-none'
+      >
+        <StarIcon className={`w-4 h-4 mx-auto ${rating ? 'text-primary-dark' : 'text-white'}`} />
       </Popover.Button>
       <Transition
         as={Fragment}
@@ -42,7 +47,7 @@ const StarRating = ({ rating, rate, removeRating }: Props) => {
                 >
                   <TrashIcon
                     className={`w-6 h-6 mx-auto ${
-                      rating ? 'cursor-pointer' : ' text-gray-400 cursor-auto'
+                      rating ? 'cursor-pointer text-primary-dark' : 'text-gray-400 cursor-auto'
                     }`}
                   />
                 </button>

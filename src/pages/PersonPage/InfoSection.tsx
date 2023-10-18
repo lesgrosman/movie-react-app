@@ -25,7 +25,7 @@ const InfoSection = ({ detail }: Props) => {
           />
         </div>
         <div>
-          <h3 className='sm:block hidden'>Personal information</h3>
+          <h3 className='sm:block hidden font-montserratAlt'>Personal information</h3>
           <div className='flex flex-col gap-3 sm:items-start items-center sm:text-start text-center'>
             <div className='flex flex-col'>
               <span className='font-semibold'>Known as</span>

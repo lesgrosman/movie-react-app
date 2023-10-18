@@ -12,16 +12,16 @@ const MovieSection = ({ section, innerClassName = '' }: Props) => {
     <div className='w-full px-2 pb-2 pt-16 sm:px-0 items-center gap-10'>
       <Tab.Group>
         <div className='flex md:flex-row flex-col md:items-center gap-5'>
-          <h2 className='mb-0'>{section.title}</h2>
-          <Tab.List className={`flex space-x-1 rounded-3xl bg-blue-900/20 p-0.5 ${innerClassName}`}>
+          <h2 className='mb-0 font-montserratAlt'>{section.title}</h2>
+          <Tab.List
+            className={`flex space-x-1 rounded-3xl p-0.5 border-[1px] border-black ${innerClassName}`}
+          >
             {section.tabs.map(({ id, title }) => (
               <Tab
                 key={id}
                 className={({ selected }) =>
-                  `w-full rounded-3xl py-1 text-sm font-medium leading-5 ring-opacity-60 ring-offset-2  focus:outline-none ${
-                    selected
-                      ? 'bg-secondary-default text-primary-light'
-                      : 'text-slate-800 hover:bg-white/[0.12] hover:text-primary-light'
+                  `w-full rounded-3xl py-1 text-sm font-semibold focus:outline-none ${
+                    selected ? 'bg-primary-default' : 'hover:bg-white/[0.12]'
                   }`
                 }
               >

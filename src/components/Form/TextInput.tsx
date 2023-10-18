@@ -37,7 +37,7 @@ const TextInput = ({
 
   return (
     <div className={`flex flex-col gap-2 ${innerClassName}`}>
-      {label && <span className='text-primary-default'>{label}</span>}
+      {label && <span className='text-primary-dark'>{label}</span>}
       <input
         {...rest}
         autoComplete='off'

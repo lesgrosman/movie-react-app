@@ -10,7 +10,7 @@ interface Props {
 const Info = ({ status, originalLanguage, keyWords, children }: Props) => {
   return (
     <div className='md:flex hidden flex-col gap-6 sm:col-span-2 px-4'>
-      <h2>Additional Info</h2>
+      <h2 className='font-montserratAlt'>Additional Info</h2>
       <div>
         <h4>Status</h4>
         <span>{status}</span>
