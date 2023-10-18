@@ -71,14 +71,11 @@ const DetailHero = ({
       <div className='flex-shrink-0 col-span-12 sm:col-span-4 flex justify-center sm:justify-end'>
         <Image src={posterPath || ''} alt='' width={300} height={450} className='rounded-xl' />
       </div>
-      <div className='col-span-12 sm:col-span-8 sm:px-0 px-2'>
+      <div className='col-span-12 sm:col-span-8 sm:px-0 px-2 flex flex-col gap-2'>
         <div className='flex sm:flex-row flex-col sm:justify-start justify-center gap-0'>
           <h1 className='mb-0 sm:text-start text-center'>{title}</h1>
-          <h1 className='text-normal sm:text-start text-center'>
-            ({releaseDate?.split('-')[0] || '-'})
-          </h1>
         </div>
-        <div className='flex mb-4 sm:justify-start justify-center gap-2'>
+        <div className='flex mb-4 sm:justify-start justify-center gap-2 font-semibold'>
           <span>
             <LocalizedDate date={releaseDate} isRaw />
           </span>
@@ -99,13 +96,15 @@ const DetailHero = ({
           <span className='italic'>{tagline}</span>
         </div>
         <div className='mb-8 sm:text-start text-center'>
-          <h3>Overview</h3>
+          <h3 className='text-primary-dark font-montserratAlt'>Overview</h3>
           <span>{overview}</span>
         </div>
         <div className='flex text-start gap-5 flex-wrap sm:justify-start justify-center'>
           {director && (
             <div>
-              <span className='italic text-xs'>Director</span>
+              <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
+                Director
+              </span>
               <Link href={`/person/${director.id}`}>
                 <h4>{director?.name}</h4>
               </Link>
@@ -113,7 +112,9 @@ const DetailHero = ({
           )}
           {writers?.map(({ id, name }) => (
             <div key={id}>
-              <span className='italic text-xs'>Screenplay</span>
+              <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
+                Screenplay
+              </span>
               <Link href={`/person/${id}`}>
                 <h4>{name}</h4>
               </Link>
@@ -121,7 +122,9 @@ const DetailHero = ({
           ))}
           {producers?.map(({ id, name }) => (
             <div key={id}>
-              <span className='italic text-xs'>Producer</span>
+              <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
+                Producer
+              </span>
               <Link href={`/person/${id}`}>
                 <h4>{name}</h4>
               </Link>

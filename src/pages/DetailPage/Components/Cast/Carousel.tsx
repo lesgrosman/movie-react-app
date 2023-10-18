@@ -47,12 +47,12 @@ const Carousel = ({ list }: Props) => {
       <div className='hidden sm:flex w-full justify-end'>
         <button onClick={scrollPrev} disabled={prevBtnDisabled}>
           <ArrowLeftCircleIcon
-            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
+            className={`z-10 w-8 h-8 ${prevBtnDisabled ? 'text-slate-100' : 'text-primary-dark'} `}
           />
         </button>
         <button onClick={scrollNext} disabled={nextBtnDisabled}>
           <ArrowRightCircleIcon
-            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-primary-light'} `}
+            className={`z-10 w-8 h-8 ${nextBtnDisabled ? 'text-slate-100' : 'text-primary-dark'} `}
           />
         </button>
       </div>

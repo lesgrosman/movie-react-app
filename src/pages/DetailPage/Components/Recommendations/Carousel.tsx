@@ -14,7 +14,7 @@ const Carousel = ({ list }: Props) => {
   const isSmall = useWindowSize('sm')
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    slidesToScroll: isSmall ? 2 : 6,
+    slidesToScroll: isSmall ? 2 : 4,
     dragFree: true,
   })
 
@@ -63,8 +63,11 @@ const Carousel = ({ list }: Props) => {
             const isMovie = 'title' in item
             const itemType = isMovie ? 'movie' : 'tv'
             return item.backdrop_path ? (
-              <div key={item.id} className='flex grow-0 shrink-0 px-2'>
-                <div className='select-none w-60 h-48'>
+              <div
+                key={item.id}
+                className='flex grow-0 shrink-0 px-2 basis-[150px] sm:basis-[212px]'
+              >
+                <div className='select-none w-44 sm:w-60 sm:h-48 '>
                   <Link href={`/${itemType}/${item.id}`}>
                     <Image
                       src={item.backdrop_path}

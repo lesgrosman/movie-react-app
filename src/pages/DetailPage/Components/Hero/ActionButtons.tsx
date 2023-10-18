@@ -145,17 +145,21 @@ const ActionButtons = ({ type }: Props) => {
     <div className='flex gap-5'>
       <button
         disabled={markAsFavoriteLoading || !session}
-        className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'
+        className='w-11 h-11 bg-black rounded-full justify-center items-center outline-none'
         onClick={handleMarkAsFavorite}
       >
-        <HeartIcon className={`w-4 h-4 mx-auto ${data?.favorite ? 'text-pink-500' : ''}`} />
+        <HeartIcon
+          className={`w-4 h-4 mx-auto ${data?.favorite ? 'text-primary-dark' : 'text-white'}`}
+        />
       </button>
       <button
         disabled={addToWatchListLoading || !session}
-        className='w-11 h-11 bg-secondary-light rounded-full justify-center items-center outline-none'
+        className='w-11 h-11 bg-black rounded-full justify-center items-center outline-none'
         onClick={handleAddToWatchList}
       >
-        <BookmarkIcon className={`w-4 h-4 mx-auto ${data?.watchlist ? 'text-red-500' : ''}`} />
+        <BookmarkIcon
+          className={`w-4 h-4 mx-auto ${data?.watchlist ? 'text-primary-dark' : 'text-white'}`}
+        />
       </button>
       <StarRating rating={initialRating ?? 0} rate={handleRate} removeRating={handleRemoveRating} />
     </div>

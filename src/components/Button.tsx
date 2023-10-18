@@ -16,7 +16,7 @@ const Button = ({ label, outline, disabled, innerClassName, ...rest }: Props) =>
           ? 'bg-gray-400 text-white'
           : outline
           ? 'bg-transparent border-primary-default cursor-pointer'
-          : 'bg-primary-default text-white cursor-pointer'
+          : 'bg-primary-dark text-white cursor-pointer'
       }`}
     >
       {label}

@@ -11,7 +11,7 @@ const Recommendations = ({ recommendations }: Props) => {
   return (
     <div className='flex flex-col'>
       <div className='px-2'>
-        <h2 className='mb-0'>Recommendations</h2>
+        <h2 className='mb-0 font-montserratAlt'>Recommendations</h2>
       </div>{' '}
       <Carousel list={recommendations} />
     </div>

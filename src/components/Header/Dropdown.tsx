@@ -15,7 +15,7 @@ const Dropdown = () => {
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button>
-            <UserCircleIcon className='h-11 w-11' aria-hidden='true' />
+            <UserCircleIcon className='h-11 w-11 text-white' aria-hidden='true' />
           </Menu.Button>
         </div>
         <Transition
