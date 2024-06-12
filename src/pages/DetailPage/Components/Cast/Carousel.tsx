@@ -1,5 +1,6 @@
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 import { PersonItem } from '@utils/types'
+import { clickPerson } from '@utils/analytics'
 import { useCallback, useEffect, useState } from 'react'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -64,6 +65,7 @@ const Carousel = ({ list }: Props) => {
               <Link
                 href={`/person/${id}`}
                 className='select-none w-[154px] border-[1px] rounded-xl h-72 shadow-lg'
+                onClick={() => clickPerson(name)}
               >
                 <div className='relative w-full pt-[66.66%] h-52'>
                   <div className='absolute top-0 left-0 right-0 bottom-0'>

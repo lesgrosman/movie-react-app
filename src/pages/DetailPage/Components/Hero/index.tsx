@@ -1,5 +1,6 @@
 import { BASE_BACKDROP } from '@utils/constants'
 import { CrewMember, Genre, Nullable } from 'utils/types'
+import { clickPerson } from '@utils/analytics'
 import { getGenres } from 'pages/DetailPage/utils'
 import { useAverageColor } from '@utils/hooks/useAverageColor'
 import { useRouter } from 'next/router'
@@ -105,7 +106,7 @@ const DetailHero = ({
               <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
                 Director
               </span>
-              <Link href={`/person/${director.id}`}>
+              <Link href={`/person/${director.id}`} onClick={() => clickPerson(director.name)}>
                 <h4>{director?.name}</h4>
               </Link>
             </div>
@@ -115,7 +116,7 @@ const DetailHero = ({
               <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
                 Screenplay
               </span>
-              <Link href={`/person/${id}`}>
+              <Link href={`/person/${id}`} onClick={() => clickPerson(name)}>
                 <h4>{name}</h4>
               </Link>
             </div>
@@ -125,7 +126,7 @@ const DetailHero = ({
               <span className='text-sm text-primary-dark font-medium font-montserratAlt'>
                 Producer
               </span>
-              <Link href={`/person/${id}`}>
+              <Link href={`/person/${id}`} onClick={() => clickPerson(name)}>
                 <h4>{name}</h4>
               </Link>
             </div>
