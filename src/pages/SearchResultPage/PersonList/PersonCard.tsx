@@ -1,4 +1,5 @@
 import { SearchPersonItem } from '../types'
+import { clickPerson } from '@utils/analytics'
 import Image from '@components/Image'
 import Link from 'next/link'
 import useWindowSize from '@utils/hooks/useWindowSize'
@@ -12,7 +13,7 @@ const PersonCard = ({ person }: Props) => {
 
   return (
     <div className='w-full flex'>
-      <Link href={`/person/${person.id}`}>
+      <Link href={`/person/${person.id}`} onClick={() => clickPerson(person.name)}>
         <Image
           src={person.profile_path ?? ''}
           alt={person.name}

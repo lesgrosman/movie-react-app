@@ -1,5 +1,6 @@
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 import { MovieItemResponse, TVSeriesItemResponse } from '@utils/types'
+import { clickListItem } from '@utils/analytics'
 import { useCallback, useEffect, useState } from 'react'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -61,6 +62,7 @@ const Carousel = ({ list }: Props) => {
         <div className='flex'>
           {list?.map(item => {
             const isMovie = 'title' in item
+            const title = isMovie ? item.title : item.name
             const itemType = isMovie ? 'movie' : 'tv'
             return item.backdrop_path ? (
               <div
@@ -68,7 +70,10 @@ const Carousel = ({ list }: Props) => {
                 className='flex grow-0 shrink-0 px-2 basis-[150px] sm:basis-[212px]'
               >
                 <div className='select-none w-44 sm:w-60 sm:h-48 '>
-                  <Link href={`/${itemType}/${item.id}`}>
+                  <Link
+                    href={`/${itemType}/${item.id}`}
+                    onClick={() => clickListItem(itemType, title)}
+                  >
                     <Image
                       src={item.backdrop_path}
                       width={240}
@@ -78,7 +83,7 @@ const Carousel = ({ list }: Props) => {
                     />
                   </Link>
                   <div className='flex justify-between gap-4'>
-                    <span className='truncate'>{isMovie ? item.title : item.name}</span>
+                    <span className='truncate'>{title}</span>
                     <span>{Math.floor(item.vote_average * 10)}%</span>
                   </div>
                 </div>
