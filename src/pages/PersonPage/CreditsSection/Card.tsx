@@ -1,4 +1,5 @@
 import { MediaItem } from '../types'
+import { clickListItem } from '@utils/analytics'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -23,7 +24,11 @@ const Card = ({ item }: Props) => {
         />
         <div className='p-3 flex flex-col'>
           <div className='mb-2'>
-            <Link href={`/${item.mediaType}/${item.id}`} className='hover:text-primary-light'>
+            <Link
+              href={`/${item.mediaType}/${item.id}`}
+              onClick={() => clickListItem(item.mediaType, item.title)}
+              className='hover:text-primary-light'
+            >
               <h4 className='mb-0'>{item.title}</h4>
             </Link>
             {item.mediaType === 'tv' && <span className='text-sm text-slate-400'>TV Series</span>}
