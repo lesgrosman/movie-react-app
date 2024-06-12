@@ -1,4 +1,4 @@
-import { searchMovie } from '@utils/analytics'
+import { searchSubmit } from '@utils/analytics'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import SearchResults from './SearchResulsts'
@@ -16,7 +16,7 @@ const SearchResultPage = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     if (searchQuery) {
-      searchMovie(searchQuery)
+      searchSubmit(searchQuery)
       e.preventDefault()
       router.push(`/search/${searchQuery}`)
     }

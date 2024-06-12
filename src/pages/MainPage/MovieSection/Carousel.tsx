@@ -2,7 +2,6 @@ import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from '@heroicons/react/24/s
 import { MovieItem, Nullable } from '@utils/types'
 import { clickListItem } from '@utils/analytics'
 import { useCallback, useEffect, useState } from 'react'
-import CircularProgress from '../../../components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
 import LocalizedDate from '@utils/components/LocalizedDate'

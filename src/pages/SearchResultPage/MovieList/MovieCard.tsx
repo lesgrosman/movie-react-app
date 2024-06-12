@@ -1,4 +1,5 @@
 import { SearchType } from '../types'
+import { clickListItem } from '@utils/analytics'
 import CircularProgress from '@components/CircularProgress'
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -19,6 +20,7 @@ const MovieCard = ({ id, imageUrl, title, release, description, rating, type }: 
     <Link
       href={`/${type}/${id}`}
       className='w-full rounded-xl border-[1px] shadow-md flex hover:scale-[101%] transition duration-100'
+      onClick={() => clickListItem(type, title)}
     >
       <div>
         <Image
